@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+  <html>
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -7,45 +8,64 @@
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <title>D3-tutorial by gcoch</title>
+  <title>Inicio</title>
   </head>
+
+
+
+  
+
 
   <body>
     <div id="container">
       <div class="inner">
-
         <header>
-          <h1>D3-tutorial</h1>
-          <h2>Tutorial de D3 en Español</h2>
+          <h4>
+       
+        	<a  href="/anadirelementos.html">Añadir Elementos | </a>
+        
+        	<a  href="/encadenarmetodos.html">Encadenar Métodos | </a>
+        
+        	<a  href="/fundamentos.html">Fundamentos | </a>
+        
+        	<a class="active" href="/index.html">Inicio | </a>
+        
+        	<a  href="/instalacion.html">Instalación | </a>
+        
+</h4>
+          <h1></h1>
+          <h2></h2>
         </header>
 
         <hr>
-
         <section id="main_content">
-          <p>Bienvenido a la versión traducida al español del excelente <a href="http://alignedleft.com/tutorials/d3">tutorial de D3</a> escrito por <a href="http://alignedleft.com/">Scott Murray</a>.</p>
+          <h1 id="tutorial_de_d3_en_espaol">Tutorial de D3 en Español</h1>
 
-<h2>
-<a name="acerca-de-este-tutorial" class="anchor" href="#acerca-de-este-tutorial"><span class="octicon octicon-link"></span></a>Acerca de este tutorial</h2>
+<p>Bienvenido a la versión traducida al español del excelente <a href="http://alignedleft.com/tutorials/d3">tutorial de D3</a> escrito por <a href="http://alignedleft.com/">Scott Murray</a>.</p>
+
+<h2 id="acerca_de_este_tutorial">Acerca de este Tutorial</h2>
 
 <p>Cada una de las lecciones de este tutorial busca ser:</p>
 
 <ul>
-<li>
-<em>Breve</em>.</li>
-<li>
-<em>Enfocada</em>, hacia un solo tema.</li>
-<li>
-<em>Modular</em>, de tal forma que cada persona pueda usar lo que le sea útil.</li>
+<li><em>Breve</em>.</li>
+
+<li><em>Enfocada</em>, hacia un solo tema.</li>
+
+<li><em>Modular</em>, de tal forma que cada persona pueda usar lo que le sea útil.</li>
+
 <li>Lo más <em>Completa</em> posible, con código de ejemplo para cada tema expuesto.</li>
-<li>
-<em>Dinámica</em>, actualizada y expandible en la forma que se requiera.</li>
-<li>
-<em>Gratis</em> y bajo una licencia sin restricciones de uso sobre el código.</li>
-</ul><h3>
-<a name="enfoque" class="anchor" href="#enfoque"><span class="octicon octicon-link"></span></a>Enfoque</h3>
+
+<li><em>Dinámica</em>, actualizada y expandible en la forma que se requiera.</li>
+
+<li><em>Gratis</em> y bajo una licencia sin restricciones de uso sobre el código.</li>
+</ul>
+
+<h3 id="enfoque">Enfoque</h3>
 
 <p>Los cursos de este tutorial han evolucionado de mi proceso de aprendizaje de la librería D3. Como bien se sabe, <a href="http://mbostock.github.com/d3/">D3</a> es una excelente herramienta escrita por <a href="http://bost.ocks.org/mike/">Mike Bostock</a> para desplegar datos dentro de paginas web. Mucha gente, incluyéndome a mi, llega a D3 con experiencia en diseño, cartografía y visualización de datos, pero sin ser necesariamente programadores o ingenieros de sistemas.</p>
 
@@ -53,46 +73,52 @@
 
 <p>Mi objetivo es reducir su tiempo de aprendizaje para que comience a crear visualizaciones espectaculares muy pronto.</p>
 
-<h3>
-<a name="pre-requisitos" class="anchor" href="#pre-requisitos"><span class="octicon octicon-link"></span></a>Pre-requisitos</h3>
+<h3 id="prerequisitos">Pre-requisitos</h3>
 
 <p>En lo posible, usted debe:</p>
 
 <ul>
 <li>Tener algún conocimiento de HTML, el DOM y CSS.</li>
+
 <li>Alguna experiencia previa en programación de computadores.</li>
+
 <li>Haya escuchado sobre jQuery o haya escrito algo en JavaScript.</li>
+
 <li>No le tiene temor a los ciertas siglas como CSV, SVG, o JSON.</li>
+
 <li>Esté interesado en crear visualizaciones interactivas interesantes y útiles.</li>
-</ul><h3>
-<a name="estructura" class="anchor" href="#estructura"><span class="octicon octicon-link"></span></a>Estructura</h3>
+</ul>
+
+<h3 id="estructura">Estructura</h3>
 
 <p>Cada lección incluye:</p>
 
 <ul>
 <li>Su propia página web cuando es útil.</li>
+
 <li>Código fuente que se puede copiar o modificar.</li>
+
 <li>Comentarios en todas las secciones.</li>
+
 <li>La fecha de su más reciente actualización.</li>
-</ul><h3>
-<a name="licenciamiento" class="anchor" href="#licenciamiento"><span class="octicon octicon-link"></span></a>Licenciamiento</h3>
+</ul>
+
+<h3 id="licenciamiento">Licenciamiento</h3>
 
 <p>El código de ejemplo en este tutorial se puede copiar, adaptar, modificar y reutilizar para cualquier propósito, incluyendo con fines comerciales. Los derechos de autor sobre el contenido y el diseño del tutorial son de propiedad de <a href="http://alignedleft.com/about">Scott Murray</a>.</p>
 
-<h3>
-<a name="nota-al-margen" class="anchor" href="#nota-al-margen"><span class="octicon octicon-link"></span></a>Nota al margen</h3>
+<h3 id="nota_al_margen">Nota al margen</h3>
 
-<p>Con el propósito de cumplir con lo anterior,  se cubrirán someramente algunos de los temas técnicos, simplificando conceptos fundamentales de la ingeniería de sistemas. Esto puede agravar a los ingenieros de sistemas verdaderos. Sin embargo, no importa pues este tutorial está escrito para artistas y diseñadores, no para ingenieros.</p>
+<p>Con el propósito de cumplir con lo anterior, se cubrirán someramente algunos de los temas técnicos, simplificando conceptos fundamentales de la ingeniería de sistemas. Esto puede agravar a los ingenieros de sistemas verdaderos. Sin embargo, no importa pues este tutorial está escrito para artistas y diseñadores, no para ingenieros.</p>
 
-<p><a href="http://localhost:4567/Fundamentos">Siguiente ----&gt;</a></p>
-        </section>
+<p><a href="/test.html">Siguiente —-&gt;</a></p>
+          <section>
+	<footer>
+		Este tutorial lo mantiene Gabriel Coch <a href="https://github.com/gcoch">gcoch</a><br>
+        El contenido es de <a href="http://alignedleft.com/">Scott Murray</a>
+    </footer>
+</section>
 
-        <footer>
-          D3-tutorial is maintained by <a href="https://github.com/gcoch">gcoch</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
-
-        
       </div>
     </div>
   </body>
