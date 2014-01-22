@@ -1,5 +1,5 @@
 <h4>
        {% for p in site.pages %}
-        	<a {% if p.url == page.url %}class="active"{% endif %} href="{{ p.url }}">{{ p.title }} | </a>
+        	<a {% if p.url == page.url %}class="active"{% endif %} href="{{site.url}}{{ p.url }}">{{ p.title }} | </a>
         {% endfor %}
 </h4>
