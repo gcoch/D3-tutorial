@@ -23,3 +23,5 @@ La página más sencilla de HTML es algo así:
     </body>
 </html>
 ```
+
+[Siguiente ---->]({{site.url}}/instalacion.html)

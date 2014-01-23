@@ -19,7 +19,7 @@ Cada una de las lecciones de este tutorial busca ser:
   
 ###Enfoque
   
-Los cursos de este tutorial han evolucionado de mi proceso de aprendizaje de la librería D3. Como bien se sabe, [D3](http://mbostock.github.com/d3/) es una excelente herramienta escrita por [Mike Bostock](http://bost.ocks.org/mike/) para desplegar datos dentro de paginas web. Mucha gente, incluyéndome a mi, llega a D3 con experiencia en diseño, cartografía y visualización de datos, pero sin ser necesariamente programadores o ingenieros de sistemas.
+Los cursos de este tutorial han evolucionado de mi proceso de aprendizaje de la librería D3. Como bien se sabe, [D3](http://mbostock.github.com/d3/) es una excelente herramienta escrita por [Mike Bostock](http://bost.ocks.org/mike/) para desplegar datos dentro de páginas web. Mucha gente, incluyéndome a mi, llega a D3 con experiencia en diseño, cartografía y visualización de datos, pero sin ser necesariamente programadores o ingenieros de sistemas.
   
 D3 utiliza técnicas avanzadas de JavaScript, por consiguiente para aprender D3 usualmente es necesario aprender bastante de ese lenguaje de programación. Para muchas personas provenientes del área de visualización de datos, D3 es su primera incursión en JavaScript. Si bien es difícil aprender un lenguaje de programación nuevo, es aún más difícil cuando se busca aprender una herramienta nueva construida en ese lenguaje. D3 es muy novedoso y permite crear cosas increíbles con JavaScript que probablemente nunca se pensaría que fuera posible crear. El tiempo que que se invierta aprendiendo el lenguaje y la herramienta sin duda traerá grandes beneficios.
 
@@ -53,4 +53,4 @@ El código de ejemplo en este tutorial se puede copiar, adaptar, modificar y reu
   
 Con el propósito de cumplir con lo anterior,  se cubrirán someramente algunos de los temas técnicos, simplificando conceptos fundamentales de la ingeniería de sistemas. Esto puede agravar a los ingenieros de sistemas verdaderos. Sin embargo, no importa pues este tutorial está escrito para artistas y diseñadores, no para ingenieros.
 
-[Siguiente ---->](/fundamentos.html)
+[Siguiente ---->]({{site.url}}/fundamentos.html)
