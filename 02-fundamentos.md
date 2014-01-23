@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Fundamentos
+permalink: "fundamentos.html"
 ---
 
 ## Fundamentos
@@ -22,7 +23,3 @@ La página más sencilla de HTML es algo así:
     </body>
 </html>
 ```
-<svg width="50" height="50">
-    <circle cx="25" cy="25" r="22"
-     fill="blue" stroke="gray" stroke-width="2"/>
-</svg>

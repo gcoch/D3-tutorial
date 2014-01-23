@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Inicio
+permalink: "index.html"
 ---
 #Tutorial de D3 en Español
 
@@ -52,4 +53,4 @@ El código de ejemplo en este tutorial se puede copiar, adaptar, modificar y reu
   
 Con el propósito de cumplir con lo anterior,  se cubrirán someramente algunos de los temas técnicos, simplificando conceptos fundamentales de la ingeniería de sistemas. Esto puede agravar a los ingenieros de sistemas verdaderos. Sin embargo, no importa pues este tutorial está escrito para artistas y diseñadores, no para ingenieros.
 
-[Siguiente ---->](/test.html)
+[Siguiente ---->](/fundamentos.html)
