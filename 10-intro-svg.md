@@ -5,4 +5,4 @@ permalink: "intro-svg.html"
 ---
 ##Introducción de SVG
 
-[Siguiente ---->]({{site.url}}/despliegue-svg.html)
+[Siguiente : Despliegue de SVG -->]({{site.url}}/despliegue-svg.html)

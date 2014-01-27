@@ -5,4 +5,4 @@ permalink: "data.html"
 ---
 ##El Poder de la Función data( )
 
-[Siguiente ---->]({{site.url}}/intro-svg.html)
+[Siguiente: Introducción a SVG -->]({{site.url}}/intro-svg.html)

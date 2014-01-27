@@ -18,8 +18,6 @@
 
 
   
-
-
   <body>
     <div id="container">
       <div class="inner">
@@ -39,7 +37,7 @@
         
         	<a href="/asociar-datos.html">Asociar Datos | </a>
         
-        	<a href="/datos-propios.html">Usar Datos Propios | </a>
+        	<a href="/datos-propios.html">Usando sus Datos | </a>
         
         	<a href="/desplegar-divs.html">Desplegar DIVs | </a>
         
@@ -60,18 +58,66 @@
         	<a href="/ejes.html">Ejes | </a>
         
 </dv>
-          <h1></h1>
-          <h2></h2>
         </header>
 
         <hr>
         <section id="main_content">
           <h2 id="aadir_elementos">Añadir Elementos</h2>
 
-<p><a href="/encadenar-metodos.html">Siguiente —-&gt;</a></p>
+<p>Uno de los primeros pasos en el uso de D3 consise en crear un nuevo elemento en el DOM. Por lo general, éste será un objeto SVG para desplegar una visualización gráfica de datos, sin embargo con el propósito de empezar con algo simple, a continuación se muestra cómo añadir un elemento -p-.</p>
+
+<p>Se empieza con la siguiente plantilla de HTML.</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;title&gt;D3 Test&lt;/title&gt;
+        &lt;script type=&quot;text/javascript&quot; src=&quot;d3/d3.v3.js&quot;&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;script type=&quot;text/javascript&quot;&gt;
+        // Your beautiful D3 code will go here
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<p>En <a href="http://alignedleft.com/content/03-tutorials/01-d3/40-adding-elements/1.html">este enlace</a> puede ver la página generada por este código. No parece tener mucho, sin embargo al abrir el inspector de web, se puede ver lo siguiente.</p>
+
+<p><img src="/images/pagina-demo.png" alt="Alt text" /></p>
+
+<p>Ahora, en el archivo HTML, cambie el texto dentro de las etiquetas <strong>script</strong> con el siguiente código:</p>
+
+<p><strong>d3.select(“body”).append(“p”).text(“New paragraph!”);</strong></p>
+
+<p>Guarde y refresque <a href="http://alignedleft.com/content/03-tutorials/01-d3/40-adding-elements/2.html">o revise esta página</a> y verá el cambio! Ahora se muestra un texto en la ventana del navegador, y en el inspector de web se muestra lo siguiente:</p>
+
+<p><img src="/images/pagina2-demo.png" alt="Alt text" /></p>
+
+<p>Nota la diferencia? Ahora el DOM contiene un nuevo elemento que se generó dinámicamente! Puede ser que esto no sea muy interesante aún, pero pronto podrá ver cómo con una técnica similarse pueden generar decenas o centenas de elementos, cada uno representando una parte de sus datos.</p>
+
+<p>Miremos lo que acaba de ocurrir. Secuencialmente:</p>
+
+<ol>
+<li>
+<p>Se invocó el método <strong>select</strong> de D3, el cual selecciona un solo elemento en el DOM utilizando la sintaxis del selector en CSS. (En este caso se utilizó <strong>body</strong>).</p>
+</li>
+
+<li>
+<p>Se creó un nuevo elemento <strong>p</strong> y se añadió al final de la selección, o sea justo <em>antes</em> de la etiqueta de cierre -body- en este caso.</p>
+</li>
+
+<li>
+<p>Se actualizó el contenido del párrafo vacío con la frase “New Parragraph”.</p>
+</li>
+</ol>
+
+<p>Al margen, todos esos puntos son parte de la <em>sintaxis de encadenamiento</em> de D3.</p>
+
+<p><a href="/encadenar-metodos.html">Siguiente: Encadenar Métodos –&gt;</a></p>
           <section>
 	<footer>
-		Este tutorial lo mantiene Gabriel Coch <a href="https://github.com/gcoch">gcoch</a><br>
+		Este tutorial lo mantiene <a href="https://twitter.com/gabrielcoch">Gabriel Coch</a><br>
         El contenido es de <a href="http://alignedleft.com/">Scott Murray</a>
     </footer>
 </section>

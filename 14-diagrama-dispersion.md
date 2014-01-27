@@ -5,4 +5,4 @@ permalink: "diagrama-dispersion.html"
 ---
 ##Cómo Hacer un Diagrama de Dispersión
 
-[Siguiente ---->]({{site.url}}/escalas.html)
+[Siguiente: Escalas -->]({{site.url}}/escalas.html)

@@ -5,4 +5,4 @@ permalink: "desplegar-divs.html"
 ---
 ##Desplegar DIVs
 
-[Siguiente ---->]({{site.url}}/poder-datos.html)
+[Siguiente: El Poder de la Función data( ) -->]({{site.url}}/poder-datos.html)

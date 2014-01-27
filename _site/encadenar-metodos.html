@@ -18,8 +18,6 @@
 
 
   
-
-
   <body>
     <div id="container">
       <div class="inner">
@@ -39,7 +37,7 @@
         
         	<a href="/asociar-datos.html">Asociar Datos | </a>
         
-        	<a href="/datos-propios.html">Usar Datos Propios | </a>
+        	<a href="/datos-propios.html">Usando sus Datos | </a>
         
         	<a href="/desplegar-divs.html">Desplegar DIVs | </a>
         
@@ -60,18 +58,56 @@
         	<a href="/ejes.html">Ejes | </a>
         
 </dv>
-          <h1></h1>
-          <h2></h2>
         </header>
 
         <hr>
         <section id="main_content">
           <h2 id="encadenar_mtodos">Encadenar Métodos</h2>
 
-<p><a href="/asociar-datos.html">Siguiente —-&gt;</a></p>
+<p>D3 utiliza una técnica denominada sintáxis de cadena, similar a la de jQuery. Mediante el encadenamiento de métodos utizando puntos, es posible ejecutar varias acciones en una misma línea de código. Esto puede ser rápido y fácil, pero es importante entender cómo funciona, para ahorrarse horas de dolores de cabeza depurando el código.</p>
+
+<p>A propósito, <em>funciones</em> y <em>métodos</em> son dos palabras diferentes para describir el mismo concepto: una unidad de código que acepta un argumento como entrada, lleva a cabo alguna acción, y devuelve algún dato de salida.</p>
+
+<p>Revisemos nuevamente la primera línea de código en D3. <a href="http://alignedleft.com/content/03-tutorials/01-d3/50-chaining-methods/index.html">Página de ejemplo</a>.</p>
+
+<pre><code>d3.select(&quot;body&quot;).append(&quot;p&quot;).text(&quot;New paragraph!&quot;);</code></pre>
+
+<p>Esto puede parecer algo desordenado, especialmente cuando se está comenzando a programar. Lo primero que toca sabe es que JavaScript, al igual que HTML, ignora el espacio en blanco y los cambios de línea, por consiguiente se puede incluir cáda uno de los métodos en su propia linea, lo cual es más legible.</p>
+
+<pre><code>d3.select(&quot;body&quot;)
+	.append(&quot;p&quot;)
+	.text(&quot;New paragraph!&quot;);</code></pre>
+
+<p>Cada quién tiene su propio estilo de progamar, por consiguiente puede utilizar diferentes espacios de indentación (sangría), cambios de línea, o espacio en blanco de acuerdo con sus preferencias.</p>
+
+<h3 id="un_enlace_a_la_vez">Un Enlace a la Vez</h3>
+
+<p>Veamos las diferentes partes del código anterior.</p>
+
+<p><strong>d3</strong> - referencia al objeto D3, de tal forma que se pueda acceder a sus métodos.</p>
+
+<p><strong>.select(“body”)</strong> - Al darle a <strong>select( )</strong> un selector de CSS como entrada, éste devolverá una referencia al primer elemento del DOM que coincida. (Se recomienda usar <strong>selectAll( )</strong> cuando se necesite más de un elemento). En este caso, solo se necesita la etiqueta <strong>body</strong>, por eso se pasa la referencia a <strong>body</strong> al siguiente método de la cadena.</p>
+
+<h3 id="la_transferencia">La Transferencia</h3>
+
+<p>Muchos pero no todos los métodos devuelven una selección (realmente la referencia a la selección), lo cual permite aplicar la técnica tan útil que es el encadenamiento de métodos. Usualmente, un método devuelve una referencia al objeto que alteró, pero no siempre.</p>
+
+<p><strong>Para recordar</strong>: Cuando se encadenan métodos el orden importa. El tipo de salida (output) de un método debe coincidir con el tipo de entrada (input) del siguiente método de la cadena. Si las entradas y salidas de métodos adyacentes no son compatibles, no ocurrirá la transferencia de información.</p>
+
+<h3 id="esquema_sin_encadenamientos">Esquema sin Encadenamientos</h3>
+
+<p>El código del ejemplo también se puede escribir sin la sintaxis de encadenamiento.</p>
+
+<pre><code>var body = d3.select(&quot;body&quot;);
+var p = body.append(&quot;p&quot;);
+p.text(&quot;New paragraph!&quot;);
+
+Realmente mucho más confuso! Sin embargo, abrá veces cuando será necesario romper la cadena, como cuando se hacen llamados a tantas funciones que no vale la pena encadenarlas todas. O simplemente porque puede ser mejor organizar el código de una manera que tenga mayor sentido para quien lo está elaborando.</code></pre>
+
+<p><a href="/asociar-datos.html">Siguiente: Asociar Datos –&gt;</a></p>
           <section>
 	<footer>
-		Este tutorial lo mantiene Gabriel Coch <a href="https://github.com/gcoch">gcoch</a><br>
+		Este tutorial lo mantiene <a href="https://twitter.com/gabrielcoch">Gabriel Coch</a><br>
         El contenido es de <a href="http://alignedleft.com/">Scott Murray</a>
     </footer>
 </section>

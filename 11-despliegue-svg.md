@@ -5,4 +5,4 @@ permalink: "despliegue-svg.html"
 ---
 ##Despliegue de SVG
 
-[Siguiente ---->]({{site.url}}/tipos-datos.html)
+[Siguiente: Tipos de datos -->]({{site.url}}/tipos-datos.html)

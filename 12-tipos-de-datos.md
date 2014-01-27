@@ -5,4 +5,4 @@ permalink: "tipos-datos.html"
 ---
 ##Diferentes Tipos de Datos
 
-[Siguiente ---->]({{site.url}}/diagrama-barras.html)
+[Siguiente: Diagrama de Barras -->]({{site.url}}/diagrama-barras.html)

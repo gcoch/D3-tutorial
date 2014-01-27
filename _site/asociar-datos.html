@@ -18,8 +18,6 @@
 
 
   
-
-
   <body>
     <div id="container">
       <div class="inner">
@@ -39,7 +37,7 @@
         
         	<a href="/asociar-datos.html">Asociar Datos | </a>
         
-        	<a href="/datos-propios.html">Usar Datos Propios | </a>
+        	<a href="/datos-propios.html">Usando sus Datos | </a>
         
         	<a href="/desplegar-divs.html">Desplegar DIVs | </a>
         
@@ -60,18 +58,100 @@
         	<a href="/ejes.html">Ejes | </a>
         
 </dv>
-          <h1></h1>
-          <h2></h2>
         </header>
 
         <hr>
         <section id="main_content">
           <h2 id="asociar_datos">Asociar Datos</h2>
 
-<p><a href="/datos-propios.html">Siguiente —-&gt;</a></p>
+<p>En qué consiste Asociar Datos (Binding) y por qué es aconsejable?</p>
+
+<p>La visualización de datos es un proceso de <em>mapeo</em> de datos a despliegues gráficos. Los datos ingresan y su representación en formato gráfico constituyen el resultado final. De esa manera es probable que números mayores correspondan a barras más altas o que categorías especiales correspondan a colores más llamativos. Las reglas de mapeo son decisión del programador.</p>
+
+<p>Con D3, se <em>asocian</em> los datos de entrada a los elementos del DOM. <em>Asociar</em> en este sentido es similar a <em>pegarse a</em> elementos específicos, de tal forma que posteriormente se puedan referenciar esos valores y aplicar la reglas de mapeo. Si no se lleva a cabo el paso de asociación, lo único que se obtiene es un listado de elementos del DOM sin datos que no pueden ser mapeados. A nadie le interesa eso.</p>
+
+<h3 id="en_asocio">En Asocio</h3>
+
+<p>En D3 se utiliza el método <strong>selection.data( )</strong> para asociar datos a los elementos del DOM. Sin embargo, es necesario tener dos componentes organizados antes de poder asociar datos:</p>
+
+<ol>
+<li>Los datos</li>
+
+<li>Una selección de elementos del DOM</li>
+</ol>
+
+<p>Miremos uno a la vez.</p>
+
+<h3 id="datos">Datos</h3>
+
+<p>D3 es bastante inteligente con respecto al manejo de diferentes tipos de datos y acepta casi cualquier tipo de arreglo de números, caracteres u objetos (éstos a su vez pueden contener otros arreglos o pares de llave/valor). D3 puede leer JSON ( y GeoJSON) con facilidad y tiene también un método que ayuda a montar archivos en formato CSV.</p>
+
+<p>Con el propósito de mantener la simplicidad, por el momento vamos a empezar con un arreglo simple de números. Esta es la muestra:</p>
+
+<pre><code>var dataset = [ 5, 10, 15, 20, 25];</code></pre>
+
+<h3 id="por_favor_haga_su_seleccin">Por Favor Haga su Selección</h3>
+
+<p>Primero es indispensable decidir qué es lo que se va a seleccionar, o sea, qué elementos estarán asociados a los datos? Nuevamente, se utilizará un esquema sencillo - esta vez se va a crear un párrafo nuevo para cada valor en el conjunto de datos. Es posible imaginarse que algo así puede ser útil:</p>
+
+<pre><code>d3.select(&quot;body&quot;).selectAll(&quot;p&quot;)</code></pre>
+
+<p>Es correcto, sin embargo toca tener algo en cuenta: Los párrafos que queremos seleccionar <em>aún no existen</em>. Este es uno de los puntos que más genera confusión con respecto a D3. Cómo puede ser posible seleccionar elementos que aún no existen? Paciencia por favor - la respuesta puede requerir la maleabilidad de su mente.</p>
+
+<p>La respuesta está en el método enter( ), que es verdaderamente mágico. Acá está el código final del ejemplo, que será explicado a continuación:</p>
+
+<pre><code>d3.select(&quot;body&quot;).selectAll(&quot;p&quot;)
+	.data(dataset)
+	.enter()
+	.append(&quot;p&quot;)
+	.text(&quot;New paragraph!&quot;);</code></pre>
+
+<p><a href="http://alignedleft.com/content/03-tutorials/01-d3/60-binding-data/index.html">Ahora, revise lo que hace el código con la página de ejemplo</a>. Puede ver cinco párrafos nuevos, cada uno con el mismo contenido. Esto es lo que pasa:</p>
+
+<p><code>d3.select(&quot;body&quot;)</code> - encuentra la etiqueta -body- en el DOM y pasa la referencia al siguiente paso en la cadena.</p>
+
+<p><code>.selectAll(&quot;p&quot;)</code> - Selecciona todos los párrafos del DOM. Como aún no existen, devuelve una selección vacía. Esto se debe entender como la representación de los párrafos que existirán <em>próximamente</em>.</p>
+
+<p><code>.data(dataset)</code>. Cuenta y desagrega los valores. Existen cinco valores en la muestra, por consiguiente de aquí en adelante todo se ejecutará cinco veces, una vez por cada valor.</p>
+
+<p><code>.enter()</code>- Para crear nuevos elementos que estén asociados a datos, es necesario utlizar <code>enter()</code>. Este método revisa el DOM y luego revisa los datos que le serán entregados. Si existen más datos que elementos del DOM, <code>enter()</code> <em>crea un elemento temporal</em> con el cual se puede hacer la magia. Luego <code>enter()</code> entrega la referencia al elemento temporal al siguiente paso en la cadena.</p>
+
+<p><code>.append()</code> - Utiliza la selección temporal creada previamente por el método <code>enter()</code> e inserta el elemento <strong>p</strong> en el DOM. Qué bién! Ahora lo pasa como referencia al elemento que acaba de crear al siguiente paso en la cadena.</p>
+
+<p><code>.text(&quot;New paragraph!&quot;)</code> - Toma la referencia al recién creado <strong>p</strong> e inserta el valor del texto.</p>
+
+<h3 id="asociados_y_listos">Asociados y Listos</h3>
+
+<p>Muy bien! Los datos se pudieron leer, desagregar y asociar a los nuevos elementos <strong>p</strong> que se crearon en el DOM. Si no cree, puede regresar a la <a href="http://alignedleft.com/content/03-tutorials/01-d3/60-binding-data/index.html">página de ejemplo</a> y abrir el inspector de web.</p>
+
+<p><img src="/images/cinco-parrafos.png" alt="Alt text" /></p>
+
+<p>Ya se tienen los cinco párrafos, pero donde están los datos. Oprima la opción <em>Consola</em>, y escriba el siguiente código de JavaScript y luego oprima la tecla Enter:</p>
+
+<pre><code>console.log(d3.selectAll(&quot;p&quot;))</code></pre>
+
+<p><img src="/images/array.png" alt="Alt text" /></p>
+
+<p>Un arreglo! Ahora oprima el triángulo gris para ver más:</p>
+
+<p><img src="/images/p-element.png" alt="Alt text" /></p>
+
+<p>Ahora podrá ver los cinco <strong>HTMLParagraphElements</strong>, numerados del 0 al 4. Oprima el tríangulo para ver el primero (número 0)</p>
+
+<p><img src="/images/nodemap.png" alt="Alt text" /></p>
+
+<p>Lo ve? Realmente lo ve? Increíble. Ahí está:</p>
+
+<p><img src="/images/data-highlight.png" alt="Alt text" /></p>
+
+<p>El primer valor, el número 5, se puede ver bajo el atributo <code>_data_</code> del párrafo. Si oprime los demás elementos de párrafo, verá que también cotienen valores en el atributo <code>_data_</code> 10, 15, 20 y 25, tal como se especificaron.</p>
+
+<p>Los datos están listos. Es hora de hacer algo con ellos.</p>
+
+<p><a href="/datos-propios.html">Siguiente: Usando sus Datos –&gt;</a></p>
           <section>
 	<footer>
-		Este tutorial lo mantiene Gabriel Coch <a href="https://github.com/gcoch">gcoch</a><br>
+		Este tutorial lo mantiene <a href="https://twitter.com/gabrielcoch">Gabriel Coch</a><br>
         El contenido es de <a href="http://alignedleft.com/">Scott Murray</a>
     </footer>
 </section>

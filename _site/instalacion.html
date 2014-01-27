@@ -18,8 +18,6 @@
 
 
   
-
-
   <body>
     <div id="container">
       <div class="inner">
@@ -39,7 +37,7 @@
         
         	<a href="/asociar-datos.html">Asociar Datos | </a>
         
-        	<a href="/datos-propios.html">Usar Datos Propios | </a>
+        	<a href="/datos-propios.html">Usando sus Datos | </a>
         
         	<a href="/desplegar-divs.html">Desplegar DIVs | </a>
         
@@ -60,18 +58,54 @@
         	<a href="/ejes.html">Ejes | </a>
         
 </dv>
-          <h1></h1>
-          <h2></h2>
         </header>
 
         <hr>
         <section id="main_content">
           <h2 id="instalacin">Instalación</h2>
 
-<p><a href="/anadir-elementos.html">Siguiente —-&gt;</a></p>
+<h3 id="desgargue_de_d3">Desgargue de D3</h3>
+
+<p>Para comenzar, es necesario crear un directorio para su proyecto. Dentro de ese directorio, se recomienda crear un subdirectorio bajo el nombre <strong>d3</strong>, descargar la <a href="http://d3js.org/">versión más reciente</a> de D3 y descomprimir el archivo ZIP.</p>
+
+<p>D3 también viene en un formato “comprimido” disponible en el <a href="https://github.com/mbostock/d3">repositorio de Github</a>. Este archivo no tiene espacio en blanco, por lo cual es de menor tamaño y se carga más rápidamente.</p>
+
+<p>Una tercera opción consiste en descargar el repositorio entero, con lo cual se optiene no solamente los archivos de JavaScript sino también todo el código fuente de los componentes. Igualmente, puede revisar el contenido del repositorio o descargarlo todo como un archivo comprimido en formato ZIP.</p>
+
+<h3 id="referenciar_a_d3">Referenciar a D3</h3>
+
+<p>Empiece creando un archivo simple en formato HTML de nombre <em>index.html</em>. La estructura del directorio debe ser similar a:</p>
+
+<pre><code>project-folder/
+    d3/
+        d3.js
+        d3.min.js (optional)
+    index.html</code></pre>
+
+<p>Luego, copie el siguiente código a su archivo HTML, de tal manera que éste haga referencia a D3 en la sección -head- y deje un espacio para el código de JavaScript:</p>
+
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;D3 Test&lt;/title&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;d3/d3.v3.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;script type=&quot;text/javascript&quot;&gt;
+        // Su código de D3 se incluirá acá
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;  </code></pre>
+
+<h3 id="despliegue_de_la_pgina">Despliegue de la Página</h3>
+
+<p>En algunos casos, es posible abrir el archivo directamente desde el navegador. Sin embargo, cuando se cargan archivos externos es recomendable correr un servidor de web y visualizar la página desde <strong>http://localhost:8888/</strong>. Existen opciones como <a href="http://mamp.info/en/">MAMP</a> con <a href="http://www.pythonforbeginners.com/modules-in-python/how-to-use-simplehttpserver/">SimpleHTTPServer</a>.</p>
+
+<p><a href="/anadir-elementos.html">Siguiente: Añadir Elementos –&gt;</a></p>
           <section>
 	<footer>
-		Este tutorial lo mantiene Gabriel Coch <a href="https://github.com/gcoch">gcoch</a><br>
+		Este tutorial lo mantiene <a href="https://twitter.com/gabrielcoch">Gabriel Coch</a><br>
         El contenido es de <a href="http://alignedleft.com/">Scott Murray</a>
     </footer>
 </section>
