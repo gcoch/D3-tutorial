@@ -64,6 +64,118 @@
         <section id="main_content">
           <h2 id="desplegar_divs">Desplegar DIVs</h2>
 
+<p>Es hora de comenzar a crear diagramas con datos.</p>
+
+<p>Por última vez vamos a utlizar el mismo conjunto de datos.</p>
+
+<pre><code>var dataset = [ 5, 10, 15, 20, 25 ];</code></pre>
+
+<p>Este conjunto se va a usar para generar un diagrama de barras muy sencillo. Los diagramas de barras son en escencia rectángulos y la forma más fácil de dibujar un rectángulo e usando la etiqueta de HTML <code>&lt;div&gt;</code>. (En realidad para los navegadores, <em>todo</em> es un rectángulo, entonces es posible cambiar el ejemplo y usar <code>&lt;span&gt;</code>o el elemento que prefiera).</p>
+
+<p>El siguiente <code>div</code> funciona bien como una barra de datos.</p>
+
+<p><span style='display: inline-block;
+            width: 20px;
+            height: 75px;
+            background-color: teal;' /></p>
+
+<pre><code>&lt;div style=&quot;display: inline-block;
+        width: 20px;
+        height: 75px;
+        background-color: teal;&quot;&gt;&lt;/div&gt;</code></pre>
+
+<p>(Este ejemplo muestra algo que no se debe hacer. Usualmente, no se dbe usar un <code>div</code> vacío para efectos visuales únicamente, sin embargo para efectos de este tutorial se puede hacer la excepción.)</p>
+
+<p>Puesto que este es un <code>div</code>, su ancho <code>width</code> y altura <code>height</code> se definen el los estilos de CSS. Cada barra en el diagrama puede compartir las mismas propiedades de despliegue (con excepción de altura <code>height</code>), por consiguiente se pueden incluir los estilos compartidos dentro de una clase <code>class</code>de nombre <code>bar</code>:</p>
+
+<pre><code>div.bar {
+	display: inline-block;
+	width: 20px;
+	height: 75px;   /* Esto se cambiará próximamente */
+	background-color: teal;
+}</code></pre>
+
+<p>Ahora a cada <code>div</code> se le debe asignar la clase <code>bar</code>, de tal manera que la regla de CSS se aplique. Si estuviera escribiendo código HTML a mano, escribiría:</p>
+
+<pre><code>&lt;div class=&quot;bar&quot;&gt;&lt;/div&gt;</code></pre>
+
+<p>Con D3, para añadir una clase a un elemento se utilize el método <code>selection.attr()</code>. Es importante entender la diferencia entre <code>attr()</code> y su pariente cercano, <code>style</code>.</p>
+
+<h3 id="asignacin_de_atributos">Asignación de Atributos</h3>
+
+<p><code>attr()</code>se usa para asignarle un atributo y su valor a un elemento. Un atributo de HTML es cualquier dupla propiedad/valor que se pueda insertar dentro de los corchetes. Por ejemplo, estos elementos de HTML</p>
+
+<pre><code>&lt;p class=&quot;caption&quot;&gt;
+&lt;select id=&quot;country&quot;&gt;
+&lt;img src=&quot;logo.png&quot; width=&quot;100px&quot; alt=&quot;Logo&quot; /&gt;</code></pre>
+
+<p>contienen en total cinco atributos (con sus valores correspondientes), y todos pueden ser asignados con la función <code>attr()</code>:</p>
+
+<pre><code>class   |   caption
+id      |   country
+src     |   logo.png
+width   |   100px
+alt     |   Logo</code></pre>
+
+<p>Para asignarle la clase <code>bar</code>a los <code>div</code>s, se puede usar:</p>
+
+<pre><code>.attr(&quot;class&quot;, &quot;bar&quot;)</code></pre>
+
+<h3 id="una_nota_sobre_clases">Una Nota sobre Clases</h3>
+
+<p>Tome nota de que la clase de un elemento se guarda como un atributo de HTML. La clase, a su vez, se usa para referenciar la regla del estilo de CSS. Esto puede causar algo de confusión porque existe una diferencia entre asignar una clase (de la cual se inferieren los estilos) y aplicar un estilo directamente a un elemento. En D3 es factible hacer ambos, y si bien se puede utilizar el que considere más conveniente, yo recomiendo usar <em>clases</em> para aquellas propiedades que sean compartidas por varios elementos, y aplicar reglas de <em>estilo</em> directamente solo cuando se esté desviando de la norma (que es exactamente lo que haremos en un momento.)</p>
+
+<p>Vale la pena mencionar otro método de D3, <code>classed()</code>, que puede ser usado para aplicar o remover clases rápidamente de los elementos. La línea de código anterior pudo haber sido escrita así: .classed(“bar”, true)</p>
+
+<h3 id="otra_vez_con_las_barras">Otra Vez con las Barras</h3>
+
+<p>Ahora, se puede ver todo el código de D3 hasta el momento, incluyendo el conjunto de datos:</p>
+
+<pre><code>var dataset = [ 5, 10, 15, 20, 25 ];
+
+d3.select(&quot;body&quot;).selectAll(&quot;div&quot;)
+.data(dataset)
+.enter()
+.append(&quot;div&quot;)
+.attr(&quot;class&quot;, &quot;bar&quot;);</code></pre>
+
+<p><img src="/images/rectangle.png" alt="Alt text" /></p>
+
+<p>Puede ver <a href="http://alignedleft.com/content/03-tutorials/01-d3/80-drawing-divs/1.html">esta página con código</a>. No olvide revisar el código fuente y abrir el inspector de web para ver qué está pasando. Debe ver cinco barras verticales, cada una representando a un dato del conjunto. Como no hay espacio entre las barras, la gráfica aparece como un solo rectángulo.</p>
+
+<h3 id="definicin_de_estilos">Definición de Estilos</h3>
+
+<p>El método <code>estilo()</code>se usa para aplicar la propiedad y valor de CSS a un elemento de HTML. Esto es el equivalente a añadir reglas de CSS dentro del atributo <code>style</code>en el código HTML, así:</p>
+
+<pre><code>&lt;div style=&quot;height: 75px;&quot;&gt;&lt;/div&gt;</code></pre>
+
+<p>En el diagrama de barras, la altura de cada barra debe generarse de acuerdo con el dato correspondiente, entonces si se añade el siguiente código:</p>
+
+<pre><code>.style(&quot;height&quot;, function(d) {
+    return d + &quot;px&quot;;
+      });</code></pre>
+
+<p><img src="/images/escalera.png" alt="Alt text" /></p>
+
+<p>verá un diagrama de barras muy pequeño. <a href="http://alignedleft.com/content/03-tutorials/01-d3/80-drawing-divs/2.html">página de ejemplo.</a></p>
+
+<p>Cuando D3 pasa por cada dato, asocia ese dato a <code>d</code>, por consiguiente se está asociando un valor <code>d</code>al atributo <code>height</code>y se le añade <code>px</code>(para especificar las unidades en pixeles). El resultado son alturas de 5px, 10px, 15px, 20px, y 25px.</p>
+
+<p>Esto suena un tanto absurdo, entonces hagamos las barras más altas:</p>
+
+<pre><code>.style(&quot;height&quot;, function(d) {
+    var barHeight = d * 5;  //Incrementar la escala 5 veces.
+    return barHeight + &quot;px&quot;;
+    });</code></pre>
+
+<p>e incluyamos un espacio en el lado derecho de cada barra, para alinear todo mejor.</p>
+
+<p><img src="/images/barra2.png" alt="Alt text" /></p>
+
+<p>Excelente! Ya podemos ir a SIGGRAPH con este diagrama.</p>
+
+<p>Acá está la <a href="http://alignedleft.com/content/03-tutorials/01-d3/80-drawing-divs/3.html">página final</a> de ejemplo con este código. Nuevamente, es importante revisar el código y utilizar el inspector de web para comparar el HTML original con el DOM final.</p>
+
 <p><a href="/poder-datos.html">Siguiente: El Poder de la Función data( ) –&gt;</a></p>
           <section>
 	<footer>

@@ -64,6 +64,84 @@
         <section id="main_content">
           <h2 id="el_poder_de_la_funcin_data_">El Poder de la Función data( )</h2>
 
+<p>Lo último que hicimos fue un diagrama de barras simple, dibujado utlizando etiquetas <code>div</code>y un conjunto de datos sencillo.</p>
+
+<pre><code>var dataset = [ 5, 10, 15, 20, 25 ];</code></pre>
+
+<p><img src="/images/barra2.png" alt="Alt text" /></p>
+
+<p>Está bien, pero los datos en la vida real nunca son así. Cambiemos <a href="http://alignedleft.com/content/03-tutorials/01-d3/90-the-power-of-data/2.html">nuestros datos</a></p>
+
+<pre><code>var dataset = [ 25, 7, 5, 26, 11 ];</code></pre>
+
+<p><img src="/images/barras4.png" alt="Alt text" /></p>
+
+<p>Tampoco vamos a limitarnos a cinco datos. Podemos <a href="http://alignedleft.com/content/03-tutorials/01-d3/90-the-power-of-data/3.html">añadir más</a>!</p>
+
+<pre><code>var dataset = [ 25, 7, 5, 26, 11, 8, 25, 14, 23, 19,
+            14, 11, 22, 29, 11, 13, 12, 17, 18, 10,
+            24, 18, 25, 9, 3 ];</code></pre>
+
+<p><img src="/images/barras5.png" alt="Alt text" /></p>
+
+<p>25 datos en vez de cinco! Cómo es que D3 expande automáticament nuestro diagrama si es necesario?</p>
+
+<pre><code>d3.select(&quot;body&quot;).selectAll(&quot;div&quot;)
+.data(dataset)  // &lt;-- The answer is here!
+.enter()
+.append(&quot;div&quot;)
+.attr(&quot;class&quot;, &quot;bar&quot;)
+.style(&quot;height&quot;, function(d) {
+    var barHeight = d * 5;
+    return barHeight + &quot;px&quot;;
+});</code></pre>
+
+<p>Se le pasan diez datos a la función <code>data()</code>, ésta recorrerá la cadena diez veces. Si se le pasan un millón de datos, la recorrerá un millón de veces (solo tiene que tener paciencia).</p>
+
+<p>Este es el poder de la función <code>data()</code>, la cual es lo suficientemente inteligente para recorrer por completo cualquier conjunto de datos que se le dé y ejecutar cada una de las funciones siguientes en la cadena. Esto lo hace mientras actualiza el contexto dentro del cual opera cada función, de tal manera que <code>d</code> siempre se refiere al dato actual, o aquel dónde esté el ciclo (loop) en ese momento.</p>
+
+<p>Puede que esto sea demasiada información. Si no la entiende del todo en este momento, pronto la entenderá. Le recomiendo que guarde el código fuente de las páginas HTML de ejemplo anteriores, cambie los valores del conjunto de datos y revise cómo cambia el diagrama de barras.</p>
+
+<p>Recuerde, los datos son lo que generan la visualización y no al contrario.</p>
+
+<h3 id="datos_aleatorios">Datos Aleatorios</h3>
+
+<p>Algunas veces es divertido generar conjuntos con datos aleatorios, pero efectos de chequeo o solamente por interés en temas técnicos. <a href="http://alignedleft.com/content/03-tutorials/01-d3/90-the-power-of-data/4.html">Eso es lo que he hecho acá</a>. Puede ver cómo cambia la gráfica cada vez que se refresca la página.</p>
+
+<p><img src="/images/barras6.png" alt="Alt text" /></p>
+
+<p><img src="/images/barras7.png" alt="Alt text" /></p>
+
+<p><img src="/images/barras8.png" alt="Alt text" /></p>
+
+<p>Si revisa el código fuente, podrá ver: var dataset = []; //Initialize empty array for (var i = 0; i &lt; 25; i++) { //Loop 25 times var newNumber = Math.random() * 30; //New random number (0-30) dataset.push(newNumber); //Add new number to array }</p>
+
+<p>Este código no utiliza ningún método de D3, es solamente JavaScript. Sin entrar en mucho detalle, este código:</p>
+
+<ol>
+<li>Crea un arreglo vacío denominado <code>dataset</code>.</li>
+
+<li>Inicia un ciclo (loop) <code>for</code>, que se ejecuta 25 veces.</li>
+
+<li>Por cada ciclo, se genera un número aleatorio entre 0 y 30.</li>
+
+<li>El nuevo número se añade al arreglo <code>dataset</code>. (<code>push()</code>es un método de arreglos que añade un nuevo valor al final del arreglo.)</li>
+</ol>
+
+<p>Solamente por jugar, abra la consola de JavaScript y escriba <code>console.log(dataset)</code>. Podrá ver todo el arreglo con 25 valores generados aleatoriamente.</p>
+
+<p><img src="/images/random.png" alt="Alt text" /></p>
+
+<p>Puede ver que todos los números son decimales o puntos flotantes (14.793717765714973) y no números reales o enteros (14) como usamos inicialmente. Para efectos de este ejemplo, esto basta, pero si alguna vez necesita números enteros, puede usar el método de JavaScript <code>Math.round()</code>. Por ejemplo, se puede envolver el generador de números aleatorios de esta línea:</p>
+
+<pre><code>var newNumber = Math.random() * 30;
+así:
+var newNumber = Math.round(Math.random() * 30);</code></pre>
+
+<p><a href="http://alignedleft.com/content/03-tutorials/01-d3/90-the-power-of-data/5.html">Pruébelo aquí</a> y use la consola para verificar que los números se hayan redondeado a números enteros.</p>
+
+<p>Ahora vamos a expandir las posibilidades de visualización con SVG.</p>
+
 <p><a href="/intro-svg.html">Siguiente: Introducción a SVG –&gt;</a></p>
           <section>
 	<footer>

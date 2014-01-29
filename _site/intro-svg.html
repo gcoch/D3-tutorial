@@ -64,6 +64,255 @@
         <section id="main_content">
           <h2 id="introduccin_de_svg">Introducción de SVG</h2>
 
+<p>D3 es de mayor utilidad cuando se usa para generar información gráfica en formato SVG. Si bien es factible deplegar gráficas con etiquetas <code>div</code>y otros elementos nativos de HTML, este método no es ideal y está sujeto las inconsistencias que existen entre los diferentes navegadores. El uso de SVG es bastante más confiable, consistente visualmente y más rápido.</p>
+
+<p>Aplicaciones de dibujo vectorial como Illustrator se pueden usar para generar archivos en formato SVG, pero es necesario aprender cómo se generan a partir de código.</p>
+
+<h3 id="el_elemento_svg">El Elemento SVG</h3>
+
+<p>Gráficos Escalables en Formato Vectorial (Scalable Vector Graphics) es formato que usa texto para definir imágenes. Cada imagen SVG se define con código similar al de HTML. El código SVG se puede incluir directamente dentro de cualquier documento de HTML. Todos los navegadores leen SVG, con excepción de Internet Explorer 8 y versiones anteriores. SVG está basado en XML, por consiguiente notará que los elementos que no tienen entiquetas de cierre se auto-cierran. Por ejemplo:</p>
+
+<pre><code>&lt;element&gt;&lt;/element&gt;   &lt;!-- Usa una etiqueta de cierra --&gt;
+&lt;element/&gt;            &lt;!-- Se auto-cierra --&gt;</code></pre>
+
+<p>Antes de poder dibujar, se debe crear un elemento SVG. Piense en un elemento SVG como el lienzo donde se dibujan todos los gráficos. (En este contexto, SVG es conceptualmente similar elemento <code>canvas</code>de HTML). Por lo menos, se deben especificar los valores de ancho (<code>width</code>) y altura (<code>height</code>). Si éstos no se especifican, SVG utilizará todo el espacio que puedan dentro detro del elemento que lo contiene.</p>
+
+<pre><code>&lt;svg width=&quot;500&quot; height=&quot;50&quot;&gt;
+&lt;/svg&gt;</code></pre>
+
+<p>Acá está el SVG generado por este código.</p>
+<svg height='50' width='500'>
+</svg>
+<p>Si no lo ve, puede usar el botón derecho y marcar en el espacio en blanco y luego seleccionar “Inspeccionar Elemento”. Su inspector de web mostrará algo similar a ésto:</p>
+
+<p><img src="/images/elemento-svg.png" alt="Alt text" /></p>
+
+<p>Tome nota de que que ya existe un elemento <code>svg</code>(qué bien!) y que ocupa 500 pixeles horizontales y 50 pixeles verticales. No es que se muestre mucho por el momento (qué mal!).</p>
+
+<p>También tome nota de que el navegador asumió que la medida por defecto es el <em>pixel</em>. Se especificólas dimensiones de <code>500</code> y <code>50</code> y no <code>500px</code>y <code>50px</code>. Se habría podido especificar <code>px</code>explícitamente, o cualquier otro tipo de unidad soporte medidas, incluyendo <code>em</code>, <code>pt</code>, <code>in</code>, <code>cm</code>, y <code>mm</code>.</p>
+
+<h3 id="figuras_simples">Figuras Simples</h3>
+
+<p>Existen ciertos elementos visuales que se pueden incluir dentro de las etiquetas <code>svg</code>, incluyendo <code>rect</code>, <code>circle</code>, <code>ellipse</code>,<code>line</code>, <code>text</code>, y <code>path</code>.</p>
+
+<p>Si usted tiene alguna familiaridad con la programación gráfica, reconocerá el sistema de coordenadas basado en pixeles, en el cual <code>0, 0</code>está ubicado en el la parte superior izquierda del espacio destinado a los dibujos. Al incrementar los valores <code>x</code>, estos se mueven hacia la derecha, mientras que el incrementar los valores <code>y</code>, se mueven hacia abajo.</p>
+<svg height='65' width='505'>
+    <line stroke='gray' stroke-width='1' x1='5' x2='5' y1='5' y2='50' />
+    <line stroke='gray' stroke-width='1' x1='5' x2='0' y1='50' y2='45' />
+    <line stroke='gray' stroke-width='1' x1='5' x2='10' y1='50' y2='45' />
+    <line stroke='gray' stroke-width='1' x1='5' x2='500' y1='5' y2='5' />
+    <line stroke='gray' stroke-width='1' x1='500' x2='495' y1='5' y2='0' />
+    <line stroke='gray' stroke-width='1' x1='500' x2='495' y1='5' y2='10' />
+    <circle cx='5' cy='5' fill='#008' r='3' />
+    <text x='10' y='20'>0,0</text>
+    <circle cx='105' cy='25' fill='#008' r='3' />
+    <text x='110' y='40'>100,20</text>
+    <circle cx='205' cy='45' fill='#008' r='3' />
+    <text x='210' y='60'>200,40</text>
+</svg>
+<p><code>rect</code>dibuja un rectángulo. Se usa <code>x</code>y <code>y</code>para especificar las coordenadas del costado superior izquierdo y <code>width</code>y <code>height</code>para especificar las dimensiones. Este rectángulo rellena todo el espacio de nuestro elemento SVG.</p>
+
+<p><code>&lt;rect x=&quot;0&quot; y=&quot;0&quot; width=&quot;500&quot; height=&quot;50&quot;/&gt;</code></p>
+<svg height='50' width='500'>
+    <rect height='50' width='500' x='0' y='0' />
+</svg>
+<p><code>circle</code> dibuja un círculo. Se usa <code>cx</code>y <code>cy</code>para especificar las coordenada del <em>centro</em> y <code>r</code>para especificar el radio. Este círculo queda centrado en la mitad del SVG de 500 pixeles de ancho, porque <code>cx</code>(“centro de x) tiene un valor de 250.</p>
+<svg height='50' width='500'>
+    <circle cx='250' cy='25' r='25' />
+</svg>
+<p><code>ellipse</code> es similiar, pero requiere dos radios, uno por cada eje. En vez de usar <code>r</code>, se usa <code>rx</code>y <code>ry</code>.</p>
+
+<p><code>&lt;ellipse cx=&quot;250&quot; cy=&quot;25&quot; rx=&quot;100&quot; ry=&quot;25&quot;/&gt;</code></p>
+<svg height='50' width='500'>
+    <ellipse cx='250' cy='25' rx='100' ry='25' />
+</svg>
+<p><code>line</code> dibuja una línea. Se usa <code>x1</code>y <code>y1</code>para especificar las coordenadas de extremo de la línea, y <code>x2</code>y <code>y2</code>para especificar las coordenadas del otro extremo. También es necesario especificar un color <code>stroke</code> para que se vea la línea.</p>
+
+<p><code>&lt;line x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;500&quot; y2=&quot;50&quot; stroke=&quot;black&quot;/&gt;</code></p>
+<svg height='50' width='500'>
+    <line stroke='black' x1='0' x2='500' y1='0' y2='50' />
+</svg>
+<p><code>text</code> despliega texto. Se usa <code>x</code>para especificar la posición del lado derecho y <code>y</code>para especificar la posición veritical de la línea de base del tipo.</p>
+<svg height='50' width='500'>
+    <text x='250' y='25'>Easy-peasy</text>
+</svg>
+<p><code>text</code> también hereda los estilos del fuente que se especifican en el CSS, específicamente los de los elementos del padre, si no se especifican explícitamente. (Próximamente se explicará en más detalle el uso de estilos para texto). Tome nota de cómo el estilo del texto de arriba tiene el mismo formato del texto de este párrafo. Es posible reemplazar ese formato de la siguiente manera:</p>
+
+<pre><code>&lt;text x=&quot;250&quot; y=&quot;25&quot; font-family=&quot;sans-serif&quot;
+font-size=&quot;25&quot; fill=&quot;gray&quot;&gt;Easy-peasy&lt;/text&gt;</code></pre>
+<svg height='50' width='500'>
+    <text fill='gray' font-family='sans-serif' font-size='25' x='250' y='25'>Easy-peasy</text>
+</svg>
+<p>También cabe anotar que cuando el elemento visual se corre sobre el costado del elemnento SVG, éste lo corta. Se debe tener cuidado al usar <code>text</code>de tal manera que los descendientes no se corten (duele!). Puede ver lo que pasa cuando se define la línea base (<code>y</code>) en 50, lo mismo que la altura del SVG:</p>
+
+<pre><code>&lt;text x=&quot;250&quot; y=&quot;50&quot; font-family=&quot;sans-serif&quot;
+font-size=&quot;25&quot; fill=&quot;gray&quot;&gt;Easy-peasy&lt;/text&gt;</code></pre>
+<svg height='50' width='500'>
+    <text fill='gray' font-family='sans-serif' font-size='25' x='250' y='50'>Easy-peasy</text>
+</svg>
+<p><code>path</code>se usa para dibujar formas más complejas que aquellas descritas anteriormente (como los límites de países en mapas) y será explicado en otra sección. Por el momento seguiremos trabajando con formas simples.</p>
+
+<h3 id="estilos_de_los_elementos_svg">Estilos de los Elementos SVG.</h3>
+
+<p>El estilo por defecto de los SVGs es llenado en negro y sin línea. Si se necesita algo diferente, se tiene que aplicar estilos a los elementos. Algunas propiedades de SVG que se usan con frecuencia son:</p>
+
+<ul>
+<li><code>fill</code> - Un valor para el color. Igual a que en CSS, los colores se pueden especificar así:
+<ul>
+<li>por nombre – orange</li>
+
+<li>valor HEX – <code>#3388aa o #38a</code></li>
+
+<li>valor RGB – <code>rgb(10, 150, 20)</code></li>
+
+<li>RGB con transparencia alfa – <code>rgba(10, 150, 20, 0.5)</code></li>
+</ul>
+</li>
+
+<li><code>stroke</code> – Un valor para el color.</li>
+
+<li><code>stroke-width</code>– Una medida númerica (usualmente en pixeles).</li>
+
+<li><code>opacity</code>– Un valor numérico entre 0.0 (completamente transparente) y 1.0 (completamente opaco).</li>
+</ul>
+
+<p>Con <code>text</code>, se pueden usar estas propiedades, que funcionan de la misma forma que en CSS”</p>
+
+<ul>
+<li><code>font-family</code></li>
+
+<li><code>font-size</code></li>
+</ul>
+
+<p>Haciendo otro paralelo con CSS, existen dos formas de aplicar estilos a un elemento SVG: directamente (en línea) como un atributo del elemento, o dentro de una regla de estilo de CSS.</p>
+
+<p>Acá se muestran algunas propiedades de estilo aplicadas directamente como atributos a <code>circle</code>.</p>
+
+<pre><code>&lt;circle cx=&quot;25&quot; cy=&quot;25&quot; r=&quot;22&quot;
+fill=&quot;yellow&quot; stroke=&quot;orange&quot; stroke-width=&quot;5&quot;/&gt;</code></pre>
+<svg height='50' width='500'>
+    <circle cx='25' cy='25' fill='yellow' r='22' stroke='orange' stroke-width='5' />
+</svg>
+<p>De otra manera, se pueden omitir los atributos de estilo y asignarle una clase a <code>circle</code>(como si fuera un elemento HTML)</p>
+
+<p><code>&lt;circle cx=&quot;25&quot; cy=&quot;25&quot; r=&quot;22&quot; class=&quot;pumpkin&quot;/&gt;</code></p>
+
+<p>y después incluir las reglas de <code>fill</code>, <code>stroke</code>, y <code>stroke-width</code> dentro de un estilo CSS asignado a esta nueva clase:</p>
+
+<pre><code>.pumpkin {
+    fill: yellow;
+    stroke: orange;
+    stroke-width: 5;
+    }</code></pre>
+
+<p>El usar CSS tiene algunos beneficios obvios:</p>
+
+<ol>
+<li>El estilo se especifica una vez y se puede aplicar a varios elementos.</li>
+
+<li>El código CSS es usualmente más fácil de leer que el código en línea.</li>
+
+<li>Por esas razones, con el enfoque de CSS tiende a ser más fácil mantener el código e igualmente es más fácil implementar cambios de diseño.</li>
+</ol>
+
+<p>El usar CSS para aplicar estilos SVG, sin embargo, puede ser algo desconcertante para algunos. <code>fill</code>, <code>stroke</code>, y <code>stroke-width</code>, después de todo, no son propiedades de CSS. (Los equivalentes más cercanos en CSS son <code>background-color</code>y <code>border</code>.). Si en algo ayuda recordarse cuales reglas dentro de CSS son específicas a SVG, vale la pena incluir <code>svg</code> en los selectores:</p>
+
+<pre><code>svg .pumpkin {
+/* ... */
+}</code></pre>
+
+<h3 id="capas_y_el_orden_de_precedencia_de_los_dibujos">Capas y el Orden de Precedencia de los Dibujos</h3>
+
+<p>En SVG no existen las “capas” y no existe el concepto de profundidad. SVG no soporta la propiedad <code>z-index</code>de CSS, por eso las figuras solamente se pueden organizar en un plano x/y de dos dimensiones.</p>
+
+<p>Sin embargo, si dibujamos varias figuras, se traslapan:</p>
+
+<pre><code>&lt;rect x=&quot;0&quot; y=&quot;0&quot; width=&quot;30&quot; height=&quot;30&quot; fill=&quot;purple&quot;/&gt;
+&lt;rect x=&quot;20&quot; y=&quot;5&quot; width=&quot;30&quot; height=&quot;30&quot; fill=&quot;blue&quot;/&gt;
+&lt;rect x=&quot;40&quot; y=&quot;10&quot; width=&quot;30&quot; height=&quot;30&quot; fill=&quot;green&quot;/&gt;
+&lt;rect x=&quot;60&quot; y=&quot;15&quot; width=&quot;30&quot; height=&quot;30&quot; fill=&quot;yellow&quot;/&gt;
+&lt;rect x=&quot;80&quot; y=&quot;20&quot; width=&quot;30&quot; height=&quot;30&quot; fill=&quot;red&quot;/&gt;</code></pre>
+<svg height='50' width='500'>
+    <rect fill='purple' height='30' width='30' x='0' y='0' />
+    <rect fill='blue' height='30' width='30' x='20' y='5' />
+    <rect fill='green' height='30' width='30' x='40' y='10' />
+    <rect fill='yellow' height='30' width='30' x='60' y='15' />
+    <rect fill='red' height='30' width='30' x='80' y='20' />
+</svg>
+<p>El orden en que se incluyen los elementos en el código determina su orden (de profundidad). El cuadrado morado aparece de primero en el código y por eso se dibuja de primer. Luego, el cuadradro azul se dibuja “encima”del morando, luego el verde encima del azul, y así en adelante.</p>
+
+<p>Toca pensar en las figuras de SVG como se dibujarían figuras en un lienzo. La pintura de pixeles que se aplica después oscurece lo que se haya dibujado antes e igualmente aparece como si estuviera “adelante”.</p>
+
+<p>El tema de orden en el dibujo es imporante cuando se tienen elementos visuales que nos deben ser bloqueados por otros. Por ejemplo, cuando se tienen etiquetas para los ejes o los valores en un diagrama de dispersión. Los ejes y las etiquetas se deben añadir al SVG de último, para que aparezcan encima de los demás elementos.</p>
+
+<h3 id="transparencia">Transparencia</h3>
+
+<p>Las transparencia puede ser útli cuando exiten elementos que se traslapan pero que deben ser visibles. También cuando se le debe quitar algo de importancia a algunos elementos y darle importance a otros.</p>
+
+<p>Existen dos formas de aplicar transparencia: usando un color RGB con alpha o asignado un valor de opaco.</p>
+
+<p>Se puede usar <code>rgba()</code> en cualquier lugar donde se especifique un color, tal como <code>fill</code>o <code>stroke.rgba()</code> que esperan tres valores entre 0 y 255 para el rojo, verde y azul, más el valor de transparencia (alpha) que está entre 0.0 y 1.0.</p>
+
+<pre><code>&lt;circle cx=&quot;25&quot; cy=&quot;25&quot; r=&quot;20&quot; fill=&quot;rgba(128, 0, 128, 1.0)&quot;/&gt;
+&lt;circle cx=&quot;50&quot; cy=&quot;25&quot; r=&quot;20&quot; fill=&quot;rgba(0, 0, 255, 0.75)&quot;/&gt;
+&lt;circle cx=&quot;75&quot; cy=&quot;25&quot; r=&quot;20&quot; fill=&quot;rgba(0, 255, 0, 0.5)&quot;/&gt;
+&lt;circle cx=&quot;100&quot; cy=&quot;25&quot; r=&quot;20&quot; fill=&quot;rgba(255, 255, 0, 0.25)&quot;/&gt;
+&lt;circle cx=&quot;125&quot; cy=&quot;25&quot; r=&quot;20&quot; fill=&quot;rgba(255, 0, 0, 0.1)&quot;/&gt;</code></pre>
+<svg height='50' width='500'>
+    <circle cx='25' cy='25' fill='rgba(128, 0, 128, 1.0)' r='20' />
+    <circle cx='50' cy='25' fill='rgba(0, 0, 255, 0.75)' r='20' />
+    <circle cx='75' cy='25' fill='rgba(0, 255, 0, 0.5)' r='20' />
+    <circle cx='100' cy='25' fill='rgba(255, 255, 0, 0.25)' r='20' />
+    <circle cx='125' cy='25' fill='rgba(255, 0, 0, 0.1)' r='20' />
+</svg>
+<p>Cabe anotar que con <code>rgba()</code>, la tansparencia se aplica independientemente a los colores de <code>fill</code> y <code>stroke</code>. Los círculos que se muestran a continuación tienen un <code>fill</code>de 75% opaco, y sus valores de <code>stroke</code>son de 25% opaco.</p>
+
+<pre><code>&lt;circle cx=&quot;25&quot; cy=&quot;25&quot; r=&quot;20&quot;
+    fill=&quot;rgba(128, 0, 128, 0.75)&quot; 
+    stroke=&quot;rgba(0, 255, 0, 0.25)&quot; stroke-width=&quot;10&quot;/&gt;
+&lt;circle cx=&quot;75&quot; cy=&quot;25&quot; r=&quot;20&quot;
+    fill=&quot;rgba(0, 255, 0, 0.75)&quot;
+    stroke=&quot;rgba(0, 0, 255, 0.25)&quot; stroke-width=&quot;10&quot;/&gt;
+&lt;circle cx=&quot;125&quot; cy=&quot;25&quot; r=&quot;20&quot;
+    fill=&quot;rgba(255, 255, 0, 0.75)&quot;
+    stroke=&quot;rgba(255, 0, 0, 0.25)&quot; stroke-width=&quot;10&quot;/&gt;</code></pre>
+<svg height='50' width='500'>
+    <circle cx='25' cy='25' fill='rgba(128, 0, 128, 0.75)' r='20' stroke='rgba(0, 255, 0, 0.25)' stroke-width='10' />
+    <circle cx='75' cy='25' fill='rgba(0, 255, 0, 0.75)' r='20' stroke='rgba(0, 0, 255, 0.25)' stroke-width='10' />
+    <circle cx='125' cy='25' fill='rgba(255, 255, 0, 0.75)' r='20' stroke='rgba(255, 0, 0, 0.25)' stroke-width='10' />
+</svg>
+<p>Para aplicar transparencia a todo el elemento, se asigna el atributo <code>opacity</code>. Acá están unos círculos completamente opacos</p>
+<svg height='50' width='500'>
+    <circle cx='25' cy='25' fill='purple' r='20' stroke='green' stroke-width='10' />
+    <circle cx='65' cy='25' fill='green' r='20' stroke='blue' stroke-width='10' />
+    <circle cx='105' cy='25' fill='yellow' r='20' stroke='red' stroke-width='10' />
+</svg>
+<p>seguidos por los mismos círculos con valores de <code>opacity</code>.</p>
+<svg height='50' width='500'>
+    <circle cx='25' cy='25' fill='purple' opacity='0.9' r='20' stroke='green' stroke-width='10' />
+    <circle cx='65' cy='25' fill='green' opacity='0.5' r='20' stroke='blue' stroke-width='10' />
+    <circle cx='105' cy='25' fill='yellow' opacity='0.1' r='20' stroke='red' stroke-width='10' />
+</svg>
+<p>Se puede aplicar <code>opacity</code>a un elemento que tenga los colores definidos con <code>rgba()</code>. Al hacer eso, las transparencias se multiplican. Los siguientes círculos unsan los mismos valores RGBA para <code>fill</code>y <code>stroke</code>. El primer círculo debajo no tiene el elemento <code>opacity</code>, pero los otros dos sí:</p>
+
+<pre><code>&lt;circle cx=&quot;25&quot; cy=&quot;25&quot; r=&quot;20&quot;
+    fill=&quot;rgba(128, 0, 128, 0.75)&quot; 
+    stroke=&quot;rgba(0, 255, 0, 0.25)&quot; stroke-width=&quot;10&quot;/&gt;
+&lt;circle cx=&quot;65&quot; cy=&quot;25&quot; r=&quot;20&quot;
+    fill=&quot;rgba(128, 0, 128, 0.75)&quot; 
+    stroke=&quot;rgba(0, 255, 0, 0.25)&quot; stroke-width=&quot;10&quot;
+    opacity=&quot;0.5&quot;/&gt;
+&lt;circle cx=&quot;105&quot; cy=&quot;25&quot; r=&quot;20&quot;
+    fill=&quot;rgba(128, 0, 128, 0.75)&quot; 
+    stroke=&quot;rgba(0, 255, 0, 0.25)&quot; stroke-width=&quot;10&quot;
+    opacity=&quot;0.2&quot;/&gt;</code></pre>
+<svg height='50' width='500'>
+    <circle cx='25' cy='25' fill='rgba(128, 0, 128, 0.75)' r='20' stroke='rgba(0, 255, 0, 0.25)' stroke-width='10' />
+    <circle cx='65' cy='25' fill='rgba(128, 0, 128, 0.75)' opacity='0.5' r='20' stroke='rgba(0, 255, 0, 0.25)' stroke-width='10' />
+    <circle cx='105' cy='25' fill='rgba(128, 0, 128, 0.75)' opacity='0.2' r='20' stroke='rgba(0, 255, 0, 0.25)' stroke-width='10' />
+</svg>
+<p>Mire como el tercer círculo tiene el valor <code>opacity</code>de 0.2 o 20%. Sin embargo, el relleno morado ya tiene un valor alpha de 0.75 o 75%. El área morada,, entonces tiene una transparencia final de 0.2 por 0.75= 0.15 o 15%.</p>
+
 <p><a href="/despliegue-svg.html">Siguiente : Despliegue de SVG –&gt;</a></p>
           <section>
 	<footer>
