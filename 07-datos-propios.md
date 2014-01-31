@@ -40,7 +40,7 @@ Esta función es muy sencilla, básicamente:
     	return d;
 	}
 
-	y está encapsulada dentro de la función `text()`de D3, por consiguiente lo que devuelva esta función será pasado a la función `text()`.
+y está encapsulada dentro de la función `text()`de D3, por consiguiente lo que devuelva esta función será pasado a la función `text()`.
 
 	.text(function(d) {
     	return d;
@@ -48,9 +48,9 @@ Esta función es muy sencilla, básicamente:
 
 Pero se puede crear algo más sofisticado, porque estas funciones se pueden adecuar de muchas maneras. Es verdad que escribir su propio código en JavaScript es placentero y doloroso a la vez. El punto importante es saber que pueden definir funciones de la manera que se necesite. Probablemente, le gustaría añadir algún texto, el cual produce el [siguiente resultado](http://alignedleft.com/content/03-tutorials/01-d3/70-using-your-data/2.html)
 
-	.text(function(d) {
-    	return "I can count up to " + d;
-	});
+        .text(function(d) {
+            return "I can count up to " + d;
+        });
 
 ### A los datos les gusta tener casa
 
@@ -62,9 +62,9 @@ En este contexto, si no se encapsula `d` dentro de una función anónima, `d`no 
 
 Acá, la función anónima se encarga de darle el espacio que necesita `d`.
 
-	.text(function(d) {  // 
-    	return "Puedo contar hasta " + d;
-	});
+        .text(function(d) {  // 
+            return "Puedo contar hasta " + d;
+        });
 
 La razón para usar esta sintaxis es que `.text(), attr()`, y muchos otros métodos de D3 reciben una función como un argumento. Por ejemplo, `text()`puede recibir o una cadena de caracteres como un argumento:
 
@@ -86,7 +86,7 @@ Inicialmente esto parece no tener sentido y que es trabajo adicional solamente p
 
 ###Más allá del Texto
 
-Las cosas se vuelven aún más interesantes cuando empezamos a mirar otros métodos de D3, como son `attr()`y `style()`, los cuales permiten actualizar respectivament los atributos de HTML y propiedades de CSS sobre selecciones.
+Las cosas se vuelven aún más interesantes cuando empezamos a mirar otros métodos de D3, como son `attr()` y `style()`, los cuales permiten actualizar respectivament los atributos de HTML y propiedades de CSS sobre selecciones.
 
 Por ejemplo, con una sola línea de código adicional, se produce el siguiente [resultado](http://alignedleft.com/content/03-tutorials/01-d3/70-using-your-data/3.html).
 
@@ -95,16 +95,16 @@ Por ejemplo, con una sola línea de código adicional, se produce el siguiente [
 Ahora todo el texto es de color rojo. Lo interesante es que se puede utilizar una función para que el texto se despliegue en rojo solamente cuando el dato está por encima de cierto umbral. Entonces, es posible alterar la última línea incertando la función:
 
 	.style("color", function(d) {
-    	if (d > 15) {   //Umbral - 15
-        return "red";
-    	} else {
+            if (d > 15) {   //Umbral - 15
+                return "red";
+            } else {
         	return "black";
-    	}
-	});
+            }
+        });
 
 [Resultados](http://alignedleft.com/content/03-tutorials/01-d3/70-using-your-data/4.html). Puede ver que las primeras tres líneas están en negro, pero apenas `d` excede el número 15, el texto cambia de color a rojo.
 
-En la siguiente lección, se utilizará `attr()`y `style()` para manipular `divs`, y generar un diagrama de barras simple - nuestra primera visualización!
+En la siguiente lección, se utilizará `attr()` y `style()` para manipular `divs`, y generar un diagrama de barras simple - nuestra primera visualización!
 
 
 [Siguiente: Desplegar Divs-->]({{site.url}}/desplegar-divs.html)
