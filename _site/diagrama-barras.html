@@ -64,6 +64,250 @@
         <section id="main_content">
           <h2 id="cmo_hacer_un_diagrama_de_barras">Cómo Hacer un Diagrama de Barras</h2>
 
+<p>Ahora vamos a integrar todo lo que hemos aprendido hasta el momento para generar un diagrama de barras simple con D3.</p>
+
+<p>Empezamos revisando el diagrama de barras que hicimos anteriormente usando elementos <code>div</code>. Luego, vamos a adaptar ese código para dibujar las barras esta vez con SVG, lo cual nos da más flexibilidad en cuanto a la presentación visual. Por último, vamos a añadir etiquetes, de tal manera que podamos ver el valor de los datos claramente.</p>
+
+<h3 id="el_diagrama_anterior">El Diagrama Anterior</h3>
+
+<p><a href="http://alignedleft.com/content/03-tutorials/01-d3/130-making-a-bar-chart/1.html">Acá está lo que hicimos la última vez, con datos nuevos</a></p>
+
+<pre><code>var dataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
+            11, 12, 15, 20, 18, 17, 16, 18, 23, 25 ];
+
+d3.select(&quot;body&quot;).selectAll(&quot;div&quot;)
+    .data(dataset)
+    .enter()
+    .append(&quot;div&quot;)
+    .attr(&quot;class&quot;, &quot;bar&quot;)
+    .style(&quot;height&quot;, function(d) {
+        var barHeight = d * 5;
+        return barHeight + &quot;px&quot;;
+});</code></pre>
+
+<p><img src="/images/barras9.png" alt="Alt text" /></p>
+
+<p>Puede ser difícil imaginárselo, pero podemos definitivamente mejorar este diagrama hecho con <code>divs</code>.</p>
+
+<h3 id="el_nuevo_diagrama">El Nuevo Diagrama</h3>
+
+<p>Lo primero es lo primero - toca decidir el tamaño del nuevo SVG:</p>
+
+<pre><code>//Ancho y Altura
+var w = 500;
+var h = 100;</code></pre>
+
+<p>(Por supuesto, se deb nombrar <code>w</code>y <code>h</code>diferente, como <code>svgWidth</code> y <code>svgHeight</code>. Utilice lo que tenga más sentido para usted. JavaScript tiene una fijación cultural con la eficiencia, entonces es común encontrar variables de un solo caracter, código escrito sin espacios y otro tipo de sintaxis que es difícil de leer peor que es eficiente desde el punto de vista de programación.)</p>
+
+<p>Luego, le decimos a D3 que cree un elemento SVG vacío y que lo añada al DOM:</p>
+
+<pre><code>//Creata un elemento SVG 
+var svg = d3.select(&quot;body&quot;)
+        .append(&quot;svg&quot;)
+        .attr(&quot;width&quot;, w)
+        .attr(&quot;height&quot;, h);</code></pre>
+
+<p>Esto inserta un nuevo elemento <code>&lt;svg&gt;</code> inmediatamente antes de la etiqueta de cierre <code>&lt;/body&gt;</code>, y le asigna el ancho de y la altura de 500 por 100 pixeles. Esta cláusula también asigna el resultado a la nueva variable llamada <code>svg</code>, de tal manera que se pueda referenciar fácilmentesin tener que volver a seleccionarla en el futuro usando algo así como <code>d3.select(&quot;svg&quot;)</code>.</p>
+
+<p>Luego, en vez de crear <code>div</code>s, vamos a generar <code>rect</code> y los vamos a añadir a <code>svg</code>.</p>
+
+<pre><code>svg.selectAll(&quot;rect&quot;)
+    .data(dataset)
+    .enter()
+    .append(&quot;rect&quot;)
+    .attr(&quot;x&quot;, 0)
+    .attr(&quot;y&quot;, 0)
+    .attr(&quot;width&quot;, 20)
+    .attr(&quot;height&quot;, 100);</code></pre>
+
+<p>Este códig selecciona todos los <code>rect</code> dentro de <code>svg</code>. Por supuesto, aún no existen, entonces el programa devuelve una selección vacía. (Sí es raro, pero quédese y verá. Con D3 siempre es necesario seleccionar primero aquello sobre lo que va a aplicar una acción, aún cuando esa selección esté vacía por el momento.)</p>
+
+<p>Luego, <code>data(dataset)</code> ve que existen 20 valores en el conjunto de datos, y llama 20 veces a <code>enter()</code>. <code>enter()</code> a su vez devuelve la posición a una selección por cada dato que hasta el momento no tiene un <code>rect</code> correspondiente – o sea, todos.</p>
+
+<p>Para cada una de esas posiciones, la función <code>append(&quot;rect&quot;)</code> inserta la etiqueta <code>rect</code> en el DOM. Como aprendimos en la introducción a SVG, cada <code>rect</code>debe tener valores de <code>x,y, width y height</code> Se utiliza <code>attr()</code> para añadir estos atribuots a cada uno de los rectángulos que se acaban de crear.</p>
+
+<p>Qué belleza, no?</p>
+
+<p><img src="/images/barra-negra.png" alt="Alt text" /></p>
+
+<p>Bueno, tal vez no. Todas las barras están ahí (puede chequear el DOM de la <a href="http://alignedleft.com/content/03-tutorials/01-d3/130-making-a-bar-chart/2.html">página de ejemplo</a>, con el inspector de web), pero todas comparten los mismos valores de <code>x, y, width y height</code>, y el resultado es que todas quedan sobrepuestas. Esto aún no es una visualización de datos.</p>
+
+<p>Arreglemos primero el tema de la sobreposición. En vez de <code>x</code> con cero, se le asignará un valor dinámico que corresponde a <code>i</code>, o la posición del valor dentro del conjunto de datos. Entonces, la primera barra tendrá cero, pero las siguientes se ubicarán en el <code>21</code>, luego el <code>42</code>y así en adelante.</p>
+
+<pre><code>.attr(&quot;x&quot;, function(d, i) {
+    return i * 21;  //Ancho de barras de 20 más 1 espacio 
+})</code></pre>
+
+<p><img src="/images/20barras.png" alt="Alt text" /></p>
+
+<p>Acá se ve el <a href="http://alignedleft.com/content/03-tutorials/01-d3/130-making-a-bar-chart/3.html">código en acción</a>.</p>
+
+<p>Esto funciona pero no es particularmente flexible. Si el conjunto de datos tuviera más elementos, las barras seguirían hacia la derecha y se saldrían del SVG! Debido a que cada barra tiene un ancho de 20 pixeles y uno adicional para presentacióon, el SVG de 500 pixeles solo puede incluir 23 datos. Mire cómo se corta la vigésima cuarta barra.</p>
+
+<p><img src="/images/24barras.png" alt="Alt text" /></p>
+
+<p>Es muy buena práctica utilizar coordenadas dinámicas y flexibles – alturas, anchos, valores x y y – para que la visualización pueda cambiar de escala de acuerdo con los datos.</p>
+
+<p>Como todo en programación, existen mil maneras de lograr ese objetivo. Acá se va a mostrar uno sencillo. Primero, se cambia la línea donde se definió la posición <code>x</code>de cada barra.</p>
+
+<pre><code>.attr(&quot;x&quot;, function(d, i) {
+    return i * (w / dataset.length);
+    })</code></pre>
+
+<p>Se puede apreciar cómo el valor de <code>x</code> ahora está directamente asociado al ancho del SVG (<code>w</code>) y al número total de valores del conjunto de datos (<code>dataset.length</code>). Esto es novedoso, porque ahora las barras están bien distribuidas, si se tienen 20 valores</p>
+
+<p><img src="/images/20barras-2.png" alt="Alt text" /></p>
+
+<p>o solo cinco:</p>
+
+<p><img src="/images/5barras.png" alt="Alt text" /></p>
+
+<p><a href="http://alignedleft.com/content/03-tutorials/01-d3/130-making-a-bar-chart/4.html">Acá está el código hasta el momento</a></p>
+
+<p>Ahora se debe definir el ancho de las barras para que sean proporiconales, de tal manera que se vuelvan más angostas cuando se añaden más datos o se agranden cuando hayan menos valores. Voy a añadir una nueva variable cerca de donde se definen el ancho y la altura del SVG.</p>
+
+<pre><code>//Width and height
+var w = 500;
+var h = 100;
+var barPadding = 1;  // &lt;-- Nueva!</code></pre>
+
+<p>y luego se referencia esta variable en la línea donde se define el ancho de cada barra. En vez de tener un valor estático de <code>20</code>, el ancho se define como una fracción del ancho del SVG y del número de datos, menos el valor del espacio de colchón (padding).</p>
+
+<pre><code>`.attr(&quot;width&quot;, w / dataset.length - barPadding)`</code></pre>
+
+<p><img src="/images/20barras-3.png" alt="Alt text" /></p>
+
+<p><a href="http://alignedleft.com/content/03-tutorials/01-d3/130-making-a-bar-chart/5.html">Funciona!</a>. El ancho de las barras y la posición horizontal cambian de escala correctamente cuando hay 20 datos o solo cinco.</p>
+
+<p><img src="/images/5barras-2.png" alt="Alt text" /></p>
+
+<p>O también 100:</p>
+
+<p><img src="/images/100barras.png" alt="Alt text" /></p>
+
+<p>Por último, codificamos los daos de tal forma que correspondan a la <em>altura</em> de cada barra. Pensaría uno que es tan fácil como referenciar el valor del dato <code>d</code> para asignarle la altura (<code>height</code>) a cada barra:</p>
+
+<pre><code>.attr(&quot;height&quot;, function(d) {
+    return d;
+});</code></pre>
+
+<p><img src="/images/barrainvertida1.png" alt="Alt text" /></p>
+
+<p>Se va raro. Tratamos de cambiar la escala de los número un poco?</p>
+
+<pre><code>.attr(&quot;height&quot;, function(d) {
+    return d * 4;  // &lt;-- Cuatro veces!
+});</code></pre>
+
+<p><img src="/images/barrainvertida2.png" alt="Alt text" /></p>
+
+<p>Realmente no es así de fácil – se quiere que las barras crezcan hacia arriba desde el borde inferior, no hacia abajo desde el tope. No se le debe echar la culpa a D3, más bien a SVG.</p>
+
+<p>Si recuerda del capítulo de introducción a SVG, cuando se dibujan <code>rect</code>, la <code>x</code> y la <code>y</code> se especifican las coordenadas de la esquina superior izquierda. Esto quiere decir que el origen o punto de referencia de cada <code>rect</code> es esa esquina. Para nuestro propósito, sería mucho más fácil definir el origen en la esquina inferior izquierda, pero así no es como funciona SVG, y en realidad a SVG no le interesa qué pensemos al repsecto.</p>
+
+<p>Dado que nuestras barras deben “crecer hacia abajo desde la parte superior,” dónde queda entonces “el tope” de cada barra con respecto al tope del SVG? El tope de cada barra se puede expresar como la relación entre la altura del SVG y el valor del dato correspondiente, de la siguiente manera:</p>
+
+<pre><code>.attr(&quot;y&quot;, function(d) {
+    return h - d;  //Height minus data value
+})</code></pre>
+
+<p>Ahora, para poner la parte inferior de la barra en el fondo del SVG, cada altura de <code>rect</code> puede ser el dato en sí.</p>
+
+<pre><code>.attr(&quot;height&quot;, function(d) {
+    return d;  //Just the data value
+    });</code></pre>
+
+<p><img src="/images/barrafinal1.png" alt="Alt text" /></p>
+
+<p>Cambiemos la escala vertical multiplicando <code>d</code> por 4, o <code>d*4</code>. (Próximamente aprenderemos acerca de las <em>escalas</em> en D3, que tiene mejores maneras de lograr esto mismo.)</p>
+
+<p><img src="/images/barrafinal2.png" alt="Alt text" /></p>
+
+<p>Acá está el <a href="http://alignedleft.com/content/03-tutorials/01-d3/130-making-a-bar-chart/6.html">código de nuestro diagrama de barras</a> que está creciendo de arriba hacia abajo.</p>
+
+<h3 id="color">Color</h3>
+
+<p>Añadir color es fácil. Solamente utilice <code>attr()</code>y asigne un color de relleno <code>fill</code>:</p>
+
+<p><code>.attr(&quot;fill&quot;, &quot;teal&quot;);</code></p>
+
+<p><img src="/images/barrafinal3.png" alt="Alt text" /></p>
+
+<p>Acá está el <a href="http://alignedleft.com/content/03-tutorials/01-d3/130-making-a-bar-chart/7.html">diagrama de barras verde azulado</a>. Usualmente se usa el color de la figura para mostrar algún otro atributo del dato. Esto quiere decir que se puede codificar un dato con el uso de colores. (En el caso de nuestro diagrama de barras, esto permite <em>codificación doble</em>, con lo cual un solo dato tiene dos tipos de códigos visuiales: altura y color.)</p>
+
+<p>Definir el color del gráfico a partir de los datos es muy fácil - se escribe una función que nuevamente referencia a <code>d</code>. Acá, se reemplaza el color verde azulado (<code>&quot;teal&quot;</code>) con una función:</p>
+
+<pre><code>.attr(&quot;fill&quot;, function(d) {
+    return &quot;rgb(0, 0, &quot; + (d * 10) + &quot;)&quot;;
+    });</code></pre>
+
+<p><img src="/images/barraazul.png" alt="Alt text" /></p>
+
+<p>Acá está [este código]. No es particularmente útil desde el punto de vista visual, para ya se empieza a tener la idea de cómo se puede traducir un dato a un color. Acá, <code>d</code> se multiplica por 10, y luego se usa el valor azul en la definición del color con la función <code>rgb()</code>. Con esto, a medida que valor de <code>d</code> es mayor (más alta la barra), la barra toma un color más azul. A medida que es menor el valor, la barra tendrá menos azul (se verá más cerca del color negro).</p>
+
+<h3 id="etiquetas">Etiquetas</h3>
+
+<p>Las gráficas son excelentes pero con alguna frecuencia también es necesario desplegar los valores de los datos dentro de la gráfica. Acá es donde las etiquetas de datos juegan un papel y es muy, muy fácil desplegarlas con D3.</p>
+
+<p>Si recuerda, en la introducción a SVG se vió cómo se puede añadir elementos de texto (<code>texto</code>) a un un elemento de SVG. Se empieza con:</p>
+
+<pre><code>svg.selectAll(&quot;text&quot;)
+    .data(dataset)
+    .enter()
+    .append(&quot;text&quot;)</code></pre>
+
+<p>Se le hace conocido? De igual manera como se hizo con <code>rect</code>, acá se hace con <code>text</code>. Primero, se selecciona lo que se necesita, se traen los datos, si crean nuevos elementos (que inicialmente son solamente espacios vacíos), y finalmente se añaden nuevos elementos <code>text</code> al DOM.</p>
+
+<p>Vamos a añadir al código para inlcuir el valor del dato dentro de cada elemento <code>text</code>, por medio del método <code>text()</code>.</p>
+
+<pre><code>.text(function(d) {
+    return d;
+})</code></pre>
+
+<p>y luego se va a ampliar esto aún más, incluyendo los valores <code>x</code>y <code>y</code> para ubicar el texto. La forma más fácil consiste en copiar y pegar el mismo código de x/y que se uso antes para las barras.</p>
+
+<pre><code>.attr(&quot;x&quot;, function(d, i) {
+    return i * (w / dataset.length);
+})
+.attr(&quot;y&quot;, function(d) {
+    return h - (d * 4);
+});</code></pre>
+
+<p><img src="/images/barraazul2.png" alt="Alt text" /></p>
+
+<p>Ajá! Etiquetas para los datos! Pero algunos están cortados en la parte de arriba. Tratemos de moverlos hacia abajo hacia el interior de las barras, lo cual se puede hacer con solo añadir algunos cálculos para los valores de <code>x</code>y <code>y</code>.</p>
+
+<pre><code>.attr(&quot;x&quot;, function(d, i) {
+    return i * (w / dataset.length) + 5;  // +5
+    })
+.attr(&quot;y&quot;, function(d) {
+    return h - (d * 4) + 15;              // +15
+});</code></pre>
+
+<p><img src="/images/barraazul3.png" alt="Alt text" /></p>
+
+<p>Mejor, pero aún no es muy legible. Afortunadamente se puede corregir esto:</p>
+
+<pre><code>.attr(&quot;font-family&quot;, &quot;sans-serif&quot;)
+.attr(&quot;font-size&quot;, &quot;11px&quot;)
+.attr(&quot;fill&quot;, &quot;white&quot;);</code></pre>
+
+<p><img src="/images/barraazul4.png" alt="Alt text" /></p>
+
+<p><a href="http://alignedleft.com/content/03-tutorials/01-d3/130-making-a-bar-chart/9.html">Fantásti-código!</a>.Si no vive obsesionado con la tipografía, ya terminó. Pero si es como yo, notará que las etiquetas no están alineadas perfectamente dentro de las barras. Eso se puede resolver muy fácilmente. Usemos el atributo <code>text-anchor</code> para centrar el texto horizontalmente sobre al valor de <code>x</code>.</p>
+
+<pre><code>`.attr(&quot;text-anchor&quot;, &quot;middle&quot;)`</code></pre>
+
+<p>Ahora, cambiemos la manera como se calcula la posición <code>x</code> asignándole el borde izquerdo <em>más</em> la mitad del ancho de la barra:</p>
+
+<pre><code>.attr(&quot;x&quot;, function(d, i) {
+    return i * (w / dataset.length) + (w / dataset.length - barPadding) / 2;
+})</code></pre>
+
+<p><img src="/images/barraazul5.png" alt="Alt text" /></p>
+
+<p><a href="http://alignedleft.com/content/03-tutorials/01-d3/130-making-a-bar-chart/10.html">Completo!</a>. Ya podemos salirnos de los diagramas de barras hacia otros temas.</p>
+
 <p><a href="/diagrama-dispersion.html">Siguiente: Diagrama de Dispersión –&gt;</a></p>
           <section>
 	<footer>

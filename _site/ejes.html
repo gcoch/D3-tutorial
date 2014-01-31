@@ -63,6 +63,195 @@
         <hr>
         <section id="main_content">
           <h2 id="ejes">Ejes</h2>
+
+<p>Ya con la maestría en el uso de escalas en D3, ahora tenemos el siguiente diagrama de dispersión:</p>
+
+<p><img src="/images/puntos7.png" alt="Alt text" /></p>
+
+<p>Si añadimos los ejes horizontal y vertical, podemos deshacernos de esos números rojos tan horribles que congestionan el diagrama.</p>
+
+<h3 id="introduccin_a_ejes">Introducción a Ejes</h3>
+
+<p>De manera similar a las funciones de escala, los <a href="https://github.com/mbostock/d3/wiki/SVG-Axes">ejes de D3</a> son realmente <em>funciones</em> a las que se les pueden definir los parámetros. A diferencia de las escalas, cuando se invoca una función de eje, ésta no devuelve un valor, sino que genera los elementos visuales del eje, incluyendo líneas, etiquetas y marcadores.</p>
+
+<p>Tome nota que las funciones de ejes son específicas a SVG, puesto que generan elementos de SVG. También, el objetivo de los ejes es de que se usen en escalas cuantitativas (y no ordinales).</p>
+
+<h3 id="construccin_del_eje">Construcción del Eje</h3>
+
+<p>Use <code>d3.svg.axis()</code> para cerar una función genérica de eje.</p>
+
+<p><code>var xAxis = d3.svg.axis();</code></p>
+
+<p>Como mínimo, cada debe saber sobre qué <em>escala</em> debe operar. Acá le pasamos <code>xScale</code> del código del diagrama de dispersión:</p>
+
+<p><code>xAxis.scale(xScale);</code></p>
+
+<p>También podemos especificar en donde deben aparecer las etiquetas con respecto al eje en sí. Por defecto se despliegan en la parte baja o <code>bottom</code>, lo que significa que aparecerán debajo de la línea del ejem (Aunque esto se asigna por defecto, no sobra especificarlo explícitamente.)</p>
+
+<p><code>xAxis.orient(&quot;bottom&quot;);</code></p>
+
+<p>Por supuesto que podemos ser más concisos y encadenar todo esto en una sola línea:</p>
+
+<pre><code>var xAxis = d3.svg.axis()
+              .scale(xScale)
+              .orient(&quot;bottom&quot;);</code></pre>
+
+<p>Por último, para generar el eje e insertar todos estos marcadores pequeños y etiquetas dentro de nuestro SVG, debemos <em>llamar</em> a la función <code>xAxis</code>. Voy a añadir este código al final de nuestro “script”, de tal mera que el eje se genere despué de los demás elementos del SVG:</p>
+
+<pre><code>svg.append(&quot;g&quot;)
+    .call(xAxis);</code></pre>
+
+<p>La función <code>call()</code> de D3 toma una <em>selección</em> como entrada y entrega esa selección a cualquier <em>función</em>. Entonces, en este caso, hemos añadido un nuevo elemento de grupo <code>g</code> que contiene todos los elementos de los ejes que están para ser generados. (La <code>g</code> no es estrictamente necesaria, pero ayuda a mantener organizados a los elementos y nos permite aplicar una clase al grup entero, que es lo que voy a hacer en un instante.)</p>
+
+<p>La <code>g</code> se convierte en la selección para el siguiente eslabón de la cadena. <code>call()</code> entrega esta selección a la función <code>xAxis</code>, para que se genere nuestro eje dentro del la nueva <code>g</code>. Las líneas de código de arriba son la versión limpia y abreviada de su equivalente:</p>
+
+<pre><code>svg.append(&quot;g&quot;)
+    .call(d3.svg.axis()
+            .scale(xScale)
+            .orient(&quot;bottom&quot;));</code></pre>
+
+<p>Ve, es posible empaquetar toda la función de eje dentro de <code>call()</code>, sin embargo es más fácil por lo general para nuestras mentes definir primero la función y luego invocarlas.</p>
+
+<p>En todo caso, <a href="http://alignedleft.com/content/03-tutorials/01-d3/160-axes/1.html">acá se ve</a></p>
+
+<p><img src="/images/scatter3.png" alt="Alt text" /></p>
+
+<h3 id="haciendo_limpieza">Haciendo Limpieza</h3>
+
+<p>Técnicamente, ese es un eje, pero no es ni agradable a la vista ni útil. Para limpiarlo, empecemos por asignarle una clase de <code>axis</code> a nuestro nuevo elemento <code>g</code>, de tal manera que lo podamos usar con CSS:</p>
+
+<pre><code>svg.append(&quot;g&quot;)
+    .attr(&quot;class&quot;, &quot;axis&quot;)  //Assign &quot;axis&quot; class
+    .call(xAxis);</code></pre>
+
+<p>Después, introducimos nuestros primeros estilos de CSS, en la etiqueta <code>&lt;head&gt;</code> de nuestra página:</p>
+
+<pre><code>.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+        }
+
+.axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+}</code></pre>
+
+<p>La propiedad <code>shape-rendering</code> es un atributo de SVG, que se utliza para asegurse de que nuestros ejes y marcadores estén perfectos a nivel de pixel. No podemos tener ejes borrosos!</p>
+
+<p><img src="/images/scatter4.png" alt="Alt text" /></p>
+
+<p>Se ve mejor, pero la parte de arriba del eje está cortada, y queremos que esté en la parte inferior del diagram. Podemos <code>transform</code> (transformar) el grupo entero del eje, empujándolo al fondo:</p>
+
+<pre><code>svg.append(&quot;g&quot;)
+    .attr(&quot;class&quot;, &quot;axis&quot;)
+    .attr(&quot;transform&quot;, &quot;translate(0,&quot; + (h - padding) + &quot;)&quot;)
+    .call(xAxis);</code></pre>
+
+<p>Tome nota del uso de (<code>h - padding</code>), pra que el borde de arriba se le asigne <code>h</code>, la altura de la imagen completa, menos el valor de <code>padding</code> (colchón) que creamos anteriormente.</p>
+
+<p><img src="/images/scatter5.png" alt="Alt text" /></p>
+
+<p>Mucho mejor! <a href="http://alignedleft.com/content/03-tutorials/01-d3/160-axes/2.html">Acá está el código</a> que llevamos hasta el momento.</p>
+
+<h3 id="buscando_marcadores">Buscando Marcadores</h3>
+
+<p>Los marcadores en D3 proporicionan información. Añadir más marcadores es necesariamente mejor, y después de cierto putno empiezan a congestionar el diagrama. Podrá notar que nunca hemos especificado cuántos marcadores se deben incluur en el eje y a qué intervalos deben aparecer. Sin instrucciones claras, D3 en forma automática y mágica examinó nuestra escala <code>xScale</code>y determinó a su juicio cuántos marcadores debió incluir y a qué intervalos (cada 50 en este caso).</p>
+
+<p>Como puede imaginárselo, es posible adecuar todos los aspectos de los ejes, empezando con el número aproximado de marcadores, usando la función <code>ticks()</code>:</p>
+
+<pre><code>var xAxis = d3.svg.axis()
+              .scale(xScale)
+              .orient(&quot;bottom&quot;)
+              .ticks(5);  //Número aproximado de marcadores</code></pre>
+
+<p><img src="/images/scatter6.png" alt="Alt text" /></p>
+
+<p><a href="http://alignedleft.com/content/03-tutorials/01-d3/160-axes/3.html">Acá está este código</a></p>
+
+<p>Probablemente notó que cuando aún cuando especificamos solamente cinco marcadores, D3 ha tomado la decisión ejecutiva y pedido un total de siete. Esto es porque D3 nos está protegiendo y calculó que si se incluían solo <em>cinco</em> marcadores, esto habría requerido dividir el dominio de entrada en valores no muy vistosos – es este caso 0, 150, 300, 450, y 600. D3 interpreta el valor de <code>ticks()</code> solamente como una sugerencia y lo sobreescribe con lo que considere con los valores que considere como los más legibles – en este caso intervalos de 100 – así sea que esto requiera añadir más o disminuir el número de marcadores que usted solicitó. Esto es una funcionalidad totalmente brillante que incrementa la escalabilidad de su diseño: a medida que cambia su conjunto de datos, y el dominio de entrada se expande o se contrae (números más grandes o más pequeños), D3 se asegura que las etiquetas de los marcadores permanezcan legibres y fáciles de leer.</p>
+
+<h3 id="y_no">Y No?</h3>
+
+<p>Es hora de añadirle etiquetas al eje vertical! Si copiamos y cambiamos el código que ya escribimos para <code>xAxis</code>, debemos añadir esto en la parte de arriba de nuestro código</p>
+
+<pre><code>//Define Y axis
+var yAxis = d3.svg.axis()
+              .scale(yScale)
+              .orient(&quot;left&quot;)
+              .ticks(5);</code></pre>
+
+<p>y esto hacia la parte de abajo:</p>
+
+<pre><code>//Create Y axis
+svg.append(&quot;g&quot;)
+    .attr(&quot;class&quot;, &quot;axis&quot;)
+    .attr(&quot;transform&quot;, &quot;translate(&quot; + padding + &quot;,0)&quot;)
+    .call(yAxis);</code></pre>
+
+<p>Puede darse cuenta que las etiquetas están orientadas hacia la izquierda (<code>left</code>) y que el <code>yAxis</code> pertenenciente al grupo <code>g</code> se ha trasladado hacia la derecha en la cantidad que se ha determinado con <code>padding</code> (colchón).</p>
+
+<p><img src="/images/scatter7.png" alt="Alt text" /></p>
+
+<p>Esto está empezando a verse como algo real! Pero las etiquetas de <code>yAxis</code>están quedando cortadsa. Para darles más espacio a la izquierda, voy a incrementar el valor de <code>padding</code> de 20 a 30:</p>
+
+<p><code>var padding = 30;</code></p>
+
+<p>Por supuesto, también se habría podido introducir variables separadas de <code>padding</code> para cada eje, por decir algo <code>xPadding</code>y <code>yPadding</code> , para obtener aún más control sobre el despliegue.</p>
+
+<p><a href="http://alignedleft.com/content/03-tutorials/01-d3/160-axes/4.html">Acá está el código</a> y así se ve:</p>
+
+<p><img src="/images/scatter8.png" alt="Alt text" /></p>
+
+<h3 id="toques_finales">Toques Finales</h3>
+
+<p>Para provarle que nuestros nuevos ejes son dinámicos y escalables, quiero reemplazar nuestro conjunto de datos estático por una serie de números generados al azar:</p>
+
+<pre><code>//Dynamic, random dataset
+var dataset = [];
+var numDataPoints = 50;
+var xRange = Math.random() * 1000;
+var yRange = Math.random() * 1000;
+for (var i = 0; i &lt; numDataPoints; i++) {
+    var newNumber1 = Math.round(Math.random() * xRange);
+    var newNumber2 = Math.round(Math.random() * yRange);
+    dataset.push([newNumber1, newNumber2]);
+    }</code></pre>
+
+<p>Este código inicializa un arreglo vacío, y luego lo recorre 50 veces, selecciona dos números al azar cada vez y añade (“empuja”) es par de datos al arreglo <code>dataset</code>.</p>
+
+<p><img src="/images/scatter9.png" alt="Alt text" /></p>
+
+<p><a href="http://alignedleft.com/content/03-tutorials/01-d3/160-axes/5.html">Intente el código aquí</a>. Cada vez que refresque la página verá valores diferentes. Mire cómo los dos ejes se ajustan a los nuevos dominios y cómo se escojen marcadores y etiquetas conforme a los cambios.</p>
+
+<p>Ya que he dicho lo que tenía decir al respecto, creo que podemos por fin omitir esas etiquetas rojas tan feas y omitir las líneas de código relevante:</p>
+
+<p><img src="/images/scatter10.png" alt="Alt text" /></p>
+
+<p><a href="http://alignedleft.com/content/03-tutorials/01-d3/160-axes/6.html">Nuestro código final del diagrama de dispersión!</a></p>
+
+<h3 id="formateo_de_las_etiquetas_de_marcadores">Formateo de las Etiquetas de Marcadores</h3>
+
+<p>Una última cosa: Hasta el momento hemos estado trabajando con números enteros – que son agradables y fáciles. Pero por lo general los datos son más complejos y e esos casos, es posible que quiere tener más control sobre los formatos de las etiquetas de los ejes. Ingrese <code>tickFormat()</code>, que permite especificar cómo puede formatear los números. Por ejemplo, si quiere incluir tres puntos decimales o mostrar los valores como porcentajes, o ambos.</p>
+
+<p>En este caso, podría definir una función para formateo de números primero. Esta, por ejemplo, dice que se deben tratar como porcentajes con un solo número decimal. (Revise el documento de referencia de <a href="https://github.com/mbostock/d3/wiki/Formatting#wiki-d3_format">d3.format()</a> para ver más opciones).</p>
+
+<p><code>var formatAsPercentage = d3.format(&quot;.1%&quot;);</code></p>
+
+<p>Luego, dígale a su eje que use esta función de formateo para las etiquetas, p. ej.:</p>
+
+<p><code>xAxis.tickFormat(formatAsPercentage);</code></p>
+
+<p>Consejo para desarrolladores: Yo encuentro que lo más fácil es chequear estas funciones de formateo en la consola de JavaScript. Por ejemplo, abra cualquier página que carga D3, como nuestro <a href="http://alignedleft.com/content/03-tutorials/01-d3/160-axes/6.html">diagrama de dispersión final</a> y escriba su regla de formateo en la consola. Luego, chequéela entregándole un valor, tal como lo haría con cualquier otra función:</p>
+
+<p><img src="/images/JavaScript1.png" alt="Alt text" /></p>
+
+<p>Puede rever que el dato <code>0.54321</code> se convierte a <code>54.3%</code> para efectos de despliegue – perfecto!</p>
+
+<p><a href="http://alignedleft.com/content/03-tutorials/01-d3/160-axes/7.html">Intente el código aquí</a>. El formato de porcentaje no tiene sentido con el conjunto de datos actual, pero como ejercicio, puede intentar modificar cómo es que se generan los números aleatorios, para lograr valores que no son enteros, pero que sean más apropiados. También puede experimentar con la función de formateo en sí.</p>
+
+<p><em>Ha terminado el tutorial de D3, pero es posible que añada más en el futuro. Para recibir notificaciones en el futuro, sígame por <a href="https://twitter.com/alignedleft">Twitter</a> o observe este <a href="http://alignedleft.com/tutorials/d3/feed">RSS feed</a></em></p>
           <section>
 	<footer>
 		Este tutorial lo mantiene <a href="https://twitter.com/gabrielcoch">Gabriel Coch</a><br>

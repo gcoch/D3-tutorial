@@ -64,6 +64,129 @@
         <section id="main_content">
           <h2 id="despliegue_de_svg">Despliegue de SVG</h2>
 
+<p>Ahora que ya estamos familiarizados con la estructura básica y los elementos de una imagen en formato SVG, cómo podemos comenzar a generar figuras de nuestros datos?</p>
+
+<p>Usted ha podido ver que todas las propiedades de los elementos se definen como <em>atributos</em>. Eso quiere decir que se incluyen como pares propiedad/valor dentro de cada etiqueta del elemento, de esta manera:</p>
+
+<p><code>&lt;element property=&quot;value&quot;/&gt;</code></p>
+
+<p>Umm, esto se parece extrañamente a HTML!</p>
+
+<p><code>&lt;p class=&quot;eureka&quot;&gt;</code></p>
+
+<p>Ya hemos usado los métodos <code>append()</code> y <code>attr()</code> para crear nuevos elementos de HTML y asignarles sus atributos. Debido a que los elementos de SVG existen en el DOM, tal como los elementos de HTML, podemos usar <code>append()</code> y <code>attr()</code> de la misma forma para generar imagenes en SVG!</p>
+
+<h3 id="cre_el_svg">Crée el SVG</h3>
+
+<p>Primero, debemos crear el elemento SVG que va a contener todas nuestras figuras.</p>
+
+<p><code>d3.select(&quot;body&quot;).append(&quot;svg&quot;);</code></p>
+
+<p>Se acuerda cómo la mayoría de métodos en D# devuelven una referencia al elemento del DOM sobre el cual actúan? Al crer una nueva variable <code>svg</code>, podemos capturar la referencia que se le pasa a <code>append()</code>. Esto se puede entender como que el <code>svg</code>no es una “variable” sino una “referencia que apunta al objeto SVG recién creado”. Esta referencia nos va a ahorrar muchas líneas de código en el futuro. En vez de buscar ese SVG cada vez - como en <code>de.select(&quot;svg&quot;)</code> – solo decimos <code>svg</code>.</p>
+
+<pre><code>svg.attr(&quot;width&quot;, 500)
+.attr(&quot;height&quot;, 50);</code></pre>
+
+<p>De otra forma, se podría haber escrito todo en una línea de código:</p>
+
+<pre><code>var svg = d3.select(&quot;body&quot;)
+        .append(&quot;svg&quot;)
+        .attr(&quot;width&quot;, 500)
+        .attr(&quot;height&quot;, 50);</code></pre>
+
+<p><a href="http://alignedleft.com/content/03-tutorials/01-d3/110-drawing-svgs/1.html">Puede ver el ejemplo de este código</a>. Al inspeccionar el DOM verá que ahí está, en verdad, el elemento SVG vacío.</p>
+
+<p>Para simplificar, recomiendo que se incluyan los valores de ancho y altura como variables al comienzo del código, de <a href="http://alignedleft.com/content/03-tutorials/01-d3/110-drawing-svgs/2.html">esta manera</a> (vea la fuente):</p>
+
+<pre><code>//Width and height
+var w = 500;
+var h = 50;</code></pre>
+
+<p>Esto se hará en todos los siguientes ejemplos. Al convertir en variables los valores de tamaño, es muy fácil hacer referencia a ellos a lo largo del código, así como:</p>
+
+<pre><code>var svg = d3.select(&quot;body&quot;)
+        .append(&quot;svg&quot;)
+        .attr(&quot;width&quot;, w)   // &lt;-- Here
+        .attr(&quot;height&quot;, h); // &lt;-- and here!</code></pre>
+
+<h3 id="figuras_a_partir_de_datos">Figuras a Partir de Datos</h3>
+
+<p>Ya es hora de añadir algunas figuras. Miremos nuestro conjunto de datos de antaño.</p>
+
+<p><code>var dataset = [ 5, 10, 15, 20, 25 ];</code></p>
+
+<p>ahora, se usa <code>data()</code> para pasar por cada uno de los datos y así crear un <code>círculo</code> por cada uno:</p>
+
+<pre><code>svg.selectAll(&quot;circle&quot;)
+    .data(dataset)
+    .enter()
+    .append(&quot;circle&quot;);</code></pre>
+
+<p>Cabe recordar que <code>selectAll()</code> devuelve referencias vacías a todos los <code>circles</code> (que aún no existen), <code>data()</code> asocia los datos a los elementos que están a punto de crearse, <code>enter()</code> devuelve la referencia al espacio que se utiliza para el nuevo elemento y <code>append()</code> por último añade un <code>circle</code> al DOM.</p>
+
+<p>Para apuntas todos los <code>circle</code>en el futuro, se puede crear una variable nueva que almacene la referencia a todos:</p>
+
+<pre><code>var circles = svg.selectAll(&quot;circle&quot;)
+             .data(dataset)
+             .enter()
+             .append(&quot;circle&quot;);</code></pre>
+
+<p>Todo bien, pero todos estos círculos necesitan posiciones y tamaños. Prevéngase: El código que va a ver a continuación lo va a descrestar.</p>
+
+<pre><code>circles.attr(&quot;cx&quot;, function(d, i) {
+        return (i * 50) + 25;
+    })
+   .attr(&quot;cy&quot;, h/2)
+   .attr(&quot;r&quot;, function(d) {
+        return d;
+   });</code></pre>
+
+<p><img src="/images/circulos.png" alt="Alt text" /></p>
+
+<p><a href="http://alignedleft.com/content/03-tutorials/01-d3/110-drawing-svgs/3.html">Deléitese con el ejemplo</a>. Revisemos paso a paso el código.</p>
+
+<pre><code>circles.attr(&quot;cx&quot;, function(d, i) {
+        return (i * 50) + 25;
+    })</code></pre>
+
+<p>Esta parte obtiene la referencia a todos los elementos <code>circle</code>y les asigna a cada uno el atributo <code>cx</code>. Los datos ya se han asociado a los elementos de tipo <code>circle</code>, entonces para cada <code>circle</code>, el valor de <code>d</code> equivale al valor correspondiente en el conjunto de datos originial (5, 10, 15, 20 o 25). Otro valor, <code>i</code>, se actualiza automáticamente. <code>i</code> es el valor del índice númerico del presente elemento. El contador comienza en O, por consiguiente para el “primer” círculo <code>i == 0</code>, para el segundo círculo <code>i == 1</code> y así sucesivamente. La <code>i</code> se va a usar para mover cada círculo hacia la derecha, puesto que después de cada paso del loop incrementa el valor de <code>i</code>.</p>
+
+<pre><code>(0 * 50) + 25 returns 25
+(1 * 50) + 25 returns 75
+(2 * 50) + 25 returns 125
+(3 * 50) + 25 returns 175
+(4 * 50) + 25 returns 225</code></pre>
+
+<p>Para garantizar que <code>i</code>esté disponible para la la función, debe incluirse como un argumento dentro de su definición <code> (function(d, i))</code>. También es necesario incluir a <code>d</code>, así no se use <code>d</code>, dentro de la función (tal como en el caso de arriba).</p>
+
+<p>Ahora, la siguiente línea.</p>
+
+<pre><code>&#39;.attr(&quot;cy&quot;, h/2)</code></pre>
+
+<p><code>h</code> es la altura de todo el SVG, entonces <code>h/2</code> es la mitad de la altura. Esto tiene el efecto de centrar a todos los círculos desde el punto de vista de alineación vertical.</p>
+
+<pre><code>.attr(&quot;r&quot;, function(d) {
+return d;
+});</code></pre>
+
+<p>Por último, el radio <code>r</code>de cada círculo es simplemente asignado a <code>d</code> o sea al valor del dato correspondiente.</p>
+
+<h3 id="uuy_bonitos_colores">Uuy, Bonitos Colores</h3>
+
+<p>Llenado y trazado de colores son otros de los atributos que se pueden asignar usando los mismos métodos. Simplemente con añadir este código:</p>
+
+<pre><code>.attr(&quot;fill&quot;, &quot;yellow&quot;)
+.attr(&quot;stroke&quot;, &quot;orange&quot;)
+.attr(&quot;stroke-width&quot;, function(d) {
+    return d/2;
+});</code></pre>
+
+<p>se obtiene la siguiente <a href="http://alignedleft.com/content/03-tutorials/01-d3/110-drawing-svgs/4.html">página de ejemplo</a>.</p>
+
+<p><img src="/images/circulos-colores.png" alt="Alt text" /></p>
+
+<p>Por supuesto que se pueden mezclar atributos y funciones específicas para poder aplicar cualquier combinación de propiedades. El truco con visualizaciones de datos, por supuesto, consiste en escojer <em>mapeos</em> apropiados, de tal forma que la expresión visual de sus datos tenga sentido y le sea útil a quién la está viendo.</p>
+
 <p><a href="/tipos-datos.html">Siguiente: Tipos de datos –&gt;</a></p>
           <section>
 	<footer>
