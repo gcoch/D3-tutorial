@@ -191,7 +191,7 @@ Luego, dígale a su eje que use esta función de formateo para las etiquetas, p.
 
 Consejo para desarrolladores: Yo encuentro que lo más fácil es chequear estas funciones de formateo en la consola de JavaScript. Por ejemplo, abra cualquier página que carga D3, como nuestro [diagrama de dispersión final](http://alignedleft.com/content/03-tutorials/01-d3/160-axes/6.html) y escriba su regla de formateo en la consola. Luego, chequéela entregándole un valor, tal como lo haría con cualquier otra función:
 
-![Alt text]({{site.url}}/images/JavaScript1.png)
+![Alt text]({{site.url}}/images/javaScript1.png)
 
 Puede rever que el dato `0.54321` se convierte a `54.3%` para efectos de despliegue -- perfecto!
 
