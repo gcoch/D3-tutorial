@@ -25,37 +25,37 @@
           <div>
        
        
-        	<a href="/index.html">Inicio | </a>
+        	<a href="/index.html">Inicio  |  </a>
         
-        	<a href="/fundamentos.html">Fundamentos | </a>
+        	<a href="/fundamentos.html">Fundamentos  |  </a>
         
-        	<a href="/instalacion.html">Instalación | </a>
+        	<a href="/instalacion.html">Instalación  |  </a>
         
-        	<a href="/anadir-elementos.html">Añadir Elementos | </a>
+        	<a href="/anadir-elementos.html">Añadir Elementos  |  </a>
         
-        	<a href="/encadenar-metodos.html">Encadenar Métodos | </a>
+        	<a href="/encadenar-metodos.html">Encadenar Métodos  |  </a>
         
-        	<a href="/asociar-datos.html">Asociar Datos | </a>
+        	<a href="/asociar-datos.html">Asociar Datos  |  </a>
         
-        	<a href="/datos-propios.html">Usando sus Datos | </a>
+        	<a href="/datos-propios.html">Usando sus Datos  |  </a>
         
-        	<a href="/desplegar-divs.html">Desplegar DIVs | </a>
+        	<a href="/desplegar-divs.html">Desplegar DIVs  |  </a>
         
-        	<a href="/data.html">La Función data( ) | </a>
+        	<a href="/poder-datos.html">La Función data( )  |  </a>
         
-        	<a href="/intro-svg.html">Introducción a SVG | </a>
+        	<a href="/intro-svg.html">Introducción a SVG  |  </a>
         
-        	<a href="/despliegue-svg.html">Despliegue de SVG | </a>
+        	<a href="/despliegue-svg.html">Despliegue de SVG  |  </a>
         
-        	<a href="/tipos-datos.html">Tipos de Datos | </a>
+        	<a href="/tipos-datos.html">Tipos de Datos  |  </a>
         
-        	<a href="/diagrama-barras.html">Diagrama de Barras | </a>
+        	<a href="/diagrama-barras.html">Diagrama de Barras  |  </a>
         
-        	<a href="/diagrama-dispersion.html">Diagrama de Dispersión | </a>
+        	<a href="/diagrama-dispersion.html">Diagrama de Dispersión  |  </a>
         
-        	<a href="/escalas.html">Escalas | </a>
+        	<a href="/escalas.html">Escalas  |  </a>
         
-        	<a href="/ejes.html">Ejes | </a>
+        	<a href="/ejes.html">Ejes  |  </a>
         
 </dv>
         </header>
@@ -66,11 +66,11 @@
 
 <p>Hasta el momento, hemos dibujado solamente diagramas de barra con datos simples — solo conjuntos de datos uni-dimensionales.</p>
 
-<p>Cuando se tiene dos conjuntos de datos y se quiere generar una gráfica en la cual se presenten los dos, es necesario tener una segunda dimensión. El diagrama de dispersión es una visualización común en la que se pueden representar dos conjuntos de datos relacionadas en dos ejes: horizontal y vertical, x y y.</p>
+<p>Cuando se tienen dos conjuntos de datos y se quiere generar una gráfica en la cual se presentan los dos, es necesario tener una segunda dimensión. El diagrama de dispersión es una visualización común con la que se pueden representar dos conjuntos de datos relacionadas en dos ejes: horizontal y vertical, x y y.</p>
 
 <h3 id="los_datos">Los Datos</h3>
 
-<p>Como se pudo ver en <em>Tipos de Datos</em>, existe mucha flexibilidad en cuanto se refiere a la estructuración de los conjuntos de datos. Para el diagrama de dispersión, se va a utilizar un arreglo de arreglos. El arreglos primario contiene un elemento por cada “dato”. Cada uno de los elementos de este “dato” será a su vez otro arreglo, con dos datos, uno con el valor de x y otro con el valor de y.</p>
+<p>Como se pudo ver en <em>Tipos de Datos</em>, existe mucha flexibilidad en cuanto se refiere a la estructuración de los conjuntos de datos. Para el diagrama de dispersión, se va a utilizar un arreglo de arreglos. El arreglo primario contiene un elemento por cada “dato”. Cada uno de los elementos de este “dato” será a su vez otro arreglo, con dos datos, uno con el valor de x y otro con el valor de y.</p>
 
 <pre><code>var dataset = [
             [5, 20], [480, 90], [250, 50], [100, 33], [330, 95],
@@ -94,7 +94,7 @@
               [ 220,   88 ]
           ];</code></pre>
 
-<p>Ahora puede ver cada una de las diez filas le corresponderá un punto de nuestra visualización. En la fila [5,20] usaremos <code>5</code>como el valor de x y <code>20</code>para el valor de y.</p>
+<p>Ahora puede ver cada una de las diez filas le corresponderá un punto de nuestra visualización. En la fila [5,20] usaremos <code>5</code> como el valor de x y <code>20</code>para el valor de y.</p>
 
 <h3 id="el_diagrama_de_dispersin">El Diagrama de Dispersión</h3>
 
@@ -113,7 +113,7 @@ var svg = d3.select(&quot;body&quot;)
     .enter()
     .append(&quot;circle&quot;)</code></pre>
 
-<p>Igualmente, en vez de especificar los atributos <code>x, y, width y height</code>de <code>rect</code>(rectángulo), nuestros <code>circle</code>(círculos) necesitan <code>cx, cy, y r</code>:</p>
+<p>Igualmente, en vez de especificar los atributos <code>x, y, width y height</code> de <code>rect</code>(rectángulo), nuestros <code>circle</code>(círculos) necesitan <code>cx, cy, y r</code>:</p>
 
 <pre><code>.attr(&quot;cx&quot;, function(d) {
     return d[0];
@@ -127,19 +127,19 @@ var svg = d3.select(&quot;body&quot;)
 
 <p>Acá está el <a href="http://alignedleft.com/content/03-tutorials/01-d3/140-making-a-scatterplot/1.html">diagrama de dispersión</a> funcionando.</p>
 
-<p>Tome nota cómo es que accedemos a los valores de los datos y los usamos para definir los valores de <code>cx</code>y <code>cy</code>. Cuando se usa la <code>funtion(d)</code>, D3 entrega automáticamente el valor actual de <code>d</code> a su función. En este caso el valor actual es uno de los arreglos pequeños dentro del arreglo más grande denominado <code>dataset</code>.</p>
+<p>Tome nota cómo es que accedemos a los valores de los datos y los usamos para definir los valores de <code>cx</code> y <code>cy</code>. Cuando se usa la <code>funtion(d)</code>, D3 entrega automáticamente el valor actual de <code>d</code> a su función. En este caso el valor actual es uno de los arreglos pequeños dentro del arreglo más grande denominado <code>dataset</code>.</p>
 
-<p>Cuando <code>d</code> es un arreglo de valores ( y no un solo valor, como 3.14159), es necesario usar la notación de corchetes para obtener estos valores. Por eso, en vez de <code>return d</code>(o devolver d), debemos <code>return d[0]</code> (devolver d[0]) y <code>return d[1]</code> (devolver d[1]), que devuelven los primeros dos valores del arreglo.</p>
+<p>Cuando <code>d</code> es un arreglo de valores ( y no un solo valor, como 3.14159), es necesario usar la notación de corchetes para obtener estos valores. Por eso, en vez de <code>return d</code>(o devolver d), debemos usar <code>return d[0]</code> (devolver d[0]) y <code>return d[1]</code> (devolver d[1]), que devuelven los primeros dos valores del arreglo.</p>
 
-<p>Por ejemplo, en el caso de nuestro primer data [5, 20], el primer vlaor (posición 0 del arreglo) es <code>5</code>, y el segundo valor (posición del arreglo 1) es <code>20</code>. Por consiguiente:</p>
+<p>Por ejemplo, en el caso de nuestro primer data [5, 20], el primer valor (posición 0 del arreglo) es <code>5</code>, y el segundo valor (posición del arreglo 1) es <code>20</code>. Por consiguiente:</p>
 
 <p><code>d[0]</code> devuelve 5 <code>d[1]</code> devuelve 20</p>
 
-<p>Por si acaso, si necesita accesar datos un valor en un conjunto de datos grande (por fuera de D3), lo puede hacer usando la notación de corchetes. Por ejemplo.</p>
+<p>Por si acaso, si necesita obtener datos almacenados en un conjunto de datos grande (por fuera de D3), lo puede hacer usando la notación de corchetes. Por ejemplo.</p>
 
 <p><code>dataset[5] returns [410, 12]</code></p>
 
-<p>No me cree? Mire nuevamente el <a href="http://alignedleft.com/content/03-tutorials/01-d3/140-making-a-scatterplot/1.html">diagrama de dispersión</a>, abra la consola de JavaScript y escriba <code>dataset[5] or dataset[5][1]</code> y mire qué pasa.</p>
+<p>No me cree? Mire nuevamente el <a href="http://alignedleft.com/content/03-tutorials/01-d3/140-making-a-scatterplot/1.html">diagrama de dispersión</a>, abra la consola de JavaScript y escriba <code>dataset[5] o dataset[5][1]</code> y mire qué pasa.</p>
 
 <h3 id="tamao">Tamaño</h3>
 
@@ -151,7 +151,7 @@ return Math.sqrt(h - d[1]);
 
 <p><img src="/images/puntos2.png" alt="Alt text" /></p>
 
-<p><a href="http://alignedleft.com/content/03-tutorials/01-d3/140-making-a-scatterplot/2.html">Esto no es</a> ni atractivo ni útil, pero ilustra como se puede usar <code>d</code> con la notación de corchetes para referenciar valores y asignárselos a <code>r</code>.</p>
+<p><a href="http://alignedleft.com/content/03-tutorials/01-d3/140-making-a-scatterplot/2.html">Esto no es</a> ni atractivo ni útil, pero ilustra cómo se puede usar <code>d</code> con la notación de corchetes para referenciar valores y asignárselos a <code>r</code>.</p>
 
 <h3 id="etiquetas">Etiquetas</h3>
 
@@ -162,7 +162,7 @@ return Math.sqrt(h - d[1]);
     .enter()
     .append(&quot;text&quot;)</code></pre>
 
-<p>Hasta el momento, el código busca los elementos <code>text</code> dentro del SVG (no existen aún), y luego añade un elemento <code>text</code>por cada dato. Acá se utiliza el método <code>text()</code> para especificar el contenido de cada elemento.</p>
+<p>Hasta el momento, el código busca los elementos <code>text</code> dentro del SVG (no existen aún), y luego añade un elemento <code>text</code> por cada dato. Acá se utiliza el método <code>text()</code> para especificar el contenido de cada elemento.</p>
 
 <pre><code>.text(function(d) {
     return d[0] + &quot;,&quot; + d[1];
@@ -172,15 +172,14 @@ return Math.sqrt(h - d[1]);
 
 <p>Los signos de +, cuando se usan con las cadenas de caracteres, tal como la coma entre las comillas “,” actúan como operadores de <em>concatenación</em>. Entonces lo que está pasando en esta línea de código realmente es: Obtenga los valores <code>d[0] y d[1]</code>y únalos con una coma en la mitad. El resultado es algo similar a <code>5,20 o 25, 67</code>.</p>
 
-<p>Ahora especificamos <em>donde</em> se va ubicar el texto, con los valores <code>x</code>y <code>y</code>. Por el momento, usemos <code>d[0]</code> y <code>d[1]</code>, los mismos valores que usamos para especificar las posiciones del círculo (<code>circle</code>).</p>
+<p>Ahora especificamos <em>donde</em> se va ubicar el texto, con los valores <code>x</code> y <code>y</code>. Por el momento, usemos <code>d[0]</code> y <code>d[1]</code>, los mismos valores que usamos para especificar las posiciones del círculo (<code>circle</code>).</p>
 
 <pre><code>.attr(&quot;x&quot;, function(d) {
     return d[0];
 })
 .attr(&quot;y&quot;, function(d) {
-    return d[1];</code></pre>
-
-<p>})</p>
+    return d[1];
+})</code></pre>
 
 <p>Por último, vamos a añadir algo de estilo con:</p>
 
@@ -198,13 +197,13 @@ return Math.sqrt(h - d[1]);
 
 <p>Sin embargo, la imagen de arriba a duras penas pasa por una visualización de datos. El diagrama de dispersión es difícil de leer y el código no es muy flexible. Honestamente, aún no hemos mejorado – broma – con respecto al <em>Asistente de Diagramas</em> de Excel!</p>
 
-<p>No hay por qué preocuparse: D3 es mucho más interesante que el Asistente de Gráficos (y eso sin mencionar Clippy), pero para gnerar un diagrama interactivo y atractivo requiere que subamos de nivel en nuestra destreza de D3. Para usar datos en forma flexible, vamos a aprender acerca de las <em>escalas</em> de D3. Para que nuestro diagrama de dispersión sea más fácil de leer, vamos a aprender acerca de los <em>generadores de ejes</em> y las etiquetas de los ejes. Luego, vamos a hacer que las cosas sean interactivas y vamos a aprender cómo actualizar los datos sobre la marcha.</p>
+<p>No hay por qué preocuparse: D3 es mucho más interesante que el Asistente de Gráficos (y eso sin mencionar Clippy), pero para generar un diagrama interactivo y atractivo requiere que subamos de nivel en nuestra destreza de D3. Para usar datos en forma flexible, vamos a aprender acerca de las <em>escalas</em> de D3. Para que nuestro diagrama de dispersión sea más fácil de leer, vamos a aprender acerca de los <em>generadores de ejes</em> y las etiquetas de los ejes. Luego, vamos a hacer que las cosas sean interactivas y vamos a aprender cómo actualizar los datos sobre la marcha.</p>
 
 <p><a href="/escalas.html">Siguiente: Escalas –&gt;</a></p>
           <section>
 	<footer>
-		Este tutorial lo mantiene <a href="https://twitter.com/gabrielcoch">Gabriel Coch</a><br>
-        El contenido es de <a href="http://alignedleft.com/">Scott Murray</a>
+		Este tutorial fue traducido por <a href="https://twitter.com/gabrielcoch">Gabriel Coch</a><br>
+        Todo el contenido fue desarrollado por y le pertenece a <a href="http://alignedleft.com/">Scott Murray</a>
     </footer>
 </section>
 

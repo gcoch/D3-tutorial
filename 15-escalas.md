@@ -9,11 +9,11 @@ permalink: "escalas.html"
 
 [Definición de escalas, según Mike Bostock](https://github.com/mbostock/d3/wiki/Quantitative-Scales)
 
-No es nada usual que exista una correspondencia exacta entre los datos de un cojunto y las medidas de los pixeles que se van a utilizar para una visualización. Las escalas proveen una manera conveniente de mapear los datos originales a nuevos valores que son útiles para el propósito de visualización.
+No es usual que exista una correspondencia exacta entre los datos de un conjunto y las medidas de los pixeles que se van a utilizar para una visualización. Las escalas proveen una manera conveniente de mapear los datos originales a nuevos valores que son útiles para el propósito de visualización.
 
 Las escalas de D3 son *funciones* en las que quién hace la visualización es quien define los parámetros. Una vez creada esta función, se invoca, se le pasa un valor y ésta devuelve el valor de salida, ya con el factor de conversión.  Uno puede definir y usar tantas escalas como quiera.
 
-Puede ser tentador pensar en una escala como algo que aparece visualmente en la imagen final -- como una serie de marcadores que muestran una progresión de datos. *No se deje engañar!* Estos marcadores son parte del *eje*, el cual es en escencia la representación visual de la escala. Una escala es una relación matemática, que no tiene un resultado visual como tal. Le recomiendo que piense en escalas y ejes como dos elementso que están relacionados.
+Puede ser tentador pensar en una escala como algo que aparece visualmente en la imagen final -- como una serie de marcadores que muestran una progresión de datos. *No se deje engañar!* Estos marcadores son parte del *eje*, el cual es en esencia la representación visual de la escala. Una escala es una relación matemática, que no tiene un resultado visual como tal. Le recomiendo que piense en escalas y ejes como dos elementos que están relacionados.
 
 Este tema describe únicamente escalas *lineales* puesto que son las más comunes y fáciles de entender. Una vez entienda las escalas lineales, entender las demás va a ser muy fácil.
 
@@ -36,9 +36,9 @@ Acá es donde entran a jugar las escalas. Puesto que las manzanas no son pixeles
 
 El *dominio de entrada* de una escala es el rango de los valores iniciales. Con los datos de manzanas de arriba, el dominio de entrada sería 100 y 500 (para el mínimo y el máximo) o cero y 500.
 
-El *rango de salida* de la escala es el rango de valores posibles de salida, que usualmente se denominan valores de despliegue y usan pixeles por unidad de medida. El rango de salida lo decide usted como diseñador. Si usted decid que la barra más pequeña tendrá una altura de 10 pixeles y que la más alta tendrá 350 pixeles, entonces usted puede definir el rango de salida de 10 a 350.
+El *rango de salida* de la escala es el rango de valores posibles de salida, que usualmente se denominan valores de despliegue y usan pixeles por unidad de medida. El rango de salida lo decide usted como diseñador. Si usted decide que la barra más pequeña tendrá una altura de 10 pixeles y que la más alta tendrá 350 pixeles, entonces usted puede definir el rango de salida de 10 a 350.
 
-Por ejemplo, puede crear una escala donde el dominio de entrada es `100, 500`y el rango de salida es de `10, 350`.  Si usted le da a esa escala un valor de `100`, ésta le devolverá `10`. Si usted le da `500`, le devolverá `350`.  Si le da `300`,  le entraga `180` en una bandeja de plata. (`300` es el centro del dominio y `180`es el centro del rango.)
+Por ejemplo, puede crear una escala donde el dominio de entrada es `100, 500` y el rango de salida es de `10, 350`.  Si usted le da a esa escala un valor de `100`, ésta le devolverá `10`. Si usted le da `500`, le devolverá `350`.  Si le da `300`,  le entrega `180` en una bandeja de plata. (`300` es el centro del dominio y `180`es el centro del rango.)
 
 Podemos visualizar el dominio y el rango como dos ejes correspondientes, uno junto al otro:
 
@@ -74,11 +74,11 @@ Entendió? Muy bien.
 
 ###Normalización
 
-Si está familiarizado con el concepto de *normalización*, puede ser conveniente que sepa eso es todo lo que está pasando aquí con una escala lineal.
+Si está familiarizado con el concepto de *normalización*, puede ser conveniente que sepa que eso es todo lo que está pasando aquí con una escala lineal.
 
 La normalización es el proceso de mapeo de un valor numérico a un nuevo valor que está entre 0 y 1, basado en los posibles valores mínimos y máximos. Por ejemplo, con 365 días al año, el día número 310 se mapea a más o menos 0.85 o 85% del recorrido del año.
 
-Con escalas lineales, dejamos que D3 se encargu de la matemática que está detrás del proceso de normalización. El valor de entrada se normaliza de acuerdo con el dominio y el valor normalizado se cambia de escala para el rango de salida.
+Con escalas lineales, dejamos que D3 se encargue de la matemática que está detrás del proceso de normalización. El valor de entrada se normaliza de acuerdo con el dominio y el valor normalizado se cambia de escala para el rango de salida.
 
 
 ###Creación de una Escala
@@ -93,7 +93,7 @@ Los generadores de escala de D3 se puede acceder con `d3.scale` seguidos por el 
 
 Puesto que no hemos definido un dominio ni un rango, esta función está mapeando la entrada a la salida con una escala de 1:1. Esto quiere decir que lo que ingrese saldrá sin ningún cambio.
 
-Podemos fijar el dominio de entrada de la escala en `100, 500`si le pasamos esos valores como un arreglo al método `domain()`.
+Podemos fijar el dominio de entrada de la escala en `100, 500` si le pasamos esos valores como un arreglo al método `domain()`.
 
 `scale.domain([100, 500]);`
 
@@ -126,13 +126,13 @@ Revisemos los datos del Diagrama de Dispersión:
 
 Si recuerda, `dataset` es un arreglo de arreglos. Mapeamos el primer valor en cada arreglo al eje x y el segundo valor al eje y. Empecemos con el eje x.
 
-Mirando por encima los valores de x, vemos que el rango va de 5 a 480, por consiguiente un dominio de entrada razonable puee ser `0, 500`, cierto?
+Mirando por encima los valores de x, vemos que el rango va de 5 a 480, por consiguiente un dominio de entrada razonable puede ser `0, 500`, cierto?
 
 `...`
 
 Por qué me mira de esa manera? Ah, porque quiere que su código siga siendo flexible y escalable, de tal manera que funcione cuando cambien los datos en el futuro. Muy inteligente!
 
-En vez de especificar valores fijos para el dominio, pudemos usar funciones que se aplican a los arreglos y que son muy convenientes, tales como `min()` y `max()` para analizar el conjunto de datos sobre la marcha. Por ejemplo, este código pasa por todos los valores de x en nuestros arreglos y devuelve el valor del mayor:
+En vez de especificar valores fijos para el dominio, podemos usar funciones que se aplican a los arreglos y que son muy convenientes, tales como `min()` y `max()` para analizar el conjunto de datos sobre la marcha. Por ejemplo, este código pasa por todos los valores de x en nuestros arreglos y devuelve el valor del mayor:
 
     d3.max(dataset, function(d) {    //Devuelve 480
         return d[0];  //Referencia el primer valor del sub-arreglo
@@ -145,11 +145,11 @@ Si se junta todo, podemos crear una función para cambiar la escala de nuestro e
                      .range([0, w]);
 
 
-Primero, observe que la nombramos `xScale.` Por supuesto que se puede usar cualquier nombra para la esca, pero uno como `xScale` ayuda a recordarme lo que hace esta función.
+Primero, observe que la nombramos `xScale.` Por supuesto que se puede usar cualquier nombra para la escala, pero uno como `xScale` ayuda a recordarme lo que hace esta función.
 
 Segundo, tome nota de que le asigné cero al rango inferior del dominio de entrada. (De otra manera, habría podido usar `min()` para calcular un valor dinámico.) El punto superior del dominio se fijó en el valor máximo del arreglo `dataset` (que es 480).
 
-Por úlimo, observe que el rango de salida quedó en `0` y `w`,  el ancho del SVG.
+Por último, observe que el rango de salida quedó en `0` y `w`,  el ancho del SVG.
 
 Vamos a usar un código similar para crear la función de escala en el eje y.
 
@@ -181,7 +181,7 @@ se cambia a:
         return yScale(d[1]);
         })
 
-Y por añadidura, hagmos el mismo cambio con las coordenadas de las etiquetas,entonces  estas líneas 
+Y por añadidura, hagamos el mismo cambio con las coordenadas de las etiquetas, entonces  estas líneas 
 
     .attr("x", function(d) {
         return d[0];
@@ -206,7 +206,7 @@ Acá encuentra [el código funcionando](http://alignedleft.com/content/03-tutori
 
 ###Refinando el Diagrama de Dispersión
 
-Seguramente ha notado que los valores *y* más pequeños están ubicados en la parte alta de la gráfica, y que los más grandes están en la parte bajo. Ya que estamos usando escalas, es muy fácil cambiar esto, de tal manera que los mayores valores se muestren en la parte superior, como es de esperarse. Es solo cuestión de cambiar el rango de salida de `yScale` de 
+Seguramente ha notado que los valores *y* más pequeños están ubicados en la parte alta de la gráfica, y que los más grandes están en la parte baja. Ya que estamos usando escalas, es muy fácil cambiar esto, de tal manera que los mayores valores se muestren en la parte superior, como es de esperarse. Es solo cuestión de cambiar el rango de salida de `yScale`  de 
 
 `.range([0,h]);`
 
@@ -218,7 +218,7 @@ a
 
 Acá encuentra [este código](http://alignedleft.com/content/03-tutorials/01-d3/150-scales/2.html). Sí, ahora una *menor* entrada a `yScale` produce un valor de salida *mayor*, de tal forma que los `circle`(círculos) y el `text` (texto) se empujan hacia abajo, más cerca de la base de la imagen. Yo sé, parece demasiado fácil!
 
-Sin embargo, algunos de los elementos salen cortados. Depemos introducir una variable de `padding`.
+Sin embargo, algunos de los elementos salen cortados. Debemos introducir una variable de `padding`.
 
 `var padding = 20;`
 
@@ -230,7 +230,7 @@ El rango de `yScale` era `range([h, 0])`, y ahora es
 
 `.range([h - padding, padding]);`
 
-Esto nos debe dar 20 pixeles adicionales de espacio en los bordes izquierdo, derecho, superior e inferior del SVG. Y efectivament así es!
+Esto nos debe dar 20 pixeles adicionales de espacio en los bordes izquierdo, derecho, superior e inferior del SVG. Y efectivamente así es!
 
 ![Alt text]({{site.url}}/images/puntos6.png)
 
@@ -252,7 +252,7 @@ Así, para definir el valor del radio, se programa de esta manera:
         return rScale(d[1]);
         });
         
-Esto es emocionante, porque de esta manera se garantiza que todos los valores de los radios *siempre* aparezcan dnetro del rango `2,5`. (O * casi* siempre. Vea la referencia a `clamp()` debajo.) Los valoes de `0`(el dato de entrada mínimo) recibirán círculos con radio de `2` (o un diámetro de 4 pixeles). Los valores más grandes se mostrarán como un círculo con radio de `5`(diámetro de 10 pixeles). 
+Esto es emocionante, porque de esta manera se garantiza que todos los valores de los radios *siempre* aparezcan dentro del rango `2,5`. (O * casi* siempre. Vea la referencia a `clamp()` debajo.) Los valores de `0` (el dato de entrada mínimo) recibirán círculos con radio de `2` (o un diámetro de 4 pixeles). Los valores más grandes se mostrarán como un círculo con radio de `5` (diámetro de 10 pixeles). 
 
 ![Alt text]({{site.url}}/images/puntos8.png)
 
@@ -262,7 +262,7 @@ Por último y en el caso de que el poder de las escalas aún no lo haya descrest
 
 ![Alt text]({{site.url}}/images/puntos9.png)
 
-Boom! [Acá está el código](http://alignedleft.com/content/03-tutorials/01-d3/150-scales/5.html). Puede notar cómo todos los puntos anteriores mantuvierons sus posiciones relativas, pero ahora están más cerca de sí mismos, más abajo y hacia la izquierda para acomodar al nuevo miembro.
+Boom! [Acá está el código](http://alignedleft.com/content/03-tutorials/01-d3/150-scales/5.html). Puede notar cómo todos los puntos anteriores mantuvieron sus posiciones relativas, pero ahora están más cerca de sí mismos, más abajo y hacia la izquierda para acomodar al nuevo miembro.
 
 Y ya, para una última revelación: Muy fácilmente podemos cambiar el tamaño de nuestro SVG, y todo cambiará de escala conforme al cambio. Acá he incrementado el valor de `h1` de `100` a `300` sin hacer *ningún otro cambio*:
 
@@ -274,11 +274,11 @@ Boom, nuevamente! [El código actualizado](http://alignedleft.com/content/03-tut
 
 `d3.scale.linear()` tiene otros métodos útiles que cabe mencionar brevemente acá:
 
-- `nice()`-- Esto le dice a la escala que tome cualquier dominio de entrada que se le haya pasado a `rang()`,  y lo expanda al valor redondeado más cercano. Del wiki de D3 "Por ejemplo, del dominio [0.20147987687960267, 0.996679553296417], el dominio `nice`es [0.2, 1].”  ESto es bastante útil para personas normales qeu usualmente encuentran algo difícil leer números como 0.20147987687960267.
+- `nice()`-- Esto le dice a la escala que tome cualquier dominio de entrada que se le haya pasado a `range()`,  y lo expanda al valor redondeado más cercano. Del wiki de D3 "Por ejemplo, del dominio [0.20147987687960267, 0.996679553296417], el dominio `nice`es [0.2, 1].”  Esto es bastante útil para personas normales que usualmente encuentran algo difícil leer números como 0.20147987687960267.
 
-`rangeRound()`-- Use `rangeRound()` en lugar de `range()` y todos los valores a los que se le aplica la escala serán redondeados al número entero más cercano. Esto es útil se quiere que las figuras tengan valores exactos en pixeles, para que los bordes no se vean borrosos por causa de "antialiasing".
+`rangeRound()`-- Use `rangeRound()` en lugar de `range()` y todos los valores a los que se le aplica la escala serán redondeados al número entero más cercano. Esto es útil si quiere que las figuras tengan valores exactos en pixeles, para que los bordes no se vean borrosos por causa de "antialiasing".
 
-`clamp()`-- Por defecto, una escala lineal *puede* devolver valores que estén por fuera del rango especificado. Por ejemplo, si se da un valor por fuera del dominio de entrada esperado, la escala producirá un número que también está por fuera del rango de salida. All llamar a `.clamp(true)`  dentro de la escala, se encarga de que todos los valores queden dentro del rango especificado. Lo que este signifca es que los valores excesivos se redondearán a los valores bajos y altos del rango (aquel esté más cercano).
+`clamp()`-- Por defecto, una escala lineal *puede* devolver valores que estén por fuera del rango especificado. Por ejemplo, si se da un valor por fuera del dominio de entrada esperado, la escala producirá un número que también está por fuera del rango de salida. Al llamar a `.clamp(true)`  dentro de la escala, se encarga de que todos los valores queden dentro del rango especificado. Lo que esto significa es que los valores excesivos se redondearán a los valores bajos y altos del rango (aquel esté más cercano).
 
 ###Otras Escalas
 
@@ -288,7 +288,7 @@ Adicionalmente a las escalas `lineales`(que se han explicado arriba), D3 incluye
 - `sqrt`-- Una escala de raíz cuadrada
 - `pow`-- Una escala de potencia (buena para el gimnasio)
 - `log`-- Una escala logarítmica
-- `quatize`-- Una escala lineal con valores discretos pra el rango de salida, para aquellos casos en que quiere organizar datos en "buckets".
+- `quatize`-- Una escala lineal con valores discretos para el rango de salida, para aquellos casos en que quiere organizar datos en "buckets".
 - `ordinal`-- Escalas ordinales utilizan valores que nos son cuantitativos (como nombres de categorías) como salida: perfecto para comparar peras y manzanas.
 
 

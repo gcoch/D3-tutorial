@@ -11,7 +11,7 @@ D3 es muy flexible en cuanto a datos de entrada. Este tema introduce las estruct
 
 Una variable es un dato, el bloque más pequeño de información. La variable es el cimiento para todas las demás estructuras de datos, que simplemente son configuraciones diferentes de las variable.
 
-Si usted está hasta ahora empezando con JavaScript, sepa que es un lenguage *debilmente tipado*, que se refiere a que no es necesario especificar de antemano el *tipo* de información que se va a almacenar en una variable. Muchos otros lenguajes, como Java (que es totalmente diferente de JavaScript!), requieren que se declare el tipo de variable, tal como `int, float, boolean, o String`
+Si usted está hasta ahora empezando con JavaScript, sepa que es un lenguaje *débilmente tipado*, lo que quiere decir que no es necesario especificar de antemano el *tipo* de información que se va a almacenar en una variable. Muchos otros lenguajes, como Java (que es totalmente diferente de JavaScript!), requieren que se declare el tipo de variable, tal como `int, float, boolean, o String`
 
     //Declaración de variables en Java
     int number = 5;
@@ -19,16 +19,16 @@ Si usted está hasta ahora empezando con JavaScript, sepa que es un lenguage *de
     boolean active = true;
     String text = "Crystal clear";
     
-JavaScript, en cambio, le asigna un *tipo* automáticamente a la variable con base en el tipo de información que se le asigne. (Tome nota de que '' o "" son indicadores de valores de una cadena de caracteres. Yo prefiero las comillas dobles "", pero algunas personas prefieren las comillas sencillas ''.)
+JavaScript, en cambio, le asigna un *tipo* automáticamente a la variable con base en el tipo de información que se le asigne. (Tome nota de que ' ' y " " son indicadores de valores de una cadena de caracteres. Yo prefiero las comillas dobles " ", pero algunas personas prefieren las comillas sencillas ''.
 
-    //Declaring variables in JavaScript
+    //Declaración de variables en JavaScript
     var number = 5;
     var value = 12.3467;
     var active = true;
     var text = "Crystal clear";
 
 
-Qué aburrido - `var, var, var, var`-0 sin embargo útil a medida que declaramos y nombramos variables antes de que sepamos que tipo de datos serán almacenados allí. Uno puede también cambiar el tipo de dato sobre la marcha sin qeu JavaScript se enloquezca.
+Qué aburrido - `var, var, var, var`- sin embargo es útil a medida que declaramos y nombramos variables antes de que sepamos qué tipo de datos serán almacenados allí. Uno puede también cambiar el tipo de dato sobre la marcha sin que JavaScript se enloquezca.
 
     var value = 100;
     value = 99.9999;
@@ -52,7 +52,7 @@ Al reescribir esto como un arreglo, se vuelven mucho más sencillos estos valore
 
 `var numbers = [ 5, 10, 15, 20, 25 ];`
 
-Los arreglos son un componente intrínseco de las visualizaciones de datos, por consiguiente es necesario entenderlos bien. Se puede acceder al valor almacenado en un arreglo, utlizando notación de corchetes:
+Los arreglos son un componente intrínseco de las visualizaciones de datos, por consiguiente es necesario entenderlos bien. Se puede acceder al valor almacenado en un arreglo, utilizando notación de corchetes:
 
 `numbers[2]  //Devuelve 15`
 
@@ -89,10 +89,10 @@ La visualización de datos basada en código no sería posible sin arreglos y el
 
 Un arreglo organiza muchos datos en un lugar conveniente. Luego, la función `for()` puede rápidamente recorrer todos los datos del arreglo y ejecutar alguna acción sobre ellos -- tal como mostrar su valor de manera visual. D3 por lo general maneja el recorrido (looping) con su método mágico `data()`, pero es importante poder escribir nuestros propios loops.
 
-No voy a describir la mecánica de los loops `for()`acá; esto da para otro tutorial entero por separado. Pero tome nota de este ejemplo, el cual recorre los valores del arreglo `numbers` de arriba.
+No voy a describir la mecánica de los loops `for()` acá; esto da para otro tutorial entero por separado. Pero tome nota de este ejemplo, el cual recorre los valores del arreglo `numbers` de arriba.
 
     for (var i = 0; i < numbers.length; i++) {
-    console.log(numbers[i]);  //Print value to console
+    console.log(numbers[i]);  //Imprime el valor a la consola
     }
     
 Ve ese `numbers.length`? Esa es la parte bella. Si `numbers` tiene diez posiciones, el loop correrá diez veces. Si tiene diez millones de posiciones... sí, usted ya sabe. Para esto es que  son buenas las computadores: para recibir un grupo de instrucciones y ejecutarlas una y otra vez. Y esto se encuentra en el corazón de por qué son tan satisfactorias las visualizaciones de datos -- uno diseña y codifica el sistema de visualización y el sistema responde acorde, aún cuando se le entrega diferentes datos. Las reglas de mapeo del sistema son consistentes, aún cuando los datos no lo son.
@@ -142,10 +142,9 @@ Digamos que hemos adquirido otras frutas y que queremos expandir nuestro catálo
         cantidad: 0,
         dulce: true
     }
-];
+    ];
 
-
-Para accesar estos datos, debemos seguir el sendero de los índices hacia los valores que buscamos. Recuerde, [] significa arreglo, y {} significa objeto.`frutas`es un arreglo, entonces utilizamos la notación de corchetes primero para especificar el índice del arreglo.
+Para obtener acceso a estos datos, debemos seguir el sendero de los índices hacia los valores que buscamos. Recuerde, [] significa arreglo, y {} significa objeto.`frutas` es un arreglo, entonces utilizamos la notación de corchetes primero para especificar el índice del arreglo.
 
 `fruta[1]`
 
@@ -170,11 +169,11 @@ Acá está el mapa de cómo acceder a todos los valores del arreglo de objetos d
     frutas[2].cantidad  ==  0
     frutas[2].dulce     ==  true
     
-Ciertamente, sabemos que `frutas[2].cantidad`bananos.
+Ciertamente, sabemos que `frutas[2].cantidad` bananos.
 
 ###JSON
 
-En algún punto de su carrera de D3, encontrará la Notación de Objetos de Javascript. Puede leer [los detalles](http://es.wikipedia.org/wiki/Json), sin embargo JSON es básicamente un tipo de sintaxis específico para organizar datos como objetos de JavaScript. Esta sintaxis se ha optimizado para uso con JavaScript (obviamente) y llamdas AJAX, por eso es que verá muchos de los APIs de la red botando datos en formato JSON. Es más rápido y fácil de descomponer con JavaScript que XML y por supuesto, D3 funciona bien con este formato.
+En algún punto de su carrera de D3, encontrará la Notación de Objetos de Javascript. Puede leer [los detalles](http://es.wikipedia.org/wiki/Json), sin embargo JSON es básicamente un tipo de sintaxis específico para organizar datos como objetos de JavaScript. Esta sintaxis se ha optimizado para uso con JavaScript (obviamente) y llamadas AJAX, por eso es que verá muchos de los APIs de la red botando datos en formato JSON. Es más rápido y fácil de descomponer con JavaScript que XML y por supuesto, D3 funciona bien con este formato.
 
 Todo esto, y en resumen no se ve mucho más raro que lo que ya hemos visto:
 

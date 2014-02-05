@@ -6,7 +6,7 @@ permalink: "encadenar-metodos.html"
 ---
 ##Encadenar Métodos
 
-D3 utiliza una técnica denominada sintáxis de cadena, similar a la de jQuery. Mediante el encadenamiento de métodos utizando puntos, es posible ejecutar varias acciones en una misma línea de código. Esto puede ser rápido y fácil, pero es importante entender cómo funciona, para  ahorrarse horas de dolores de cabeza depurando el código.
+D3 utiliza una técnica denominada sintáxis de cadena, similar a la de jQuery. Mediante el encadenamiento de métodos separados por puntos, es posible ejecutar varias acciones en una misma línea de código. Esto puede ser rápido y fácil, pero es importante entender cómo funciona, para  ahorrarse horas de dolores de cabeza depurando el código.
 
 A propósito, *funciones* y *métodos* son dos palabras diferentes para describir el mismo concepto: una unidad de código que acepta un argumento como entrada, lleva a cabo alguna acción, y devuelve algún dato de salida.
 

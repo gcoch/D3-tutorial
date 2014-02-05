@@ -25,37 +25,37 @@
           <div>
        
        
-        	<a href="/index.html">Inicio | </a>
+        	<a href="/index.html">Inicio  |  </a>
         
-        	<a href="/fundamentos.html">Fundamentos | </a>
+        	<a href="/fundamentos.html">Fundamentos  |  </a>
         
-        	<a href="/instalacion.html">Instalación | </a>
+        	<a href="/instalacion.html">Instalación  |  </a>
         
-        	<a href="/anadir-elementos.html">Añadir Elementos | </a>
+        	<a href="/anadir-elementos.html">Añadir Elementos  |  </a>
         
-        	<a href="/encadenar-metodos.html">Encadenar Métodos | </a>
+        	<a href="/encadenar-metodos.html">Encadenar Métodos  |  </a>
         
-        	<a href="/asociar-datos.html">Asociar Datos | </a>
+        	<a href="/asociar-datos.html">Asociar Datos  |  </a>
         
-        	<a href="/datos-propios.html">Usando sus Datos | </a>
+        	<a href="/datos-propios.html">Usando sus Datos  |  </a>
         
-        	<a href="/desplegar-divs.html">Desplegar DIVs | </a>
+        	<a href="/desplegar-divs.html">Desplegar DIVs  |  </a>
         
-        	<a href="/data.html">La Función data( ) | </a>
+        	<a href="/poder-datos.html">La Función data( )  |  </a>
         
-        	<a href="/intro-svg.html">Introducción a SVG | </a>
+        	<a href="/intro-svg.html">Introducción a SVG  |  </a>
         
-        	<a href="/despliegue-svg.html">Despliegue de SVG | </a>
+        	<a href="/despliegue-svg.html">Despliegue de SVG  |  </a>
         
-        	<a href="/tipos-datos.html">Tipos de Datos | </a>
+        	<a href="/tipos-datos.html">Tipos de Datos  |  </a>
         
-        	<a href="/diagrama-barras.html">Diagrama de Barras | </a>
+        	<a href="/diagrama-barras.html">Diagrama de Barras  |  </a>
         
-        	<a href="/diagrama-dispersion.html">Diagrama de Dispersión | </a>
+        	<a href="/diagrama-dispersion.html">Diagrama de Dispersión  |  </a>
         
-        	<a href="/escalas.html">Escalas | </a>
+        	<a href="/escalas.html">Escalas  |  </a>
         
-        	<a href="/ejes.html">Ejes | </a>
+        	<a href="/ejes.html">Ejes  |  </a>
         
 </dv>
         </header>
@@ -70,7 +70,7 @@
 
 <p>Una variable es un dato, el bloque más pequeño de información. La variable es el cimiento para todas las demás estructuras de datos, que simplemente son configuraciones diferentes de las variable.</p>
 
-<p>Si usted está hasta ahora empezando con JavaScript, sepa que es un lenguage <em>debilmente tipado</em>, que se refiere a que no es necesario especificar de antemano el <em>tipo</em> de información que se va a almacenar en una variable. Muchos otros lenguajes, como Java (que es totalmente diferente de JavaScript!), requieren que se declare el tipo de variable, tal como <code>int, float, boolean, o String</code></p>
+<p>Si usted está hasta ahora empezando con JavaScript, sepa que es un lenguaje <em>débilmente tipado</em>, lo que quiere decir que no es necesario especificar de antemano el <em>tipo</em> de información que se va a almacenar en una variable. Muchos otros lenguajes, como Java (que es totalmente diferente de JavaScript!), requieren que se declare el tipo de variable, tal como <code>int, float, boolean, o String</code></p>
 
 <pre><code>//Declaración de variables en Java
 int number = 5;
@@ -78,15 +78,15 @@ float value = 12.3467;
 boolean active = true;
 String text = &quot;Crystal clear&quot;;</code></pre>
 
-<p>JavaScript, en cambio, le asigna un <em>tipo</em> automáticamente a la variable con base en el tipo de información que se le asigne. (Tome nota de que ” o ”” son indicadores de valores de una cadena de caracteres. Yo prefiero las comillas dobles ””, pero algunas personas prefieren las comillas sencillas ”.)</p>
+<p>JavaScript, en cambio, le asigna un <em>tipo</em> automáticamente a la variable con base en el tipo de información que se le asigne. (Tome nota de que ’ ’ y ” ” son indicadores de valores de una cadena de caracteres. Yo prefiero las comillas dobles ” “, pero algunas personas prefieren las comillas sencillas ”.</p>
 
-<pre><code>//Declaring variables in JavaScript
+<pre><code>//Declaración de variables en JavaScript
 var number = 5;
 var value = 12.3467;
 var active = true;
 var text = &quot;Crystal clear&quot;;</code></pre>
 
-<p>Qué aburrido - <code>var, var, var, var</code>-0 sin embargo útil a medida que declaramos y nombramos variables antes de que sepamos que tipo de datos serán almacenados allí. Uno puede también cambiar el tipo de dato sobre la marcha sin qeu JavaScript se enloquezca.</p>
+<p>Qué aburrido - <code>var, var, var, var</code>- sin embargo es útil a medida que declaramos y nombramos variables antes de que sepamos qué tipo de datos serán almacenados allí. Uno puede también cambiar el tipo de dato sobre la marcha sin que JavaScript se enloquezca.</p>
 
 <pre><code>var value = 100;
 value = 99.9999;
@@ -110,7 +110,7 @@ var numberE = 25;</code></pre>
 
 <p><code>var numbers = [ 5, 10, 15, 20, 25 ];</code></p>
 
-<p>Los arreglos son un componente intrínseco de las visualizaciones de datos, por consiguiente es necesario entenderlos bien. Se puede acceder al valor almacenado en un arreglo, utlizando notación de corchetes:</p>
+<p>Los arreglos son un componente intrínseco de las visualizaciones de datos, por consiguiente es necesario entenderlos bien. Se puede acceder al valor almacenado en un arreglo, utilizando notación de corchetes:</p>
 
 <p><code>numbers[2]  //Devuelve 15</code></p>
 
@@ -146,10 +146,10 @@ names[1]        //Returns &quot;Bert&quot;</code></pre>
 
 <p>Un arreglo organiza muchos datos en un lugar conveniente. Luego, la función <code>for()</code> puede rápidamente recorrer todos los datos del arreglo y ejecutar alguna acción sobre ellos – tal como mostrar su valor de manera visual. D3 por lo general maneja el recorrido (looping) con su método mágico <code>data()</code>, pero es importante poder escribir nuestros propios loops.</p>
 
-<p>No voy a describir la mecánica de los loops <code>for()</code>acá; esto da para otro tutorial entero por separado. Pero tome nota de este ejemplo, el cual recorre los valores del arreglo <code>numbers</code> de arriba.</p>
+<p>No voy a describir la mecánica de los loops <code>for()</code> acá; esto da para otro tutorial entero por separado. Pero tome nota de este ejemplo, el cual recorre los valores del arreglo <code>numbers</code> de arriba.</p>
 
 <pre><code>for (var i = 0; i &lt; numbers.length; i++) {
-console.log(numbers[i]);  //Print value to console
+console.log(numbers[i]);  //Imprime el valor a la consola
 }</code></pre>
 
 <p>Ve ese <code>numbers.length</code>? Esa es la parte bella. Si <code>numbers</code> tiene diez posiciones, el loop correrá diez veces. Si tiene diez millones de posiciones… sí, usted ya sabe. Para esto es que son buenas las computadores: para recibir un grupo de instrucciones y ejecutarlas una y otra vez. Y esto se encuentra en el corazón de por qué son tan satisfactorias las visualizaciones de datos – uno diseña y codifica el sistema de visualización y el sistema responde acorde, aún cuando se le entrega diferentes datos. Las reglas de mapeo del sistema son consistentes, aún cuando los datos no lo son.</p>
@@ -198,11 +198,10 @@ fruta.dulce     //Devuelve true</code></pre>
     color: &quot;amarillo&quot;,
     cantidad: 0,
     dulce: true
-}</code></pre>
+}
+];</code></pre>
 
-<p>];</p>
-
-<p>Para accesar estos datos, debemos seguir el sendero de los índices hacia los valores que buscamos. Recuerde, [] significa arreglo, y {} significa objeto.<code>frutas</code>es un arreglo, entonces utilizamos la notación de corchetes primero para especificar el índice del arreglo.</p>
+<p>Para obtener acceso a estos datos, debemos seguir el sendero de los índices hacia los valores que buscamos. Recuerde, [] significa arreglo, y {} significa objeto.<code>frutas</code> es un arreglo, entonces utilizamos la notación de corchetes primero para especificar el índice del arreglo.</p>
 
 <p><code>fruta[1]</code></p>
 
@@ -227,11 +226,11 @@ frutas[2].color     ==  &quot;amarillo&quot;
 frutas[2].cantidad  ==  0
 frutas[2].dulce     ==  true</code></pre>
 
-<p>Ciertamente, sabemos que <code>frutas[2].cantidad</code>bananos.</p>
+<p>Ciertamente, sabemos que <code>frutas[2].cantidad</code> bananos.</p>
 
 <h3 id="json">JSON</h3>
 
-<p>En algún punto de su carrera de D3, encontrará la Notación de Objetos de Javascript. Puede leer <a href="http://es.wikipedia.org/wiki/Json">los detalles</a>, sin embargo JSON es básicamente un tipo de sintaxis específico para organizar datos como objetos de JavaScript. Esta sintaxis se ha optimizado para uso con JavaScript (obviamente) y llamdas AJAX, por eso es que verá muchos de los APIs de la red botando datos en formato JSON. Es más rápido y fácil de descomponer con JavaScript que XML y por supuesto, D3 funciona bien con este formato.</p>
+<p>En algún punto de su carrera de D3, encontrará la Notación de Objetos de Javascript. Puede leer <a href="http://es.wikipedia.org/wiki/Json">los detalles</a>, sin embargo JSON es básicamente un tipo de sintaxis específico para organizar datos como objetos de JavaScript. Esta sintaxis se ha optimizado para uso con JavaScript (obviamente) y llamadas AJAX, por eso es que verá muchos de los APIs de la red botando datos en formato JSON. Es más rápido y fácil de descomponer con JavaScript que XML y por supuesto, D3 funciona bien con este formato.</p>
 
 <p>Todo esto, y en resumen no se ve mucho más raro que lo que ya hemos visto:</p>
 
@@ -273,8 +272,8 @@ frutas[2].dulce     ==  true</code></pre>
 <p><a href="/diagrama-barras.html">Siguiente: Diagrama de Barras –&gt;</a></p>
           <section>
 	<footer>
-		Este tutorial lo mantiene <a href="https://twitter.com/gabrielcoch">Gabriel Coch</a><br>
-        El contenido es de <a href="http://alignedleft.com/">Scott Murray</a>
+		Este tutorial fue traducido por <a href="https://twitter.com/gabrielcoch">Gabriel Coch</a><br>
+        Todo el contenido fue desarrollado por y le pertenece a <a href="http://alignedleft.com/">Scott Murray</a>
     </footer>
 </section>
 

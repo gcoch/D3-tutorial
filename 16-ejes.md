@@ -19,15 +19,15 @@ Tome nota que las funciones de ejes son específicas a SVG, puesto que generan e
 
 ###Construcción del Eje
 
-Use `d3.svg.axis()` para cerar una función genérica de eje.
+Use `d3.svg.axis()` para cerrar una función genérica de eje.
 
 `var xAxis = d3.svg.axis();`
 
-Como mínimo, cada debe saber sobre qué *escala* debe operar. Acá le pasamos `xScale` del código del diagrama de dispersión:
+Como mínimo, cada eje debe saber sobre qué *escala* debe operar. Acá le pasamos `xScale` del código del diagrama de dispersión:
 
 `xAxis.scale(xScale);`
 
-También podemos especificar en donde deben aparecer las etiquetas con respecto al eje en sí. Por defecto se despliegan en la parte baja o `bottom`, lo que significa que aparecerán debajo de la línea del ejem (Aunque esto se asigna por defecto, no sobra especificarlo explícitamente.)
+También podemos especificar en donde deben aparecer las etiquetas con respecto al eje en sí. Por defecto se despliegan en la parte baja o `bottom`, lo que significa que aparecerán debajo de la línea del eje (Aunque esto se asigna por defecto, no sobra especificarlo explícitamente.)
 
 `xAxis.orient("bottom");`
 
@@ -37,12 +37,12 @@ Por supuesto que podemos ser más concisos y encadenar todo esto en una sola lí
                   .scale(xScale)
                   .orient("bottom");
 
-Por último, para generar el eje e insertar todos estos marcadores pequeños y etiquetas dentro de nuestro SVG, debemos *llamar* a la función `xAxis`. Voy a añadir este código al final de nuestro "script", de tal mera que el eje se genere despué de los demás elementos del SVG:
+Por último, para generar el eje e insertar todos estos marcadores pequeños y etiquetas dentro de nuestro SVG, debemos *llamar* a la función `xAxis`. Voy a añadir este código al final de nuestro "script", de tal manera que el eje se genere después de los demás elementos del SVG:
 
     svg.append("g")
         .call(xAxis);
         
-La función `call()` de D3 toma una *selección* como entrada y entrega esa selección a cualquier *función*. Entonces, en este caso, hemos añadido un nuevo elemento de grupo `g` que contiene todos los elementos de los ejes que están para ser generados. (La `g` no es estrictamente necesaria, pero ayuda a mantener organizados a los elementos y nos permite aplicar una clase al grup entero, que es lo que voy a hacer en un instante.)
+La función `call()` de D3 toma una *selección* como entrada y entrega esa selección a cualquier *función*. Entonces, en este caso, hemos añadido un nuevo elemento de grupo `g` que contiene todos los elementos de los ejes que están para ser generados. (La `g` no es estrictamente necesaria, pero ayuda a mantener organizados a los elementos y nos permite aplicar una clase al grupo entero, que es lo que voy a hacer en un instante.)
 
 La `g` se convierte en la selección para el siguiente eslabón de la cadena. `call()` entrega esta selección a la función `xAxis`,  para que se genere nuestro eje dentro del la nueva `g`.  Las líneas de código de arriba son la versión limpia y abreviada de su equivalente:
 
@@ -81,11 +81,11 @@ Después, introducimos nuestros primeros estilos de CSS, en la etiqueta `<head>`
     }
 
 
-La propiedad `shape-rendering` es un atributo de SVG, que se utliza para asegurse de que nuestros ejes y marcadores estén perfectos a nivel de pixel. No podemos tener ejes borrosos!
+La propiedad `shape-rendering` es un atributo de SVG, que se utiliza para asegurarse de que nuestros ejes y marcadores estén perfectos a nivel de pixel. No podemos tener ejes borrosos!
 
 ![Alt text]({{site.url}}/images/scatter4.png)
 
-Se ve mejor, pero la parte de arriba del eje está cortada, y queremos que esté en la parte inferior del diagram. Podemos `transform` (transformar) el grupo entero del eje, empujándolo al fondo:
+Se ve mejor, pero la parte de arriba del eje está cortada, y queremos que esté en la parte inferior del diagrama. Podemos `transform` (transformar) el grupo entero del eje, empujándolo al fondo:
 
     svg.append("g")
         .attr("class", "axis")
@@ -100,7 +100,7 @@ Mucho mejor! [Acá está el código](http://alignedleft.com/content/03-tutorials
 
 ###Buscando Marcadores
 
-Los marcadores en D3 proporicionan información. Añadir más marcadores es necesariamente mejor, y después de cierto putno empiezan a congestionar el diagrama. Podrá notar que nunca hemos especificado cuántos marcadores se deben incluur en el eje y a qué intervalos deben aparecer. Sin instrucciones claras, D3 en forma automática y mágica examinó nuestra escala `xScale`y determinó a su juicio cuántos marcadores debió incluir y a qué intervalos (cada 50 en este caso).
+Los marcadores en D3 proporcionan información. Añadir más marcadores es necesariamente mejor, pero después de cierto punto empiezan a congestionar el diagrama. Podrá notar que nunca hemos especificado cuántos marcadores se deben incluir en el eje y a qué intervalos deben aparecer. Sin instrucciones claras, D3 en forma automática y mágica examinó nuestra escala `xScale`y determinó a su juicio cuántos marcadores debió incluir y a qué intervalos (cada 50 en este caso).
 
 Como puede imaginárselo, es posible adecuar todos los aspectos de los ejes, empezando con el número aproximado de marcadores, usando la función `ticks()`:
 
@@ -114,7 +114,7 @@ Como puede imaginárselo, es posible adecuar todos los aspectos de los ejes, emp
 
 [Acá está este código](http://alignedleft.com/content/03-tutorials/01-d3/160-axes/3.html)
 
-Probablemente notó que cuando aún cuando especificamos solamente cinco marcadores, D3 ha tomado la decisión ejecutiva y pedido un total de siete. Esto es porque D3 nos está protegiendo y calculó que si se incluían solo *cinco* marcadores, esto habría requerido dividir el dominio de entrada en valores no muy vistosos -- es este caso 0, 150, 300, 450, y 600. D3 interpreta el valor de `ticks()` solamente como una sugerencia y lo sobreescribe con lo que considere con los valores que considere como los más legibles -- en este caso intervalos de 100 -- así sea que esto requiera añadir más o disminuir el número de marcadores que usted solicitó. Esto es una funcionalidad totalmente brillante que incrementa la escalabilidad de su diseño: a medida que cambia su conjunto de datos, y el dominio de entrada se expande o se contrae (números más grandes o más pequeños), D3 se asegura que las etiquetas de los marcadores permanezcan legibres y fáciles de leer.
+Probablemente notó que cuando aún cuando especificamos solamente cinco marcadores, D3 ha tomado la decisión ejecutiva y pedido un total de siete. Esto es porque D3 nos está protegiendo y calculó que si se incluían solo *cinco* marcadores, esto habría requerido dividir el dominio de entrada en valores no muy vistosos -- es este caso 0, 150, 300, 450, y 600. D3 interpreta el valor de `ticks()` solamente como una sugerencia y lo sobreescribe con lo que considere con los valores que considere como los más legibles -- en este caso intervalos de 100 -- así sea que esto requiera añadir más o disminuir el número de marcadores que usted solicitó. Esto es una funcionalidad totalmente brillante que incrementa la escalabilidad de su diseño: a medida que cambia su conjunto de datos, y el dominio de entrada se expande o se contrae (números más grandes o más pequeños), D3 se asegura que las etiquetas de los marcadores permanezcan legibles y fáciles de leer.
 
 ###Y No?
 
@@ -135,11 +135,11 @@ y esto hacia la parte de abajo:
         .call(yAxis);
 
 
-Puede darse cuenta que las etiquetas están orientadas hacia la izquierda (`left`) y que el `yAxis` pertenenciente al grupo `g` se ha trasladado hacia la derecha en la cantidad que se ha determinado con `padding` (colchón).
+Puede darse cuenta que las etiquetas están orientadas hacia la izquierda (`left`) y que el `yAxis` perteneciente al grupo `g` se ha trasladado hacia la derecha en la cantidad que se ha determinado con `padding` (colchón).
 
 ![Alt text]({{site.url}}/images/scatter7.png)
 
-Esto está empezando a verse como algo real! Pero las etiquetas de `yAxis`están quedando cortadsa. Para darles más espacio a la izquierda, voy a incrementar el valor de `padding` de 20 a 30:
+Esto está empezando a verse como algo real! Pero las etiquetas de `yAxis` están quedando cortadas. Para darles más espacio a la izquierda, voy a incrementar el valor de `padding` de 20 a 30:
 
 `var padding = 30;`
 
@@ -151,7 +151,7 @@ Por supuesto, también se habría podido introducir variables separadas de `padd
 
 ###Toques Finales
 
-Para provarle que nuestros nuevos ejes son dinámicos y escalables, quiero reemplazar nuestro conjunto de datos estático por una serie de números generados al azar:
+Para probarle que nuestros nuevos ejes son dinámicos y escalables, quiero reemplazar nuestro conjunto de datos estático por una serie de números generados al azar:
 
     //Dynamic, random dataset
     var dataset = [];
@@ -164,11 +164,11 @@ Para provarle que nuestros nuevos ejes son dinámicos y escalables, quiero reemp
         dataset.push([newNumber1, newNumber2]);
         }
 
-Este código inicializa un arreglo vacío, y luego lo recorre 50 veces, selecciona dos números al azar cada vez y  añade ("empuja") es par de datos al arreglo `dataset`.
+Este código inicializa un arreglo vacío, y luego lo recorre 50 veces, selecciona dos números al azar cada vez y  añade ("empuja") ese par de datos al arreglo `dataset`.
 
 ![Alt text]({{site.url}}/images/scatter9.png)
 
-[Intente el código aquí](http://alignedleft.com/content/03-tutorials/01-d3/160-axes/5.html). Cada vez que refresque la página verá valores diferentes. Mire cómo los dos ejes se ajustan a los nuevos dominios y cómo se escojen marcadores y etiquetas conforme a los cambios.
+[Intente el código aquí](http://alignedleft.com/content/03-tutorials/01-d3/160-axes/5.html). Cada vez que refresque la página verá valores diferentes. Mire cómo los dos ejes se ajustan a los nuevos dominios y cómo se escogen marcadores y etiquetas conforme a los cambios.
 
 Ya que he dicho lo que tenía decir al respecto, creo que podemos por fin omitir esas etiquetas rojas tan feas y omitir las líneas de código relevante:
 
@@ -179,7 +179,7 @@ Ya que he dicho lo que tenía decir al respecto, creo que podemos por fin omitir
 
 ###Formateo de las Etiquetas de Marcadores
 
-Una última cosa: Hasta el momento hemos estado trabajando con números enteros -- que son agradables y fáciles. Pero por lo general los datos son más complejos y e esos casos, es posible que quiere tener más control sobre los formatos de las etiquetas de los ejes. Ingrese `tickFormat()`, que permite especificar cómo puede formatear los números. Por ejemplo, si quiere incluir tres puntos decimales o mostrar los valores como porcentajes, o ambos.
+Una última cosa: Hasta el momento hemos estado trabajando con números enteros -- que son agradables y fáciles. Pero por lo general los datos son más complejos y en esos casos, es posible que quiera tener más control sobre los formatos de las etiquetas de los ejes. Ingrese `tickFormat()`, que permite especificar cómo puede formatear los números. Por ejemplo, si quiere incluir tres puntos decimales o mostrar los valores como porcentajes, o ambos.
 
 En este caso, podría definir una función para formateo de números primero. Esta, por ejemplo, dice que se deben tratar como porcentajes con un solo número decimal. (Revise el documento de referencia de [d3.format()](https://github.com/mbostock/d3/wiki/Formatting#wiki-d3_format) para ver más opciones).
 

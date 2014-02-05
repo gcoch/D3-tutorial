@@ -5,7 +5,7 @@ permalink: "anadir-elementos.html"
 ---
 ##Añadir Elementos
 
-Uno de los primeros pasos en el uso de D3 consise en crear un nuevo elemento en el DOM. Por lo general, éste será un objeto SVG para desplegar una visualización gráfica de datos, sin embargo con el propósito de empezar con algo simple, a continuación se muestra cómo añadir un elemento -p-.
+Uno de los primeros pasos en el uso de D3 consiste en crear un nuevo elemento en el DOM. Por lo general, éste será un objeto SVG para desplegar una visualización gráfica de datos, sin embargo con el propósito de empezar con algo simple, a continuación se muestra cómo añadir un elemento -p-.
 
 Se empieza con la siguiente plantilla de HTML.
 
@@ -18,7 +18,7 @@ Se empieza con la siguiente plantilla de HTML.
         </head>
         <body>
             <script type="text/javascript">
-            // Your beautiful D3 code will go here
+            // Su bello código de D3 vendrá acá
             </script>
         </body>
     </html>

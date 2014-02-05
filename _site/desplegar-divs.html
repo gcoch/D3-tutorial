@@ -25,37 +25,37 @@
           <div>
        
        
-        	<a href="/index.html">Inicio | </a>
+        	<a href="/index.html">Inicio  |  </a>
         
-        	<a href="/fundamentos.html">Fundamentos | </a>
+        	<a href="/fundamentos.html">Fundamentos  |  </a>
         
-        	<a href="/instalacion.html">Instalación | </a>
+        	<a href="/instalacion.html">Instalación  |  </a>
         
-        	<a href="/anadir-elementos.html">Añadir Elementos | </a>
+        	<a href="/anadir-elementos.html">Añadir Elementos  |  </a>
         
-        	<a href="/encadenar-metodos.html">Encadenar Métodos | </a>
+        	<a href="/encadenar-metodos.html">Encadenar Métodos  |  </a>
         
-        	<a href="/asociar-datos.html">Asociar Datos | </a>
+        	<a href="/asociar-datos.html">Asociar Datos  |  </a>
         
-        	<a href="/datos-propios.html">Usando sus Datos | </a>
+        	<a href="/datos-propios.html">Usando sus Datos  |  </a>
         
-        	<a href="/desplegar-divs.html">Desplegar DIVs | </a>
+        	<a href="/desplegar-divs.html">Desplegar DIVs  |  </a>
         
-        	<a href="/data.html">La Función data( ) | </a>
+        	<a href="/poder-datos.html">La Función data( )  |  </a>
         
-        	<a href="/intro-svg.html">Introducción a SVG | </a>
+        	<a href="/intro-svg.html">Introducción a SVG  |  </a>
         
-        	<a href="/despliegue-svg.html">Despliegue de SVG | </a>
+        	<a href="/despliegue-svg.html">Despliegue de SVG  |  </a>
         
-        	<a href="/tipos-datos.html">Tipos de Datos | </a>
+        	<a href="/tipos-datos.html">Tipos de Datos  |  </a>
         
-        	<a href="/diagrama-barras.html">Diagrama de Barras | </a>
+        	<a href="/diagrama-barras.html">Diagrama de Barras  |  </a>
         
-        	<a href="/diagrama-dispersion.html">Diagrama de Dispersión | </a>
+        	<a href="/diagrama-dispersion.html">Diagrama de Dispersión  |  </a>
         
-        	<a href="/escalas.html">Escalas | </a>
+        	<a href="/escalas.html">Escalas  |  </a>
         
-        	<a href="/ejes.html">Ejes | </a>
+        	<a href="/ejes.html">Ejes  |  </a>
         
 </dv>
         </header>
@@ -66,11 +66,11 @@
 
 <p>Es hora de comenzar a crear diagramas con datos.</p>
 
-<p>Por última vez vamos a utlizar el mismo conjunto de datos.</p>
+<p>Por última vez vamos a utilizar el mismo conjunto de datos.</p>
 
 <pre><code>var dataset = [ 5, 10, 15, 20, 25 ];</code></pre>
 
-<p>Este conjunto se va a usar para generar un diagrama de barras muy sencillo. Los diagramas de barras son en escencia rectángulos y la forma más fácil de dibujar un rectángulo e usando la etiqueta de HTML <code>&lt;div&gt;</code>. (En realidad para los navegadores, <em>todo</em> es un rectángulo, entonces es posible cambiar el ejemplo y usar <code>&lt;span&gt;</code>o el elemento que prefiera).</p>
+<p>Este conjunto se va a usar para generar un diagrama de barras muy sencillo. Los diagramas de barras son en esencia rectángulos y la forma más fácil de dibujar un rectángulo es usando la etiqueta de HTML <code>&lt;div&gt;</code>. (En realidad para los navegadores, <em>todo</em> es un rectángulo, entonces es posible cambiar el ejemplo y usar <code>&lt;span&gt;</code> o el elemento que prefiera).</p>
 
 <p>El siguiente <code>div</code> funciona bien como una barra de datos.</p>
 
@@ -84,9 +84,9 @@
         height: 75px;
         background-color: teal;&quot;&gt;&lt;/div&gt;</code></pre>
 
-<p>(Este ejemplo muestra algo que no se debe hacer. Usualmente, no se dbe usar un <code>div</code> vacío para efectos visuales únicamente, sin embargo para efectos de este tutorial se puede hacer la excepción.)</p>
+<p>(Este ejemplo muestra algo que no se debe hacer. Usualmente, no se debe usar un <code>div</code> vacío para efectos visuales únicamente, sin embargo para efectos de este tutorial se puede hacer la excepción.)</p>
 
-<p>Puesto que este es un <code>div</code>, su ancho <code>width</code> y altura <code>height</code> se definen el los estilos de CSS. Cada barra en el diagrama puede compartir las mismas propiedades de despliegue (con excepción de altura <code>height</code>), por consiguiente se pueden incluir los estilos compartidos dentro de una clase <code>class</code>de nombre <code>bar</code>:</p>
+<p>Puesto que este es un <code>div</code>, su ancho <code>width</code> y altura <code>height</code> se definen en los estilos de CSS. Cada barra en el diagrama puede compartir las mismas propiedades de despliegue (con excepción de altura <code>height</code>), por consiguiente se pueden incluir los estilos compartidos dentro de una clase <code>class</code> de nombre <code>bar</code>:</p>
 
 <pre><code>div.bar {
 	display: inline-block;
@@ -99,11 +99,11 @@
 
 <pre><code>&lt;div class=&quot;bar&quot;&gt;&lt;/div&gt;</code></pre>
 
-<p>Con D3, para añadir una clase a un elemento se utilize el método <code>selection.attr()</code>. Es importante entender la diferencia entre <code>attr()</code> y su pariente cercano, <code>style</code>.</p>
+<p>Con D3, para añadir una clase a un elemento se utiliza el método <code>selection.attr()</code>. Es importante entender la diferencia entre <code>attr()</code> y su pariente cercano, <code>style</code>.</p>
 
 <h3 id="asignacin_de_atributos">Asignación de Atributos</h3>
 
-<p><code>attr()</code>se usa para asignarle un atributo y su valor a un elemento. Un atributo de HTML es cualquier dupla propiedad/valor que se pueda insertar dentro de los corchetes. Por ejemplo, estos elementos de HTML</p>
+<p><code>attr()</code> se usa para asignarle un atributo y su valor a un elemento. Un atributo de HTML es cualquier dupla propiedad/valor que se pueda insertar dentro de los corchetes. Por ejemplo, estos elementos de HTML</p>
 
 <pre><code>&lt;p class=&quot;caption&quot;&gt;
 &lt;select id=&quot;country&quot;&gt;
@@ -117,13 +117,13 @@ src     |   logo.png
 width   |   100px
 alt     |   Logo</code></pre>
 
-<p>Para asignarle la clase <code>bar</code>a los <code>div</code>s, se puede usar:</p>
+<p>Para asignarle la clase <code>bar</code> a los <code>div</code>s, se puede usar:</p>
 
 <pre><code>.attr(&quot;class&quot;, &quot;bar&quot;)</code></pre>
 
 <h3 id="una_nota_sobre_clases">Una Nota sobre Clases</h3>
 
-<p>Tome nota de que la clase de un elemento se guarda como un atributo de HTML. La clase, a su vez, se usa para referenciar la regla del estilo de CSS. Esto puede causar algo de confusión porque existe una diferencia entre asignar una clase (de la cual se inferieren los estilos) y aplicar un estilo directamente a un elemento. En D3 es factible hacer ambos, y si bien se puede utilizar el que considere más conveniente, yo recomiendo usar <em>clases</em> para aquellas propiedades que sean compartidas por varios elementos, y aplicar reglas de <em>estilo</em> directamente solo cuando se esté desviando de la norma (que es exactamente lo que haremos en un momento.)</p>
+<p>Tome nota de que la clase de un elemento se guarda como un atributo de HTML. La clase, a su vez, se usa para referenciar la regla del estilo de CSS. Esto puede causar algo de confusión porque existe una diferencia entre asignar una clase (de la cual se infieren los estilos) y aplicar un estilo directamente a un elemento. En D3 es factible hacer ambos, y si bien se puede utilizar el que considere más conveniente, yo recomiendo usar <em>clases</em> para aquellas propiedades que sean compartidas por varios elementos, y aplicar reglas de <em>estilo</em> directamente solo cuando se esté desviando de la norma (que es exactamente lo que haremos en un momento.)</p>
 
 <p>Vale la pena mencionar otro método de D3, <code>classed()</code>, que puede ser usado para aplicar o remover clases rápidamente de los elementos. La línea de código anterior pudo haber sido escrita así: .classed(“bar”, true)</p>
 
@@ -145,7 +145,7 @@ d3.select(&quot;body&quot;).selectAll(&quot;div&quot;)
 
 <h3 id="definicin_de_estilos">Definición de Estilos</h3>
 
-<p>El método <code>estilo()</code>se usa para aplicar la propiedad y valor de CSS a un elemento de HTML. Esto es el equivalente a añadir reglas de CSS dentro del atributo <code>style</code>en el código HTML, así:</p>
+<p>El método <code>estilo()</code>se usa para aplicar la propiedad y valor de CSS a un elemento de HTML. Esto es el equivalente a añadir reglas de CSS dentro del atributo <code>style</code> en el código HTML, así:</p>
 
 <pre><code>&lt;div style=&quot;height: 75px;&quot;&gt;&lt;/div&gt;</code></pre>
 
@@ -159,7 +159,7 @@ d3.select(&quot;body&quot;).selectAll(&quot;div&quot;)
 
 <p>verá un diagrama de barras muy pequeño. <a href="http://alignedleft.com/content/03-tutorials/01-d3/80-drawing-divs/2.html">página de ejemplo.</a></p>
 
-<p>Cuando D3 pasa por cada dato, asocia ese dato a <code>d</code>, por consiguiente se está asociando un valor <code>d</code>al atributo <code>height</code>y se le añade <code>px</code>(para especificar las unidades en pixeles). El resultado son alturas de 5px, 10px, 15px, 20px, y 25px.</p>
+<p>Cuando D3 pasa por cada dato, asocia ese dato a <code>d</code>, por consiguiente se está asociando un valor <code>d</code> al atributo <code>height</code> y se le añade <code>px</code> (para especificar las unidades en pixeles). El resultado son alturas de 5px, 10px, 15px, 20px, y 25px.</p>
 
 <p>Esto suena un tanto absurdo, entonces hagamos las barras más altas:</p>
 
@@ -179,8 +179,8 @@ d3.select(&quot;body&quot;).selectAll(&quot;div&quot;)
 <p><a href="/poder-datos.html">Siguiente: El Poder de la Función data( ) –&gt;</a></p>
           <section>
 	<footer>
-		Este tutorial lo mantiene <a href="https://twitter.com/gabrielcoch">Gabriel Coch</a><br>
-        El contenido es de <a href="http://alignedleft.com/">Scott Murray</a>
+		Este tutorial fue traducido por <a href="https://twitter.com/gabrielcoch">Gabriel Coch</a><br>
+        Todo el contenido fue desarrollado por y le pertenece a <a href="http://alignedleft.com/">Scott Murray</a>
     </footer>
 </section>
 

@@ -25,37 +25,37 @@
           <div>
        
        
-        	<a href="/index.html">Inicio | </a>
+        	<a href="/index.html">Inicio  |  </a>
         
-        	<a href="/fundamentos.html">Fundamentos | </a>
+        	<a href="/fundamentos.html">Fundamentos  |  </a>
         
-        	<a href="/instalacion.html">Instalación | </a>
+        	<a href="/instalacion.html">Instalación  |  </a>
         
-        	<a href="/anadir-elementos.html">Añadir Elementos | </a>
+        	<a href="/anadir-elementos.html">Añadir Elementos  |  </a>
         
-        	<a href="/encadenar-metodos.html">Encadenar Métodos | </a>
+        	<a href="/encadenar-metodos.html">Encadenar Métodos  |  </a>
         
-        	<a href="/asociar-datos.html">Asociar Datos | </a>
+        	<a href="/asociar-datos.html">Asociar Datos  |  </a>
         
-        	<a href="/datos-propios.html">Usando sus Datos | </a>
+        	<a href="/datos-propios.html">Usando sus Datos  |  </a>
         
-        	<a href="/desplegar-divs.html">Desplegar DIVs | </a>
+        	<a href="/desplegar-divs.html">Desplegar DIVs  |  </a>
         
-        	<a href="/data.html">La Función data( ) | </a>
+        	<a href="/poder-datos.html">La Función data( )  |  </a>
         
-        	<a href="/intro-svg.html">Introducción a SVG | </a>
+        	<a href="/intro-svg.html">Introducción a SVG  |  </a>
         
-        	<a href="/despliegue-svg.html">Despliegue de SVG | </a>
+        	<a href="/despliegue-svg.html">Despliegue de SVG  |  </a>
         
-        	<a href="/tipos-datos.html">Tipos de Datos | </a>
+        	<a href="/tipos-datos.html">Tipos de Datos  |  </a>
         
-        	<a href="/diagrama-barras.html">Diagrama de Barras | </a>
+        	<a href="/diagrama-barras.html">Diagrama de Barras  |  </a>
         
-        	<a href="/diagrama-dispersion.html">Diagrama de Dispersión | </a>
+        	<a href="/diagrama-dispersion.html">Diagrama de Dispersión  |  </a>
         
-        	<a href="/escalas.html">Escalas | </a>
+        	<a href="/escalas.html">Escalas  |  </a>
         
-        	<a href="/ejes.html">Ejes | </a>
+        	<a href="/ejes.html">Ejes  |  </a>
         
 </dv>
         </header>
@@ -86,7 +86,7 @@ d3.select(&quot;body&quot;).selectAll(&quot;p&quot;)
 
 <h3 id="funcionando">Funcionando</h3>
 
-<p>En caso de que usted esté empezando a escribir sus propias funciones (o métodos), la estructura básica pra la definición de una función es la siguiente:</p>
+<p>En caso de que usted esté empezando a escribir sus propias funciones (o métodos), la estructura básica de la definición de una función es la siguiente:</p>
 
 <pre><code>function(input_value) {
 	//Calculate something here
@@ -97,19 +97,19 @@ d3.select(&quot;body&quot;).selectAll(&quot;p&quot;)
 
 <pre><code>function(d) {
 	return d;
-}
+}</code></pre>
 
-y está encapsulada dentro de la función `text()`de D3, por consiguiente lo que devuelva esta función será pasado a la función `text()`.
+<p>y está encapsulada dentro de la función <code>text()</code>de D3, por consiguiente lo que devuelva esta función será pasado a la función <code>text()</code>.</p>
 
-.text(function(d) {
+<pre><code>.text(function(d) {
 	return d;
 });</code></pre>
 
-<p>Pero se puede crear algo más sofisticado, porque estas funciones se pueden adecuar de muchas maneras. Es verdad que escribir su propio código en JavaScript es placentero y doloroso a la vez. El punto importante es saber que pueden definir funciones de la manera que se necesite. Probablemente, le gustaría añadir algún texto, el cual produce el <a href="http://alignedleft.com/content/03-tutorials/01-d3/70-using-your-data/2.html">siguiente resultado</a></p>
+<p>Pero se puede crear algo más sofisticado, porque estas funciones se pueden adecuar de muchas maneras. Es verdad que escribir código en JavaScript es placentero y doloroso a la vez. El punto importante es saber que se pueden definir funciones para lo que se necesite. Probablemente, le gustaría añadir algún texto, el cual produce el <a href="http://alignedleft.com/content/03-tutorials/01-d3/70-using-your-data/2.html">siguiente resultado</a></p>
 
-<pre><code>.text(function(d) {
-	return &quot;I can count up to &quot; + d;
-});</code></pre>
+<pre><code>    .text(function(d) {
+        return &quot;I can count up to &quot; + d;
+    });</code></pre>
 
 <h3 id="a_los_datos_les_gusta_tener_casa">A los datos les gusta tener casa</h3>
 
@@ -117,15 +117,15 @@ y está encapsulada dentro de la función `text()`de D3, por consiguiente lo que
 
 <pre><code>.text(&quot;Puedo contar hasta &quot; + d);</code></pre>
 
-<p>En este contexto, si no se encapsula <code>d</code> dentro de una función anónima, <code>d</code>no tiene valor. Piense en <code>d</code>como un valor temporal que está solo y necesita el lugar caluroso que le proporcionan los paréntesis de la función.</p>
+<p>En este contexto, si no se encapsula <code>d</code> dentro de una función anónima, <code>d</code> no tiene valor. Piense en <code>d</code> como un valor temporal que está solo y necesita el lugar caluroso que le proporcionan los paréntesis de la función.</p>
 
 <p>Acá, la función anónima se encarga de darle el espacio que necesita <code>d</code>.</p>
 
-<pre><code>.text(function(d) {  // 
-	return &quot;Puedo contar hasta &quot; + d;
-});</code></pre>
+<pre><code>    .text(function(d) {  // 
+        return &quot;Puedo contar hasta &quot; + d;
+    });</code></pre>
 
-<p>La razón para usar esta sintaxis es que <code>.text(), attr()</code>, y muchos otros métodos de D3 reciben una función como un argumento. Por ejemplo, <code>text()</code>puede recibir o una cadena de caracteres como un argumento:</p>
+<p>La razón para usar esta sintaxis es que <code>.text(), attr()</code>, y muchos otros métodos de D3 reciben una función como un argumento. Por ejemplo, <code>text()</code> puede recibir o una cadena de caracteres como un argumento:</p>
 
 <pre><code>.text(&quot;Alguna cadena&quot;)</code></pre>
 
@@ -133,19 +133,19 @@ y está encapsulada dentro de la función `text()`de D3, por consiguiente lo que
 
 <pre><code>.text(algunaFuncion())</code></pre>
 
-<p>o las función anónima es sí puede ser un argumento, como cuando se escribe:</p>
+<p>o las función anónima en sí puede ser un argumento, como cuando se escribe:</p>
 
 <pre><code>.text(function(d) {
 	return d;
 })</code></pre>
 
-<p>Arriba, se está definiendo una función anónima. Si D3 encuentra una función acá, la procesa y la pasa el valor actual de <code>d</code> como el argumento de la función. Si no existe una función, D3 no puede saber a quién pasarle el argumento <code>d</code>.</p>
+<p>Arriba, se está definiendo una función anónima. Si D3 encuentra una función acá, la procesa y le pasa el valor actual de <code>d</code> como el argumento de la función. Si no existe una función, D3 no puede saber a quién pasarle el argumento <code>d</code>.</p>
 
-<p>Inicialmente esto parece no tener sentido y que es trabajo adicional solamente par obtener el valor de <code>d</code>, pero próximamente este enfoque será más claro a medida que miremos temas más complejos.</p>
+<p>Inicialmente esto parece no tener sentido y que es trabajo adicional solamente para obtener el valor de <code>d</code>, pero próximamente este enfoque será más claro a medida que miremos temas más complejos.</p>
 
 <h3 id="ms_all_del_texto">Más allá del Texto</h3>
 
-<p>Las cosas se vuelven aún más interesantes cuando empezamos a mirar otros métodos de D3, como son <code>attr()</code>y <code>style()</code>, los cuales permiten actualizar respectivament los atributos de HTML y propiedades de CSS sobre selecciones.</p>
+<p>Las cosas se vuelven aún más interesantes cuando empezamos a mirar otros métodos de D3, como son <code>attr()</code> y <code>style()</code>, los cuales permiten actualizar respectivamente los atributos de HTML y propiedades de CSS sobre selecciones.</p>
 
 <p>Por ejemplo, con una sola línea de código adicional, se produce el siguiente <a href="http://alignedleft.com/content/03-tutorials/01-d3/70-using-your-data/3.html">resultado</a>.</p>
 
@@ -154,22 +154,22 @@ y está encapsulada dentro de la función `text()`de D3, por consiguiente lo que
 <p>Ahora todo el texto es de color rojo. Lo interesante es que se puede utilizar una función para que el texto se despliegue en rojo solamente cuando el dato está por encima de cierto umbral. Entonces, es posible alterar la última línea incertando la función:</p>
 
 <pre><code>.style(&quot;color&quot;, function(d) {
-	if (d &gt; 15) {   //Umbral - 15
-    return &quot;red&quot;;
-	} else {
+        if (d &gt; 15) {   //Umbral - 15
+            return &quot;red&quot;;
+        } else {
     	return &quot;black&quot;;
-	}
-});</code></pre>
+        }
+    });</code></pre>
 
 <p><a href="http://alignedleft.com/content/03-tutorials/01-d3/70-using-your-data/4.html">Resultados</a>. Puede ver que las primeras tres líneas están en negro, pero apenas <code>d</code> excede el número 15, el texto cambia de color a rojo.</p>
 
-<p>En la siguiente lección, se utilizará <code>attr()</code>y <code>style()</code> para manipular <code>divs</code>, y generar un diagrama de barras simple - nuestra primera visualización!</p>
+<p>En la siguiente lección, se utilizará <code>attr()</code> y <code>style()</code> para manipular <code>divs</code>, y generar un diagrama de barras simple - nuestra primera visualización!</p>
 
 <p><a href="/desplegar-divs.html">Siguiente: Desplegar Divs–&gt;</a></p>
           <section>
 	<footer>
-		Este tutorial lo mantiene <a href="https://twitter.com/gabrielcoch">Gabriel Coch</a><br>
-        El contenido es de <a href="http://alignedleft.com/">Scott Murray</a>
+		Este tutorial fue traducido por <a href="https://twitter.com/gabrielcoch">Gabriel Coch</a><br>
+        Todo el contenido fue desarrollado por y le pertenece a <a href="http://alignedleft.com/">Scott Murray</a>
     </footer>
 </section>
 

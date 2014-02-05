@@ -1,11 +1,11 @@
 ---
 layout: default
 title: La Función data( )
-permalink: "data.html"
+permalink: "poder-datos.html"
 ---
 ##El Poder de la Función data( )
 
-Lo último que hicimos fue un diagrama de barras simple, dibujado utlizando etiquetas `div`y un conjunto de datos sencillo.
+Lo último que hicimos fue un diagrama de barras simple, dibujado utilizando etiquetas `div`  y un conjunto de datos sencillo.
 
     var dataset = [ 5, 10, 15, 20, 25 ];
     
@@ -26,10 +26,10 @@ Tampoco vamos a limitarnos a cinco datos. Podemos [añadir más](http://alignedl
 
 ![Alt text]({{site.url}}/images/barras5.png)
 
-25 datos en vez de cinco! Cómo es que D3 expande automáticament nuestro diagrama si es necesario?
+25 datos en vez de cinco! Cómo es que D3 expande automáticamente nuestro diagrama si es necesario?
 
     d3.select("body").selectAll("div")
-    .data(dataset)  // <-- The answer is here!
+    .data(dataset)  // <-- Acá está la respuesta!
     .enter()
     .append("div")
     .attr("class", "bar")
@@ -38,7 +38,7 @@ Tampoco vamos a limitarnos a cinco datos. Podemos [añadir más](http://alignedl
         return barHeight + "px";
     });
 
-Se le pasan diez datos a la función `data()`, ésta recorrerá la cadena diez veces. Si se le pasan un millón de datos, la recorrerá un millón de veces (solo tiene que tener paciencia).
+Si se le pasan diez datos a la función `data()`, ésta recorrerá la cadena diez veces. Si se le pasan un millón de datos, la recorrerá un millón de veces (solo tiene que tener paciencia).
 
 Este es el poder de la función `data()`, la cual es lo suficientemente inteligente para recorrer por completo cualquier conjunto de datos que se le dé y ejecutar cada una de las funciones siguientes en la cadena. Esto lo hace mientras actualiza el contexto dentro del cual opera cada función, de tal manera que `d` siempre se refiere al dato actual, o aquel dónde esté el ciclo (loop) en ese momento.
 
@@ -68,7 +68,7 @@ Este código no utiliza ningún método de D3, es solamente JavaScript. Sin entr
 1. Crea un arreglo vacío denominado `dataset`.
 2. Inicia un ciclo (loop) `for`, que se ejecuta 25 veces.
 3. Por cada ciclo, se genera un número aleatorio entre 0 y 30.
-4. El nuevo número se añade al arreglo `dataset`. (`push()`es un método de arreglos que añade un nuevo valor al final del arreglo.)
+4. El nuevo número se añade al arreglo `dataset`. (`push()` es un método de arreglos que añade un nuevo valor al final del arreglo.)
 
 Solamente por jugar, abra la consola de JavaScript y escriba `console.log(dataset)`. Podrá ver todo el arreglo con 25 valores generados aleatoriamente.
 

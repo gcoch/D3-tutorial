@@ -25,37 +25,37 @@
           <div>
        
        
-        	<a href="/index.html">Inicio | </a>
+        	<a href="/index.html">Inicio  |  </a>
         
-        	<a href="/fundamentos.html">Fundamentos | </a>
+        	<a href="/fundamentos.html">Fundamentos  |  </a>
         
-        	<a href="/instalacion.html">Instalación | </a>
+        	<a href="/instalacion.html">Instalación  |  </a>
         
-        	<a href="/anadir-elementos.html">Añadir Elementos | </a>
+        	<a href="/anadir-elementos.html">Añadir Elementos  |  </a>
         
-        	<a href="/encadenar-metodos.html">Encadenar Métodos | </a>
+        	<a href="/encadenar-metodos.html">Encadenar Métodos  |  </a>
         
-        	<a href="/asociar-datos.html">Asociar Datos | </a>
+        	<a href="/asociar-datos.html">Asociar Datos  |  </a>
         
-        	<a href="/datos-propios.html">Usando sus Datos | </a>
+        	<a href="/datos-propios.html">Usando sus Datos  |  </a>
         
-        	<a href="/desplegar-divs.html">Desplegar DIVs | </a>
+        	<a href="/desplegar-divs.html">Desplegar DIVs  |  </a>
         
-        	<a href="/data.html">La Función data( ) | </a>
+        	<a href="/poder-datos.html">La Función data( )  |  </a>
         
-        	<a href="/intro-svg.html">Introducción a SVG | </a>
+        	<a href="/intro-svg.html">Introducción a SVG  |  </a>
         
-        	<a href="/despliegue-svg.html">Despliegue de SVG | </a>
+        	<a href="/despliegue-svg.html">Despliegue de SVG  |  </a>
         
-        	<a href="/tipos-datos.html">Tipos de Datos | </a>
+        	<a href="/tipos-datos.html">Tipos de Datos  |  </a>
         
-        	<a href="/diagrama-barras.html">Diagrama de Barras | </a>
+        	<a href="/diagrama-barras.html">Diagrama de Barras  |  </a>
         
-        	<a href="/diagrama-dispersion.html">Diagrama de Dispersión | </a>
+        	<a href="/diagrama-dispersion.html">Diagrama de Dispersión  |  </a>
         
-        	<a href="/escalas.html">Escalas | </a>
+        	<a href="/escalas.html">Escalas  |  </a>
         
-        	<a href="/ejes.html">Ejes | </a>
+        	<a href="/ejes.html">Ejes  |  </a>
         
 </dv>
         </header>
@@ -64,7 +64,7 @@
         <section id="main_content">
           <h2 id="el_poder_de_la_funcin_data_">El Poder de la Función data( )</h2>
 
-<p>Lo último que hicimos fue un diagrama de barras simple, dibujado utlizando etiquetas <code>div</code>y un conjunto de datos sencillo.</p>
+<p>Lo último que hicimos fue un diagrama de barras simple, dibujado utilizando etiquetas <code>div</code> y un conjunto de datos sencillo.</p>
 
 <pre><code>var dataset = [ 5, 10, 15, 20, 25 ];</code></pre>
 
@@ -84,10 +84,10 @@
 
 <p><img src="/images/barras5.png" alt="Alt text" /></p>
 
-<p>25 datos en vez de cinco! Cómo es que D3 expande automáticament nuestro diagrama si es necesario?</p>
+<p>25 datos en vez de cinco! Cómo es que D3 expande automáticamente nuestro diagrama si es necesario?</p>
 
 <pre><code>d3.select(&quot;body&quot;).selectAll(&quot;div&quot;)
-.data(dataset)  // &lt;-- The answer is here!
+.data(dataset)  // &lt;-- Acá está la respuesta!
 .enter()
 .append(&quot;div&quot;)
 .attr(&quot;class&quot;, &quot;bar&quot;)
@@ -96,7 +96,7 @@
     return barHeight + &quot;px&quot;;
 });</code></pre>
 
-<p>Se le pasan diez datos a la función <code>data()</code>, ésta recorrerá la cadena diez veces. Si se le pasan un millón de datos, la recorrerá un millón de veces (solo tiene que tener paciencia).</p>
+<p>Si se le pasan diez datos a la función <code>data()</code>, ésta recorrerá la cadena diez veces. Si se le pasan un millón de datos, la recorrerá un millón de veces (solo tiene que tener paciencia).</p>
 
 <p>Este es el poder de la función <code>data()</code>, la cual es lo suficientemente inteligente para recorrer por completo cualquier conjunto de datos que se le dé y ejecutar cada una de las funciones siguientes en la cadena. Esto lo hace mientras actualiza el contexto dentro del cual opera cada función, de tal manera que <code>d</code> siempre se refiere al dato actual, o aquel dónde esté el ciclo (loop) en ese momento.</p>
 
@@ -125,7 +125,7 @@
 
 <li>Por cada ciclo, se genera un número aleatorio entre 0 y 30.</li>
 
-<li>El nuevo número se añade al arreglo <code>dataset</code>. (<code>push()</code>es un método de arreglos que añade un nuevo valor al final del arreglo.)</li>
+<li>El nuevo número se añade al arreglo <code>dataset</code>. (<code>push()</code> es un método de arreglos que añade un nuevo valor al final del arreglo.)</li>
 </ol>
 
 <p>Solamente por jugar, abra la consola de JavaScript y escriba <code>console.log(dataset)</code>. Podrá ver todo el arreglo con 25 valores generados aleatoriamente.</p>
@@ -145,8 +145,8 @@ var newNumber = Math.round(Math.random() * 30);</code></pre>
 <p><a href="/intro-svg.html">Siguiente: Introducción a SVG –&gt;</a></p>
           <section>
 	<footer>
-		Este tutorial lo mantiene <a href="https://twitter.com/gabrielcoch">Gabriel Coch</a><br>
-        El contenido es de <a href="http://alignedleft.com/">Scott Murray</a>
+		Este tutorial fue traducido por <a href="https://twitter.com/gabrielcoch">Gabriel Coch</a><br>
+        Todo el contenido fue desarrollado por y le pertenece a <a href="http://alignedleft.com/">Scott Murray</a>
     </footer>
 </section>
 

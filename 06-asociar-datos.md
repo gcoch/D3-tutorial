@@ -52,9 +52,9 @@ La respuesta está en el método enter( ), que es verdaderamente mágico. Acá e
 
 `.data(dataset)`. Cuenta y desagrega los valores. Existen cinco valores en la muestra, por consiguiente de aquí en adelante todo se ejecutará cinco veces, una vez por cada valor.
 
-`.enter()`- Para crear nuevos elementos que estén asociados a datos, es necesario utlizar `enter()`. Este método revisa el DOM y luego revisa los datos que le serán entregados. Si existen más datos que elementos del DOM, `enter()`  *crea un elemento temporal* con el cual se puede hacer la magia. Luego `enter()` entrega la referencia al elemento temporal al siguiente paso en la cadena.
+`.enter()`- Para crear nuevos elementos que estén asociados a datos, es necesario utilizar `enter()`. Este método revisa el DOM y luego revisa los datos que le serán entregados. Si existen más datos que elementos del DOM, `enter()`  *crea un elemento temporal* con el cual se puede hacer la magia. Luego `enter()` entrega la referencia al elemento temporal al siguiente paso en la cadena.
 
-`.append()` - Utiliza la selección temporal creada previamente por el método `enter()` e inserta el elemento **p** en el DOM. Qué bién! Ahora lo pasa como referencia al elemento que acaba de crear al siguiente paso en la cadena.
+`.append()` - Utiliza la selección temporal creada previamente por el método `enter()` e inserta el elemento **p** en el DOM. Qué bien! Ahora lo pasa como referencia al elemento que acaba de crear al siguiente paso en la cadena.
 
 `.text("New paragraph!")` - Toma la referencia al recién creado **p** e inserta el valor del texto.
 
@@ -64,7 +64,7 @@ Muy bien! Los datos se pudieron leer, desagregar y asociar a los nuevos elemento
 
 ![Alt text]({{site.url}}/images/cinco-parrafos.png)
 
-Ya se tienen los cinco párrafos, pero donde están los datos. Oprima la opción *Consola*, y escriba el siguiente código de JavaScript y luego oprima la tecla Enter:
+Ya se tienen los cinco párrafos, pero donde están los datos? Oprima la opción *Consola*, y escriba el siguiente código de JavaScript y luego oprima la tecla Enter:
 
 	console.log(d3.selectAll("p"))
 
@@ -74,7 +74,7 @@ Un arreglo! Ahora oprima el triángulo gris para ver más:
 
 ![Alt text]({{site.url}}/images/p-element.png)
 
-Ahora podrá ver los cinco **HTMLParagraphElements**, numerados del 0 al 4. Oprima el tríangulo para ver el primero (número 0)
+Ahora podrá ver los cinco **HTMLParagraphElements**, numerados del 0 al 4. Oprima el tríángulo para ver el primero (número 0)
 
 ![Alt text]({{site.url}}/images/nodemap.png)
 
@@ -82,7 +82,7 @@ Lo ve? Realmente lo ve? Increíble. Ahí está:
 
 ![Alt text]({{site.url}}/images/data-highlight.png)
 
-El primer valor, el número 5, se puede ver bajo el atributo `_data_` del párrafo. Si oprime los demás elementos de párrafo, verá que también cotienen valores en el atributo `_data_` 10, 15, 20 y 25, tal como se especificaron.
+El primer valor, el número 5, se puede ver bajo el atributo `_data_` del párrafo. Si oprime los demás elementos de párrafo, verá que también contienen valores en el atributo `_data_` 10, 15, 20 y 25, tal como se especificaron.
 
 Los datos están listos. Es hora de hacer algo con ellos.
 
